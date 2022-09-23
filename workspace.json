@@ -1,0 +1,8 @@
+{
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json",
+  "version": 2,
+  "projects": {
+    "cruxi": "apps/cruxi",
+    "cruxi-e2e": "apps/cruxi-e2e"
+  }
+}
