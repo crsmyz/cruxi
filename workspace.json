@@ -3,6 +3,7 @@
   "version": 2,
   "projects": {
     "cruxi": "apps/cruxi",
-    "cruxi-e2e": "apps/cruxi-e2e"
+    "cruxi-e2e": "apps/cruxi-e2e",
+    "server": "apps/server"
   }
 }
