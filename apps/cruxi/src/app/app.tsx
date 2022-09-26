@@ -3,36 +3,36 @@ import styled from 'styled-components';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Dashboard from './dashboard/dashboard';
 import Login from './login/login';
-import useToken from './use-token/use-token';
-import { useNavigate  } from "react-router-dom";
+import LoginButton from './login/login';
+import Logout from './logout/logout';
+import { useAuth0 } from '@auth0/auth0-react';
+import ProtectedRoute from "./protected-route/protected-route";
+import { withAuthenticationRequired } from "@auth0/auth0-react";
+import Home from './home/home';
+import SignupButton from './sign-up/sign-up';
+import AuthNav from './auth-nav/auth-nav';
 
 const StyledApp = styled.div`
   padding: 20px;
 `;
 
 export function App() {
-  const { token, setToken } = useToken();
-
-  if(!token) {
-    return <Login setToken={setToken} />
-  }
-
-  const logoutHandler = () => {
-    setToken('');
+  const {isLoading} = useAuth0();
+  
+  if (isLoading) {
+    return <div>LOADING</div>;
   }
 
   return (
     <StyledApp>
       <div className="wrapper">
-        <h1>Application</h1>
-        <button onClick={logoutHandler}>Logout!</button>
-        <BrowserRouter>
+        <h1>Welcome to Cruxi!</h1>
+          <AuthNav/>
+          <SignupButton/>
           <Routes>
-          <Route path="/" element={<Dashboard />}></Route>
-            <Route path="/dashboard" element={<Dashboard />}></Route>
-            <Route path="/logout" element={<Login/>}></Route>
+            <Route path="/" element={<Home/>} />
+            <Route path="/dashboard" element={<ProtectedRoute path='/dashboard' component={Dashboard} />} />
           </Routes>
-        </BrowserRouter>
       </div>
     </StyledApp>
   );

@@ -3,4 +3,6 @@
 
 export const environment = {
   production: false,
+  REACT_APP_AUTH0_DOMAIN: 'dev-eqw3nufz.us.auth0.com',
+  REACT_APP_AUTH0_CLIENT_ID: 'i9EMfWBfQhSmbXhJT0wUbK8psn5WspKR',
 };
