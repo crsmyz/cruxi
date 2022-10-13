@@ -16,10 +16,11 @@ import { APP_NAME } from './Constants/AppConstants';
 import Button from './Button/Button';
 import SplashScreen from './Splash-screen/Splash-screen';
 import Footer from './Footer/Footer';
+import NavItem from './NavItem/NavItem';
 
 const GlobalStyle = createGlobalStyle`
   body {
-    font-family: "Rubik", sans-serif;
+    font-family: "Rubik", sans-serif !important;
   }
 `;
 const StyledApp = styled.div``;
@@ -32,7 +33,9 @@ const StyledNavBrand = styled.div`
 const StyledSplashWrapper = styled.div`
   margin: 10rem 25rem 10rem 25rem;
   padding: 5rem;
-  border: 1px solid black;
+  background-color: #d3c9c6d3;
+  -webkit-clip-path: polygon(6% -17%,110% 30%,85% 75%,-2% 75%);
+  clip-path: polygon(6% -17%,110% 30%,85% 75%,-2% 75%);
 `;
 const StyledNavButtonLayout = styled.div`
   display: flex;
@@ -47,8 +50,21 @@ const SplashBody = styled.p`
   font-weight: 400;
 `;
 
+const HeaderAppName = styled.h1`
+  font-family: "Rubik", sans-serif;
+  font-weight: 300;
+  display: block;
+  font-size: 1.85rem;
+  margin-block-start: 0.67em;
+  margin-block-end: 0.67em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+`;
+
 export function App() {
   const {isLoading} = useAuth0();
+  const { loginWithRedirect } = useAuth0();
   
   if (isLoading) {
     return <div>LOADING</div>;
@@ -59,20 +75,24 @@ export function App() {
       <Navbar>
         <StyledNavBrand>
           <img src='./../assets/images/carabiner.png' height='60px'  alt='Cruxi-Logo'/>
-          <h1>{APP_NAME}</h1>
+          <HeaderAppName>{APP_NAME}</HeaderAppName>
         </StyledNavBrand>
         <StyledNavButtonLayout>
-          <Button buttonClickHandler={console.log('Sign Up')} buttonName='Sign Up'/>
-          <Button buttonClickHandler={console.log('Log In')} buttonName='Log In'/>
-          {/* <AuthNav/>
-          <SignupButton/> */}
+          <NavItem clickHandler={() => loginWithRedirect({
+          screen_hint: 'signup',
+        })} hrefProp='' title='Sign Up'/>
+          <NavItem clickHandler={loginWithRedirect} hrefProp='' title='Login'/>
+          <AuthNav/>
+          {/* <SignupButton/> */}
         </StyledNavButtonLayout>
       </Navbar>
       <SplashScreen>
         <StyledSplashWrapper>
           <SplashHeader>Welcome to Cruxi</SplashHeader>
           <SplashBody>Cruxi is a climbing app that helps make you you a better climber. You can assess your current status as a climber. Track exercises, see your progress, and progress to your goals. Sign up now to see how Cruxi can make you a better climber!</SplashBody>
-          <Button buttonClickHandler={console.log('Sign Up')} buttonName='Sign Up'/>
+          <Button buttonClickHandler={() => loginWithRedirect({
+          screen_hint: 'signup',
+        })} buttonName='Sign Up'/>
         </StyledSplashWrapper>
       </SplashScreen>
       <Footer/>

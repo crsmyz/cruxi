@@ -8,18 +8,20 @@ export interface ButtonProps {
 
 const StyledButton = styled.button`
   color: #FFFFFF;
-  font-size: 1rem;
-  font-weight: 700;
-  background-color: #0DAAFF;
-  border-radius: 24px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  background-color: #00B6FC;
   border: none;
   box-sizing: border-box;
   display: inline-block;
   height: 45px;
   line-height: 24px;
-  padding: 8px 16px;
+  padding: 8px 24px;
   text-align: center;
   vertical-align: middle;
+  cursor: pointer;
+  font-family: "Rubik", sans-serif;
+
 `;
 
 export function Button(props: ButtonProps) {
