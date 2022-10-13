@@ -9,7 +9,7 @@ export const StyledNavbar = styled.div`
   background-color: #D3C9C67A;
   border-bottom: 3px solid #FD430D;
   margin: 0;
-  padding: 0.25rem;
+  padding: 0.1rem;
 `;
 
 export const StyledNav = styled.nav`
