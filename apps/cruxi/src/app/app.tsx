@@ -18,11 +18,10 @@ import { APP_NAME } from './Constants/AppConstants';
 import Footer from './Footer/Footer';
 import NavItem from './NavItem/NavItem';
 import SplashScreenPage from './splash-screen-page/splash-screen-page';
+import Layout from './Layout/Layout';
 
 
 const GlobalStyle = createGlobalStyle`
-
-
   body {
     font-family: "Rubik", sans-serif !important;
   }
@@ -79,27 +78,14 @@ export function App() {
 
   return (
     <StyledApp>
-      <Navbar>
-        <StyledNavBrand>
-          <img src='./../assets/images/carabiner.png' height='60px'  alt='Cruxi-Logo'/>
-          <HeaderAppName>{APP_NAME}</HeaderAppName>
-        </StyledNavBrand>
-        <StyledNavButtonLayout>
-          <NavItem clickHandler={() => loginWithRedirect({
-          screen_hint: 'signup',
-        })} hrefProp='' title='Sign Up'/>
-          <NavItem clickHandler={loginWithRedirect} hrefProp='' title='Login'/>
-          <AuthNav/>
-          {/* <SignupButton/> */}
-        </StyledNavButtonLayout>
-      </Navbar>
+      <Layout>
       <div className="wrapper">
           <Routes>
             <Route path="/" element={<SplashScreenPage/>}/>
             <Route path="/dashboard" element={<ProtectedRoute path='/dashboard' component={Dashboard} />} />
           </Routes>
       </div>
-      <Footer/>
+      </Layout>
     </StyledApp>
   );
 }
