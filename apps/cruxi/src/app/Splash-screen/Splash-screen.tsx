@@ -12,7 +12,7 @@ const StyledSplashScreen = styled.section`
   background-repeat: no-repeat;
   background-position: center;
   width: 100%;
-  height: 86.5vh;
+  height: 86.45vh;
 `;
 
 export function SplashScreen(props: any) {

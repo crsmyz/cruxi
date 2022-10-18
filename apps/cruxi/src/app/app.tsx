@@ -13,12 +13,16 @@ import SignupButton from './sign-up/sign-up';
 import AuthNav from './auth-nav/auth-nav';
 import Navbar from './Navbar/Navbar';
 import { APP_NAME } from './Constants/AppConstants';
-import Button from './Button/Button';
-import SplashScreen from './Splash-screen/Splash-screen';
+// import Button from './Button/Button';
+// import SplashScreen from './Splash-screen/Splash-screen';
 import Footer from './Footer/Footer';
 import NavItem from './NavItem/NavItem';
+import SplashScreenPage from './splash-screen-page/splash-screen-page';
+
 
 const GlobalStyle = createGlobalStyle`
+
+
   body {
     font-family: "Rubik", sans-serif !important;
   }
@@ -30,25 +34,28 @@ const StyledNavBrand = styled.div`
   font-family: "Rubik", sans-serif;
   font-weight: 300;
 `;
-const StyledSplashWrapper = styled.div`
-  margin: 10rem 25rem 10rem 25rem;
-  padding: 5rem;
-  background-color: #d3c9c6d3;
-  -webkit-clip-path: polygon(6% -17%,110% 30%,85% 75%,-2% 75%);
-  clip-path: polygon(6% -17%,110% 30%,85% 75%,-2% 75%);
-`;
+// const StyledSplashWrapper = styled.div`
+//   margin: 10rem 25rem 10rem 25rem;
+//   padding: 5rem;
+//   background-color: #d3c9c6d3;
+//   -webkit-clip-path: polygon(6% -17%,110% 30%,85% 75%,-2% 75%);
+//   clip-path: polygon(6% -17%,110% 30%,85% 75%,-2% 75%);
+// `;
+// const SplashHeader = styled.header`
+//   font-size: 3.5rem;
+//   font-weight: 700;
+// `;
+// const SplashBody = styled.p`
+//   font-size: 1.5rem;
+//   font-weight: 400;
+// `;
+
+
 const StyledNavButtonLayout = styled.div`
   display: flex;
   flex-direction: row;
 `;
-const SplashHeader = styled.header`
-  font-size: 3.5rem;
-  font-weight: 700;
-`;
-const SplashBody = styled.p`
-  font-size: 1.5rem;
-  font-weight: 400;
-`;
+
 
 const HeaderAppName = styled.h1`
   font-family: "Rubik", sans-serif;
@@ -86,21 +93,13 @@ export function App() {
           {/* <SignupButton/> */}
         </StyledNavButtonLayout>
       </Navbar>
-      <SplashScreen>
-        <StyledSplashWrapper>
-          <SplashHeader>Welcome to Cruxi</SplashHeader>
-          <SplashBody>Cruxi is a climbing app that helps make you you a better climber. You can assess your current status as a climber. Track exercises, see your progress, and progress to your goals. Sign up now to see how Cruxi can make you a better climber!</SplashBody>
-          <Button buttonClickHandler={() => loginWithRedirect({
-          screen_hint: 'signup',
-        })} buttonName='Sign Up'/>
-        </StyledSplashWrapper>
-      </SplashScreen>
-      <Footer/>
       <div className="wrapper">
           <Routes>
+            <Route path="/" element={<SplashScreenPage/>}/>
             <Route path="/dashboard" element={<ProtectedRoute path='/dashboard' component={Dashboard} />} />
           </Routes>
       </div>
+      <Footer/>
     </StyledApp>
   );
 }
