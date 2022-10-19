@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import Dashboard from './Dashboard';
+import SplashScreen from './SplashScreen';
 
-describe('Dashboard', () => {
+describe('SplashScreen', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Dashboard />);
+    const { baseElement } = render(<SplashScreen />);
     expect(baseElement).toBeTruthy();
   });
 });

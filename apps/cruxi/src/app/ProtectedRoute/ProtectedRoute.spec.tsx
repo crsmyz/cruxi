@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import Dashboard from './Dashboard';
+import ProtectedRoute from './ProtectedRoute';
 
-describe('Dashboard', () => {
+describe('ProtectedRoute', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Dashboard />);
+    const { baseElement } = render(<ProtectedRoute />);
     expect(baseElement).toBeTruthy();
   });
 });

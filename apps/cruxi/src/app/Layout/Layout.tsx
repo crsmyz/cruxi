@@ -1,49 +1,26 @@
-import styled from 'styled-components';
 
-import React, { useState } from 'react';
+
+import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-
-import AuthNav from './../auth-nav/auth-nav';
-import Navbar from './../Navbar/Navbar';
+// interfaces
+import { LayoutProps } from './Layout.interface';
+// styles
+import { StyledLayout, StyledNavBrand, StyledNavButtonLayout, HeaderAppName} from './StyledLayout'
+import Navbar from '../components/Navbar/Navbar';
+import NavItem from '../components/NavItem/NavItem';
 import { APP_NAME } from './../Constants/AppConstants';
-import Footer from './../Footer/Footer';
-import NavItem from './../NavItem/NavItem';
+import Footer from '../components/Footer/Footer';
 
-/* eslint-disable-next-line */
-export interface LayoutProps {
-  children: any;
-}
-
-const StyledLayout = styled.div`
-  color: pink;
-`;
-
-const StyledNavBrand = styled.div`
-  display: flex;
-  flex-direction: row;
-  font-family: "Rubik", sans-serif;
-  font-weight: 300;
-`;
-
-const StyledNavButtonLayout = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
-const HeaderAppName = styled.h1`
-  font-family: "Rubik", sans-serif;
-  font-weight: 300;
-  display: block;
-  font-size: 1.85rem;
-  margin-block-start: 0.67em;
-  margin-block-end: 0.67em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  font-weight: bold;
-`;
-
-export function Layout(props: LayoutProps) {
+const Layout = (props: LayoutProps) => {
   const { loginWithRedirect } = useAuth0();
+  const { isAuthenticated } = useAuth0();
+  const { logout } = useAuth0();
+
+  const ShowSignUp = isAuthenticated ? '' : <NavItem clickHandler={() => loginWithRedirect({ screen_hint: 'signup'})} hrefProp='' title='Sign Up'/>;
+  const ShowLoginOrLogout = isAuthenticated ? <NavItem clickHandler={() => logout({returnTo: window.location.origin,})} hrefProp='' title='Logout'/> : <NavItem clickHandler={loginWithRedirect} hrefProp='' title='Login'/>;
+  const ShowDashboard = isAuthenticated ? <NavItem hrefProp='/dashboard' title='Dashboard'/> : '';
+  const ShowProfile = isAuthenticated ? <NavItem hrefProp='/profile' title='Profile'/> : '';
+
   return (
     <StyledLayout>
       <Navbar>
@@ -52,12 +29,10 @@ export function Layout(props: LayoutProps) {
           <HeaderAppName>{APP_NAME}</HeaderAppName>
         </StyledNavBrand>
         <StyledNavButtonLayout>
-          <NavItem clickHandler={() => loginWithRedirect({
-          screen_hint: 'signup',
-        })} hrefProp='' title='Sign Up'/>
-          <NavItem clickHandler={loginWithRedirect} hrefProp='' title='Login'/>
-          <AuthNav/>
-          {/* <SignupButton/> */}
+          {ShowDashboard}
+          {ShowProfile}
+          {ShowSignUp}
+          {ShowLoginOrLogout}
         </StyledNavButtonLayout>
       </Navbar>
       {props.children}
