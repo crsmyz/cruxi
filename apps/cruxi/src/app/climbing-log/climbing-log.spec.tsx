@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import Dashboard from './Dashboard';
+import ClimbingLog from './climbing-log';
 
-describe('Dashboard', () => {
+describe('ClimbingLog', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Dashboard />);
+    const { baseElement } = render(<ClimbingLog />);
     expect(baseElement).toBeTruthy();
   });
 });

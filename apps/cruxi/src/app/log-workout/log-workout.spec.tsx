@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import Dashboard from './Dashboard';
+import LogWorkout from './log-workout';
 
-describe('Dashboard', () => {
+describe('LogWorkout', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Dashboard />);
+    const { baseElement } = render(<LogWorkout />);
     expect(baseElement).toBeTruthy();
   });
 });

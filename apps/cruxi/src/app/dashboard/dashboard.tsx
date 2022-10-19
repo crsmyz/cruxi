@@ -1,18 +1,25 @@
-import styled from 'styled-components';
+import React, { useState } from 'react';
+// interfaces
+import { DashboardProps } from './Dashboard.interface';
+// styles
+import { StyledDashboard } from './StyledDashboard';
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 
-/* eslint-disable-next-line */
-export interface DashboardProps {}
-
-const StyledDashboard = styled.div`
-  color: #3D3837;
-  margin: 2rem;
-`;
-
-export function Dashboard(props: DashboardProps) {
+const Dashboard = (props: DashboardProps) => {
+  const [workout, setWorkout] = useState();
   const { user } = useAuth0();
   return (
     <StyledDashboard>
+      <h2>Log Workout</h2>
+      <div>
+        <form action="">
+          <input type="text" />
+          <input type="text" />
+          <input type="text" />
+          <input type="text" />
+          <input type="text" />
+        </form>
+      </div>
       <h2>Stats</h2>
       <div>
         <h1>Bouldering</h1>
