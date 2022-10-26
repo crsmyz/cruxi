@@ -4,48 +4,32 @@ import { DashboardProps } from './Dashboard.interface';
 // styles
 import { StyledDashboard } from './StyledDashboard';
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
+import LogWorkout from '../LogWorkout/LogWorkout';
 
 const Dashboard = (props: DashboardProps) => {
   const [workout, setWorkout] = useState();
+  const [workOutHistory, setWorkoutHistory] = useState([]);
+
+
   const { user } = useAuth0();
   return (
     <StyledDashboard>
-      <h2>Log Workout</h2>
-      <div>
-        <form action="">
-          <input type="text" />
-          <input type="text" />
-          <input type="text" />
-          <input type="text" />
-          <input type="text" />
-        </form>
-      </div>
-      <h2>Stats</h2>
-      <div>
-        <h1>Bouldering</h1>
-        <div>Easy Onsight: V1</div>
-        <div>Medium Onsight: V1</div>
-        <div>Hard Onsight: V1</div>
-        <div>Easy Redpoint: V1</div>
-        <div>Medium Redpoint: V1</div>
-        <div>Hard Redpoint: V1</div>
-      </div>
-      <div>
-        <h1>Sport Climbing</h1>
-        <div>Easy Onsight: V1</div>
-        <div>Medium Onsight: V1</div>
-        <div>Hard Onsight: V1</div>
-        <div>Easy Redpoint: V1</div>
-        <div>Medium Redpoint: V1</div>
-        <div>Hard Redpoint: V1</div>
-      </div>
-      <div>
-        <h1>Exercises</h1>
-      </div>
+      <LogWorkout workOutData={workOutHistory} setWorkOutHandler={setWorkoutHistory}/>
 
-      <div>{user?.picture}</div>
-      <div>{user?.name}</div>
-      <div>{JSON.stringify(user, null, 2)}</div>
+      <h2>Workout History</h2>
+      <div>
+        {workOutHistory.map((workout: any) => (
+          <div>
+            {workout.date}
+            {workout.activity}
+            {workout.routeType}
+            {workout.holdTypes}
+            {workout.grade}
+            {workout.intensity}
+            {workout.notes}
+          </div>
+        ))}
+      </div>
     </StyledDashboard>
   );
 }

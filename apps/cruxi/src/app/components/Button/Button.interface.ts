@@ -1,4 +1,4 @@
 export interface ButtonProps {
     buttonName: string;
-    buttonClickHandler: any;
+    buttonClickHandler?: any;
   }

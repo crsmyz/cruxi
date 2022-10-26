@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import ClimbingLog from './climbing-log';
+import Dropdown from './Dropdown';
 
-describe('ClimbingLog', () => {
+describe('Dropdown', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<ClimbingLog />);
+    const { baseElement } = render(<Dropdown />);
     expect(baseElement).toBeTruthy();
   });
 });

@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import LogBook from './log-book';
+import Textarea from './Textarea';
 
-describe('LogBook', () => {
+describe('Textarea', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<LogBook />);
+    const { baseElement } = render(<Textarea />);
     expect(baseElement).toBeTruthy();
   });
 });
