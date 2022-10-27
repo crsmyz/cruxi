@@ -26,11 +26,25 @@ const LogWorkout = (props: LogWorkoutProps) => {
 
   const [date, setDate] = useState('');
   const [activity, setActivity] = useState('');
-  const [routeType, setRouteType] = useState('');
   const [holdType, setHoldType] = useState('');
-  const [grade, setGrade] = useState('');
-  const [intensity, setIntensity] = useState('');
   const [notes, setNotes] = useState('');
+
+  const [routeNumber, setRouteNumber] = useState('');
+  const [grade, setGrade] = useState('');
+  const [outcome, setOutcome] = useState('');
+  const [intensity, setIntensity] = useState('');
+  const [routeType, setRouteType] = useState('');
+  const [holdTypes, setHoldTypes] = useState('');
+
+  const [routes, setRoutes] = useState([{
+    routeNumber: '',
+    grade: '',
+    outcome: '',
+    intensity: '',
+    routeType: '',
+    holdTypes: ''
+  }]);
+
   const saveWorkoutHandler = (e: any) => {
     e.preventDefault();
     const workOut = {
@@ -43,6 +57,18 @@ const LogWorkout = (props: LogWorkoutProps) => {
       notes: notes,
     };
     props.setWorkOutHandler([...props.workOutData, workOut]);
+  }
+  const saveRouteHandler = (e: any) => {
+    e.preventDefault();
+    const route = {
+      routeNumber: routeNumber,
+      grade: grade,
+      outcome: outcome,
+      intensity: intensity,
+      routeType: routeType,
+      holdTypes: holdTypes
+    };
+    setRoutes([...routes, route]);
   }
 
   const holdsDropdownData = [
@@ -64,33 +90,42 @@ const LogWorkout = (props: LogWorkoutProps) => {
     { value: 'slab', label: 'Slab'},
     { value: 'vertical', label: 'Vertical'},
   ];
+  const shoesDropdownData = [
+    { value: '', label: 'Choose a shoe...' },
+    { value: 'laSportivaSkwama', label: 'La Sportiva Skwama' },
+    { value: 'scarpaMaestro', label: 'Scarpa Maestro' },
+  ];
+  const outcomeDropdownData = [
+    { value: '', label: 'Climbing Outcome...' },
+    { value: 'sent', label: 'Sent' },
+    { value: 'attemped', label: 'Attemped' },
+  ]
 
   return (
     <StyledLogWorkout>
       <h2>Log Workout</h2>
       <StyledCard>
-        <Form onSubmit={saveWorkoutHandler}>
-          <InputGroup htmlFor='datetime-local' labelName='Date:' type='datetime-local' onChangeHandler={setDate}/>
-          Start Time
-          End Time
+        <Form onSubmit=''>
           <h3>Climbing Time:</h3>
-          Climbing Time
+          <InputGroup htmlFor='date' labelName='Date:' type='date' onChangeHandler={setDate}/>
+          <InputGroup htmlFor='time' labelName='Start Time:' type='time' onChangeHandler={setDate}/>
+          <InputGroup htmlFor='time' labelName='End Time:' type='time' onChangeHandler={setDate}/>
+          {/* Climbing Time
           Total Rest
-          Total Time
+          Total Time */}
           <br/>
 
           <h3>Location</h3>
-          Climbing Gym
-          Location
+          <InputGroup htmlFor='gymName' labelName='Climbing Gym:' type='text' onChangeHandler={setDate}/>
+          <InputGroup htmlFor='gymLocation' labelName='Location' type='text' onChangeHandler={setDate}/>
 
           <h3>Session Data:</h3>
-          <Dropdown htmlFor='activity-select' labelName='Activity:' selectName='activities' selectId='activity-select' onChangeHandler={setActivity} options={activityDreopdownData} />
+          <InputGroup htmlFor='totalRoutes' labelName='Total Routes:' type='number' onChangeHandler={setDate}/>
+          {/* <Dropdown htmlFor='activity-select' labelName='Activity:' selectName='activities' selectId='activity-select' onChangeHandler={setActivity} options={activityDreopdownData} /> */}
           <br/>
-          Total Routes
+          <InputGroup htmlFor='routesAttempted' labelName='Routes Attempted:' type='number' onChangeHandler={setDate}/>
           <br/>
-          Routes Attemped
-          <br/>
-          Routes Completed
+          <InputGroup htmlFor='routesCompleted' labelName='Routes Completed:' type='number' onChangeHandler={setDate}/>
           <br/>
           Max Difficulty
           <br/>
@@ -98,53 +133,65 @@ const LogWorkout = (props: LogWorkoutProps) => {
           <br/>
           Easiest Difficulty
           <br/>
-          Overall Intensity
+          <Textarea htmlFor='notes' labelName='Notes:' onChangeHandler={setNotes}/>
+          {/* <InputGroup htmlFor='overallIntensity' labelName='Overall Intensity:' type='range' min="0" max="50" onChangeHandler={setDate}/> */}
           <br/>
           <br/>
           <h3>Gear</h3>
-          Shoes
+          <InputGroup htmlFor='shoes' labelName='Shoes:' type='text' onChangeHandler={setDate}/>
           <br/>
-          Chalk
+          <InputGroup htmlFor='chalk' labelName='Chalk:' type='text' onChangeHandler={setDate}/>
           <br/>
-          Rope Gear
-            Harness
-            Quick Draws
+          <InputGroup htmlFor='harness' labelName='Harness:' type='text' onChangeHandler={setDate}/>
           <br/>
-          Trad Gear
-            Cams
-            Nuts
-            Hexes
-            Tricams
-            <br/>
-            <br/>
-          <h3>Notes:</h3>
-          <Textarea htmlFor='notes' labelName='Notes:' onChangeHandler={setNotes}/>
-
+          <InputGroup htmlFor='rope' labelName='Rope:' type='text' onChangeHandler={setDate}/>
+          <br/>
+          <InputGroup htmlFor='quickDraws' labelName='Quick Draws:' type='text' onChangeHandler={setDate}/>
+          <br/>
+          <InputGroup htmlFor='cams' labelName='Cams:' type='text' onChangeHandler={setDate}/>
+          <br/>
+          <InputGroup htmlFor='nuts' labelName='Nuts:' type='text' onChangeHandler={setDate}/>
+          <br/>
+          <InputGroup htmlFor='hexes' labelName='Hexes:' type='text' onChangeHandler={setDate}/>
+          <br/>
+          <br/>
           <h3>Route Data:</h3>
-          Route #
+          <div>{routes.map((eachRoute: any) => (
+            <div>
+              <div>{eachRoute.routeNumber}</div>
+              <div>{eachRoute.grade}</div>
+              <div>{eachRoute.outcome}</div>
+              <div>{eachRoute.intensity}</div>
+              <div>{eachRoute.routeType}</div>
+              <div>{eachRoute.holdTypes}</div>
+            </div>
+            ))}
+          </div>
           <br/>
-          Grade
-          <br/>
-          <InputGroup htmlFor='grade' labelName='Grade:' type='text' onChangeHandler={setGrade}/>
-          <br/>
-          Time to Complete
-          <br/>
-          Outcome
-          <br/>
-          Intensity
-          <br/>
-          <InputGroup htmlFor='intensity' labelName='Intensity:' type='text' onChangeHandler={setIntensity}/>
-          <br/>
-          Wall Style
-          <Dropdown htmlFor='route-select' labelName='Type of Route:' selectName='routes' selectId='route-select' onChangeHandler={setRouteType} options={routeDreopdownData} />
-          <br/>
-          Holds on Route
-          <br/>
-          <Dropdown htmlFor='holds-select' labelName='Hold Type:' selectName='holds' selectId='holds-select' onChangeHandler={setHoldType} options={holdsDropdownData} />
           <br/>
           <Button buttonName='Submit Workout' />
         </Form>
       </StyledCard>
+      <h3>Route Data:</h3>
+          <Form onSubmit={saveRouteHandler}>
+            <InputGroup htmlFor='routeNumber' labelName='Route #:' type='number' onChangeHandler={setRouteNumber}/>
+            <br/>
+            <InputGroup htmlFor='grade' labelName='Grade:' type='text' onChangeHandler={setGrade}/>
+            <br/>
+            {/* <br/>
+            Time to Complete
+            <br/> */}
+            <Dropdown htmlFor='outcome' labelName='Outcome:' selectName='outcome' selectId='outcome-select' onChangeHandler={setOutcome} options={outcomeDropdownData} />
+            <br/>
+            <InputGroup htmlFor='intensity' labelName='Intensity:' type='text' onChangeHandler={setIntensity}/>
+            <br/>
+            <Dropdown htmlFor='route-select' labelName='Type of Route:' selectName='routes' selectId='route-select' onChangeHandler={setRouteType} options={routeDreopdownData} />
+            <br/>
+            <Dropdown htmlFor='holds-select' labelName='Hold Type:' selectName='holds' selectId='holds-select' onChangeHandler={setHoldTypes} options={holdsDropdownData} />
+            <br/>
+            <Button buttonName='Add Route' />
+          </Form>
+          
     </StyledLogWorkout>
   );
 }
