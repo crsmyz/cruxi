@@ -6,8 +6,8 @@ export const StyledDropdown = styled.div`
 
 export const StyledLabel = styled.label`
     color: #3D3837;
-    font-weight: 500;
-    font-size: 1.125rem;
+    font-weight: 400;
+    font-size: 1rem;
 `;
 
 export const StyledSelect = styled.select`
@@ -15,8 +15,8 @@ export const StyledSelect = styled.select`
   border: 1px solid #bbb;
   margin: 0.25rem 1rem 0.25rem 0rem;
   padding: 0px 5px 0px 10px;
-  height: 2.75rem;
-  font-size: 1.125rem;
+  height: 2rem;
+  font-size: 1rem;
 `;
 
 export const StyledOption = styled.option`

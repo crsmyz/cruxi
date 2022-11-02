@@ -5,8 +5,8 @@ export const StyledTextareaGroup = styled.div`
 
 export const StyledLabel = styled.label`
     color: #3D3837;
-    font-weight: 500;
-    font-size: 1.125rem;
+    font-weight: 400;
+    font-size: 1rem;
 `;
 
 export const StyledTextarea = styled.textarea`
