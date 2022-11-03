@@ -16,7 +16,7 @@ const Dashboard = (props: DashboardProps) => {
     <StyledDashboard>
       <LogWorkout workOutData={workOutHistory} setWorkOutHandler={setWorkoutHistory}/>
 
-      <h2>Workout History</h2>
+      {/* <h2>Workout History</h2>
       <div>
         {workOutHistory.map((workout: any) => (
           <div>
@@ -29,7 +29,7 @@ const Dashboard = (props: DashboardProps) => {
             {workout.notes}
           </div>
         ))}
-      </div>
+      </div> */}
     </StyledDashboard>
   );
 }

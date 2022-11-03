@@ -17,6 +17,7 @@ export const StyledSelect = styled.select`
   padding: 0px 5px 0px 10px;
   height: 2rem;
   font-size: 1rem;
+  width: 13.25rem;
 `;
 
 export const StyledOption = styled.option`

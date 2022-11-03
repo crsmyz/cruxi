@@ -36,16 +36,33 @@ const StyledRouteDataRow = styled.div`
 const StyledRouteDataItem = styled.div`
   margin: 1rem;
 `;
+const StyledTable = styled.table`
+  border-collapse: collapse;
+`;
+const StyledTableHead = styled.thead`
+  border-bottom: 1px solid #D3C9C67A;
+`;
 const StyledTableHeaderRow = styled.tr`
 `;
 const StyledTableHeader = styled.td`
-  padding: 0rem 2rem 1rem 0rem;
+  padding: 0rem 4rem 1rem 0rem;
   color: #3D3837;
   font-weight: 500;
+  font-size: 1.25rem;
+`;
+const StyledTableCell = styled.td`
+  padding: 1rem 3rem 1rem 0rem;
+  color: #3D3837;
+  font-weight: 400;
   font-size: 1.125rem;
 `;
 const StyledWorkoutRow = styled.div`
+  margin: 1rem 0rem 0rem 0rem;
   display: flex;
+`;
+const StyleWorkoutSection = styled.section`
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #D3C9C67A;
 `;
 
 const LogWorkout = (props: LogWorkoutProps) => {
@@ -91,57 +108,64 @@ const LogWorkout = (props: LogWorkoutProps) => {
     };
     setRoutes([...routes, route]);
   }
+  const editRouteHandler = (i: number) => {
+    console.log(i);
+    console.log(routes[i]);
+  }
 
   const holdsDropdownData = [
     { value: '', label: 'Choose Holds...' },
-    { value: 'crimps', label: 'Crimps' },
-    { value: 'slopers', label: 'Slopers' },
-    { value: 'jugs', label: 'Jugs' },
-    { value: 'mixed', label: 'Mixed' },
-  ];
-  const activityDreopdownData = [
-    { value: '', label: 'Choose an activity'},
-    { value: 'sportClimbing', label: 'Sport Climbing'},
-    { value: 'bouldering', label: 'Bouldering'},
-  ];
-  const routeDreopdownData = [
-    { value: '', label: 'Choose a route'},
-    { value: 'overhanging', label: 'Overhanging'},
-    { value: 'caveRoof', label: 'Cave/Roof'},
-    { value: 'slab', label: 'Slab'},
-    { value: 'vertical', label: 'Vertical'},
-  ];
-  const shoesDropdownData = [
-    { value: '', label: 'Choose a shoe...' },
-    { value: 'laSportivaSkwama', label: 'La Sportiva Skwama' },
-    { value: 'scarpaMaestro', label: 'Scarpa Maestro' },
+    { value: 'Crimps', label: 'Crimps' },
+    { value: 'Slopers', label: 'Slopers' },
+    { value: 'Jugs', label: 'Jugs' },
+    { value: 'Mixed', label: 'Mixed' },
   ];
   const outcomeDropdownData = [
     { value: '', label: 'Climbing Outcome...' },
-    { value: 'sent', label: 'Sent' },
-    { value: 'attemped', label: 'Attemped' },
-  ]
+    { value: 'Sent', label: 'Sent' },
+    { value: 'Attempted', label: 'Attempted' },
+  ];
+  const activityDreopdownData = [
+    { value: '', label: 'Choose an activity'},
+    { value: 'Sport Climbing', label: 'Sport Climbing'},
+    { value: 'Bouldering', label: 'Bouldering'},
+  ];
+  const routeDreopdownData = [
+    { value: '', label: 'Choose a route'},
+    { value: 'Overhanging', label: 'Overhanging'},
+    { value: 'Cave/Roof', label: 'Cave/Roof'},
+    { value: 'Slab', label: 'Slab'},
+    { value: 'Vertical', label: 'Vertical'},
+  ];
+  // const shoesDropdownData = [
+  //   { value: '', label: 'Choose a shoe...' },
+  //   { value: 'laSportivaSkwama', label: 'La Sportiva Skwama' },
+  //   { value: 'scarpaMaestro', label: 'Scarpa Maestro' },
+  // ];
 
-  const routeTable = (<table>
-    <StyledTableHeaderRow>
-      <StyledTableHeader>Route #</StyledTableHeader>
-      <StyledTableHeader>Grade</StyledTableHeader>
-      <StyledTableHeader>Outcome</StyledTableHeader>
-      <StyledTableHeader>Intensity</StyledTableHeader>
-      <StyledTableHeader>Route Type</StyledTableHeader>
-      <StyledTableHeader>Hold Type</StyledTableHeader>
-    </StyledTableHeaderRow>
-    {routes.map((eachRoute: any) => (
+  const routeTable = (<StyledTable>
+    <StyledTableHead>
+      <StyledTableHeaderRow>
+        <StyledTableHeader>Route #</StyledTableHeader>
+        <StyledTableHeader>Grade</StyledTableHeader>
+        <StyledTableHeader>Outcome</StyledTableHeader>
+        <StyledTableHeader>Intensity</StyledTableHeader>
+        <StyledTableHeader>Route Type</StyledTableHeader>
+        <StyledTableHeader>Hold Type</StyledTableHeader>
+      </StyledTableHeaderRow>
+    </StyledTableHead>
+    {routes.map((eachRoute: any, index: number) => (
     <tr>
-      <td>{eachRoute.routeNumber}</td>
-      <td>{eachRoute.grade}</td>
-      <td>{eachRoute.outcome}</td>
-      <td>{eachRoute.intensity}</td>
-      <td>{eachRoute.routeType}</td>
-      <td>{eachRoute.holdTypes}</td>
+      <StyledTableCell>{eachRoute.routeNumber}</StyledTableCell>
+      <StyledTableCell>{eachRoute.grade}</StyledTableCell>
+      <StyledTableCell>{eachRoute.outcome}</StyledTableCell>
+      <StyledTableCell>{eachRoute.intensity}</StyledTableCell>
+      <StyledTableCell>{eachRoute.routeType}</StyledTableCell>
+      <StyledTableCell>{eachRoute.holdTypes}</StyledTableCell>
+      <StyledTableCell><Button buttonName='Edit' buttonClickHandler={editRouteHandler(index)} /></StyledTableCell>
     </tr>
     ))}
-  </table>);
+  </StyledTable>);
 
   // sections to add
   /**
@@ -153,76 +177,70 @@ const LogWorkout = (props: LogWorkoutProps) => {
     <StyledLogWorkout>
       <h1>Log Workout</h1>
         <Form onSubmit=''>
+          <StyleWorkoutSection>
           <h3>Climbing Time</h3>
           <StyledWorkoutRow>
             <InputGroup htmlFor='date' labelName='Date:' type='date' onChangeHandler={setDate}/>
             <InputGroup htmlFor='time' labelName='Start Time:' type='time' onChangeHandler={setDate}/>
             <InputGroup htmlFor='time' labelName='End Time:' type='time' onChangeHandler={setDate}/>
           </StyledWorkoutRow>
-          <br/>
+          </StyleWorkoutSection>
+          <StyleWorkoutSection>
           <h3>Location</h3>
           <StyledWorkoutRow>
             <InputGroup htmlFor='gymName' labelName='Climbing Gym:' type='text' onChangeHandler={setDate}/>
             <InputGroup htmlFor='gymLocation' labelName='Location:' type='text' onChangeHandler={setDate}/>
           </StyledWorkoutRow>
-          <br/>
+          </StyleWorkoutSection>
+          <StyleWorkoutSection>
           <h3>Session Data</h3>
-          <StyledWorkoutRow>
-            <InputGroup htmlFor='totalRoutes' labelName='Total Routes:' type='number' onChangeHandler={setDate}/>
-            <br/>
-            <InputGroup htmlFor='routesAttempted' labelName='Routes Attempted:' type='number' onChangeHandler={setDate}/>
-            <br/>
-            <InputGroup htmlFor='routesCompleted' labelName='Routes Completed:' type='number' onChangeHandler={setDate}/>
-            <br/>
-            <InputGroup htmlFor='maxDifficulty' labelName='Max Difficulty:' type='text' onChangeHandler={setDate}/>
-            <br/>
-            <InputGroup htmlFor='avgDifficulty' labelName='Avg Difficulty:' type='text' onChangeHandler={setDate}/>
-            <br/>
-            <InputGroup htmlFor='easiestDifficulty' labelName='Easiest Difficulty:' type='text' onChangeHandler={setDate}/>
-            <br/>
-            <Textarea htmlFor='notes' labelName='Notes:' onChangeHandler={setNotes}/>
-          </StyledWorkoutRow>
-          <br/>
+            <StyledWorkoutRow>
+              <InputGroup htmlFor='totalRoutes' labelName='Total Routes:' type='number' onChangeHandler={setDate}/>
+              <InputGroup htmlFor='routesAttempted' labelName='Routes Attempted:' type='number' onChangeHandler={setDate}/>
+              <InputGroup htmlFor='routesCompleted' labelName='Routes Completed:' type='number' onChangeHandler={setDate}/>
+            </StyledWorkoutRow>
+            <StyledWorkoutRow>
+              <InputGroup htmlFor='maxDifficulty' labelName='Max Difficulty:' type='text' onChangeHandler={setDate}/>
+              <InputGroup htmlFor='avgDifficulty' labelName='Avg Difficulty:' type='text' onChangeHandler={setDate}/>
+              <InputGroup htmlFor='easiestDifficulty' labelName='Easiest Difficulty:' type='text' onChangeHandler={setDate}/>
+            </StyledWorkoutRow>
+            <StyledWorkoutRow>
+              <Textarea htmlFor='notes' labelName='Notes:' onChangeHandler={setNotes}/>
+            </StyledWorkoutRow>
+          </StyleWorkoutSection>
+          <StyleWorkoutSection>
           <h3>Gear</h3>
           <StyledWorkoutRow>
             <InputGroup htmlFor='shoes' labelName='Shoes:' type='text' onChangeHandler={setDate}/>
-            <br/>
             <InputGroup htmlFor='chalk' labelName='Chalk:' type='text' onChangeHandler={setDate}/>
-            <br/>
             <InputGroup htmlFor='harness' labelName='Harness:' type='text' onChangeHandler={setDate}/>
-            <br/>
+          </StyledWorkoutRow>
+          <StyledWorkoutRow>
             <InputGroup htmlFor='rope' labelName='Rope:' type='text' onChangeHandler={setDate}/>
-            <br/>
             <InputGroup htmlFor='quickDraws' labelName='Quick Draws:' type='text' onChangeHandler={setDate}/>
           </StyledWorkoutRow>
-          {/* <br/>
-          <InputGroup htmlFor='cams' labelName='Cams:' type='text' onChangeHandler={setDate}/>
-          <br/>
-          <InputGroup htmlFor='nuts' labelName='Nuts:' type='text' onChangeHandler={setDate}/>
-          <br/>
-          <InputGroup htmlFor='hexes' labelName='Hexes:' type='text' onChangeHandler={setDate}/> */}
-          <br/>
+          </StyleWorkoutSection>
+          <StyleWorkoutSection>
           <h3>Add Climbs</h3>
           <StyledWorkoutRow>
             <InputGroup htmlFor='grade' labelName='Grade:' type='text' onChangeHandler={setGrade}/>
-            <br/>
             <Dropdown htmlFor='outcome' labelName='Outcome:' selectName='outcome' selectId='outcome-select' onChangeHandler={setOutcome} options={outcomeDropdownData} />
-            <br/>
+          </StyledWorkoutRow>
+          <StyledWorkoutRow>
             <InputGroup htmlFor='intensity' labelName='Intensity:' type='range' min='0' max='10' step='1' name='intensity' onChangeHandler={setIntensity}/>
-            <br/>
+            {intensity}
+          </StyledWorkoutRow>
+          <StyledWorkoutRow>
             <Dropdown htmlFor='route-select' labelName='Type of Route:' selectName='routes' selectId='route-select' onChangeHandler={setRouteType} options={routeDreopdownData} />
-            <br/>
             <Dropdown htmlFor='holds-select' labelName='Hold Type:' selectName='holds' selectId='holds-select' onChangeHandler={setHoldTypes} options={holdsDropdownData} />
-            <br/>
+          </StyledWorkoutRow>
+          <StyledWorkoutRow>
             <Button buttonName='Add Route' buttonClickHandler={saveRouteHandler} />
           </StyledWorkoutRow>
-          <br/>
-          <br/>
-          <br/>
+          <StyledWorkoutRow>
           {routes && routes.length > 0 && Object.keys(routes[0]).length > 0 ? routeTable : null}
-          <br/>
-          <br/>
-          <br/>
+          </StyledWorkoutRow>
+          </StyleWorkoutSection>
           <br/>
           <Button buttonName='Submit Workout' />
         </Form>
