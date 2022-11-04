@@ -15,21 +15,50 @@ const Dashboard = (props: DashboardProps) => {
   return (
     <StyledDashboard>
       <LogWorkout workOutData={workOutHistory} setWorkOutHandler={setWorkoutHistory}/>
-
-      {/* <h2>Workout History</h2>
+      <h2>Workout History</h2>
       <div>
         {workOutHistory.map((workout: any) => (
           <div>
-            {workout.date}
+            {/* {workout.date}
             {workout.activity}
             {workout.routeType}
             {workout.holdTypes}
             {workout.grade}
             {workout.intensity}
-            {workout.notes}
+            {workout.notes} */}
+
+            date: date,
+            startTime: startTime,
+            endTime: endTime,
+
+            climbingGym: climbingGym,
+            location: location,
+
+            activity: activity,
+            totalRoutes: totalRoutes,
+            routesAttempted: routesAttempted,
+            routesCompleted: routesCompleted,
+            maxDifficulty: maxDifficulty,
+            avgDifficulty: avgDifficulty,
+            easiestDifficulty: easiestDifficulty,
+            notes: notes,
+
+            shoes: shoes,
+            chalk: chalk,
+            harness: harness,
+            rope: rope,
+            quickDraw: quickDraw,
+
+            grade: grade,
+            outcome: outcome,
+            intensity: intensity,
+            routeType: routeType,
+            holdTypes: holdTypes,
+
+            routes: routes,
           </div>
         ))}
-      </div> */}
+      </div>
     </StyledDashboard>
   );
 }

@@ -68,30 +68,70 @@ const StyleWorkoutSection = styled.section`
 const LogWorkout = (props: LogWorkoutProps) => {
   const row : RouteRow[] = [];
 
+  // climbing time
   const [date, setDate] = useState('');
+  const [startTime, setStartTime] = useState('');
+  const [endTime, setEndTime] = useState('');
+  // location
+  const [climbingGym, setClimbingGym] = useState('');
+  const [location, setLocation] = useState('');
+  // session data
   const [activity, setActivity] = useState('');
-  const [holdType, setHoldType] = useState('');
+  const [totalRoutes, setTotalRoutes] = useState('');
+  const [routesAttempted, setRoutesAttempted] = useState('');
+  const [routesCompleted, setRoutesCompleted] = useState('');
+  const [maxDifficulty, setMaxDifficulty] = useState('');
+  const [avgDifficulty, setAvgDifficulty] = useState('');
+  const [easiestDifficulty, setEasiestDifficulty] = useState('');
   const [notes, setNotes] = useState('');
-
-  const [routeNumber, setRouteNumber] = useState(1);
+  // gear
+  const [shoes, setShoes] = useState('');
+  const [chalk, setChalk] = useState('');
+  const [harness, setHarness] = useState('');
+  const [rope, setRope] = useState('');
+  const [quickDraw, setQuickDraws] = useState('');
+  // add climbs
   const [grade, setGrade] = useState('');
   const [outcome, setOutcome] = useState('');
   const [intensity, setIntensity] = useState('');
   const [routeType, setRouteType] = useState('');
   const [holdTypes, setHoldTypes] = useState('');
-
+  // route table data
   const [routes, setRoutes] = useState(row);
+  const [isEditing, setIsEditing] = useState(false);
 
   const saveWorkoutHandler = (e: any) => {
     e.preventDefault();
     const workOut = {
       date: date,
+      startTime: startTime,
+      endTime: endTime,
+
+      climbingGym: climbingGym,
+      location: location,
+
       activity: activity,
-      routeType: routeType,
-      holdType: holdType,
-      grade: grade,
-      intensity: intensity,
+      totalRoutes: totalRoutes,
+      routesAttempted: routesAttempted,
+      routesCompleted: routesCompleted,
+      maxDifficulty: maxDifficulty,
+      avgDifficulty: avgDifficulty,
+      easiestDifficulty: easiestDifficulty,
       notes: notes,
+
+      shoes: shoes,
+      chalk: chalk,
+      harness: harness,
+      rope: rope,
+      quickDraw: quickDraw,
+
+      grade: grade,
+      outcome: outcome,
+      intensity: intensity,
+      routeType: routeType,
+      holdTypes: holdTypes,
+
+      routes: routes,
     };
     props.setWorkOutHandler([...props.workOutData, workOut]);
   }
@@ -108,9 +148,11 @@ const LogWorkout = (props: LogWorkoutProps) => {
     };
     setRoutes([...routes, route]);
   }
-  const editRouteHandler = (i: number) => {
-    console.log(i);
-    console.log(routes[i]);
+  const removeRouteHandler = (e: any, i: number) => {
+    e.preventDefault();
+    const newRoutes = routes;
+    newRoutes.splice(i, 1);
+    setRoutes([...newRoutes]);
   }
 
   const holdsDropdownData = [
@@ -137,11 +179,6 @@ const LogWorkout = (props: LogWorkoutProps) => {
     { value: 'Slab', label: 'Slab'},
     { value: 'Vertical', label: 'Vertical'},
   ];
-  // const shoesDropdownData = [
-  //   { value: '', label: 'Choose a shoe...' },
-  //   { value: 'laSportivaSkwama', label: 'La Sportiva Skwama' },
-  //   { value: 'scarpaMaestro', label: 'Scarpa Maestro' },
-  // ];
 
   const routeTable = (<StyledTable>
     <StyledTableHead>
@@ -155,28 +192,22 @@ const LogWorkout = (props: LogWorkoutProps) => {
       </StyledTableHeaderRow>
     </StyledTableHead>
     {routes.map((eachRoute: any, index: number) => (
-    <tr>
-      <StyledTableCell>{eachRoute.routeNumber}</StyledTableCell>
-      <StyledTableCell>{eachRoute.grade}</StyledTableCell>
-      <StyledTableCell>{eachRoute.outcome}</StyledTableCell>
-      <StyledTableCell>{eachRoute.intensity}</StyledTableCell>
-      <StyledTableCell>{eachRoute.routeType}</StyledTableCell>
-      <StyledTableCell>{eachRoute.holdTypes}</StyledTableCell>
-      <StyledTableCell><Button buttonName='Edit' buttonClickHandler={editRouteHandler(index)} /></StyledTableCell>
+    <tr key={index}>
+      {<StyledTableCell key={index}>{index + 1}</StyledTableCell>}
+      <StyledTableCell key={index}>{eachRoute.grade}</StyledTableCell>
+      <StyledTableCell key={index}>{eachRoute.outcome}</StyledTableCell>
+      <StyledTableCell key={index}>{eachRoute.intensity}</StyledTableCell>
+      <StyledTableCell key={index}>{eachRoute.routeType}</StyledTableCell>
+      <StyledTableCell key={index}>{eachRoute.holdTypes}</StyledTableCell>
+      {/* <StyledTableCell key={index}><Button buttonName='Edit' buttonClickHandler={(e: any) => editRouteHandler(e, index)} /></StyledTableCell> */}
+      <StyledTableCell key={index}><Button buttonName='Delete' buttonClickHandler={(e: any) => removeRouteHandler(e, index)} /></StyledTableCell>
     </tr>
     ))}
   </StyledTable>);
-
-  // sections to add
-  /**
-   * Climbing Time
-   * Total Rest
-   * Total Time
-   */
   return (
     <StyledLogWorkout>
       <h1>Log Workout</h1>
-        <Form onSubmit=''>
+        <Form onSubmit={saveWorkoutHandler}>
           <StyleWorkoutSection>
           <h3>Climbing Time</h3>
           <StyledWorkoutRow>
