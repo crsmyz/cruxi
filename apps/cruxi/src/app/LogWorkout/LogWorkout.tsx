@@ -13,7 +13,6 @@ export interface LogWorkoutProps {
 }
 
 export interface RouteRow {
-  routeNumber: number;
   grade: string;
   outcome: string;
   intensity: string;
@@ -137,9 +136,7 @@ const LogWorkout = (props: LogWorkoutProps) => {
   }
   const saveRouteHandler = (e: any) => {
     e.preventDefault();
-    setRouteNumber(routeNumber + 1)
     const route = {
-      routeNumber: routeNumber,
       grade: grade,
       outcome: outcome,
       intensity: intensity,
@@ -212,7 +209,7 @@ const LogWorkout = (props: LogWorkoutProps) => {
           <h3>Climbing Time</h3>
           <StyledWorkoutRow>
             <InputGroup htmlFor='date' labelName='Date:' type='date' onChangeHandler={setDate}/>
-            <InputGroup htmlFor='time' labelName='Start Time:' type='time' onChangeHandler={setDate}/>
+            <InputGroup htmlFor='time' labelName='Start Time:' type='time' onChangeHandler={setStartTime}/>
             <InputGroup htmlFor='time' labelName='End Time:' type='time' onChangeHandler={setDate}/>
           </StyledWorkoutRow>
           </StyleWorkoutSection>

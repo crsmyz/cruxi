@@ -19,43 +19,89 @@ const Dashboard = (props: DashboardProps) => {
       <div>
         {workOutHistory.map((workout: any) => (
           <div>
-            {/* {workout.date}
+            Date:
+            <br/>
+            {workout.date}
+            <br/>
+            Start Time:
+            <br/>
+            {workout.startTime}
+            <br/>
+            End Time
+            <br/>
+            {workout.endTime}
+            <br/>
+            Climbing Gym:
+            <br/>
+            {workout.climbingGym}
+            <br/>
+            Location
+            <br/>
+            {workout.location}
+            <br/>
+            Activity:
+            <br/>
             {workout.activity}
-            {workout.routeType}
-            {workout.holdTypes}
-            {workout.grade}
-            {workout.intensity}
-            {workout.notes} */}
-
-            date: date,
-            startTime: startTime,
-            endTime: endTime,
-
-            climbingGym: climbingGym,
-            location: location,
-
-            activity: activity,
-            totalRoutes: totalRoutes,
-            routesAttempted: routesAttempted,
-            routesCompleted: routesCompleted,
-            maxDifficulty: maxDifficulty,
-            avgDifficulty: avgDifficulty,
-            easiestDifficulty: easiestDifficulty,
-            notes: notes,
-
-            shoes: shoes,
-            chalk: chalk,
-            harness: harness,
-            rope: rope,
-            quickDraw: quickDraw,
-
-            grade: grade,
-            outcome: outcome,
-            intensity: intensity,
-            routeType: routeType,
-            holdTypes: holdTypes,
-
-            routes: routes,
+            <br/>
+            Total Routes:
+            <br/>
+            {workout.totalRoutes}
+            <br/>
+            Routes Attempted:
+            <br/>
+            {workout.routesAttempted}
+            <br/>
+            Routes Completed:
+            <br/>
+            {workout.routesCompleted}
+            <br/>
+            Max Difficulty:
+            <br/>
+            {workout.maxDifficulty}
+            <br/>
+            Avg Diff:
+            <br/>
+            {workout.avgDifficulty}
+            <br/>
+            East Diff:
+            <br/>
+            {workout.easiestDifficulty}
+            <br/>
+            Notes:
+            <br/>
+            {workout.notes}
+            <br/>
+            Shoes:
+            <br/>
+            {workout.shoes}
+            <br/>
+            Chalk:
+            <br/>
+            {workout.chalk}
+            <br/>
+            Harness:
+            <br/>
+            {workout.harness}
+            <br/>
+            Rope:
+            <br/>
+            {workout.rope}
+            <br/>
+            Quick Draw:
+            <br/>
+            {workout.quickDraw}
+            <br/>
+            <br/>
+            {workout.routes.map((route: any, index: number) => (
+              <div key={index}>
+                <span>{index + 1}</span>
+                <span>{workout.grade}</span>
+                <span>{workout.outcome}</span>
+                <span>{workout.intensity}</span>
+                <span>{workout.routeType}</span>
+                <span>{workout.holdTypes}</span>
+              </div>
+            ))}
           </div>
         ))}
       </div>
