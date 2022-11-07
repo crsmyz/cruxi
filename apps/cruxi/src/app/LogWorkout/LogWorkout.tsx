@@ -6,7 +6,6 @@ import InputGroup from '../components/Input/Input';
 import Dropdown from '../components/Dropdown/Dropdown';
 import Textarea from '../components/Textarea/Textarea';
 
-/* eslint-disable-next-line */
 export interface LogWorkoutProps {
   workOutData: any;
   setWorkOutHandler: any;
@@ -75,7 +74,19 @@ const LogWorkout = (props: LogWorkoutProps) => {
   const [climbingGym, setClimbingGym] = useState('');
   const [location, setLocation] = useState('');
   // session data
+  const [activityName, setActivityName] = useState('');
   const [activity, setActivity] = useState('');
+  const [event, setEvent] = useState('');
+  const [calories, setCalories] = useState('');
+  const [avgHeartRate, setAvgHeartRate] = useState('');
+  const [maxHeartRate, setMaxHeartRate] = useState('');
+  const [rockType, setRockType] = useState('');
+  const [avgAscent, setAvgAscent] = useState('');
+  const [maxAscent, setMaxAscent] = useState('');
+  const [TotalAscent, setTotalAscent] = useState('');
+  const [weatherConditions, setWeatherConditions] = useState('');
+  const [helmet, setHelmet] = useState('');
+  const [overallExertion, setOverallExertion] = useState('');
   const [totalRoutes, setTotalRoutes] = useState('');
   const [routesAttempted, setRoutesAttempted] = useState('');
   const [routesCompleted, setRoutesCompleted] = useState('');
@@ -89,6 +100,7 @@ const LogWorkout = (props: LogWorkoutProps) => {
   const [harness, setHarness] = useState('');
   const [rope, setRope] = useState('');
   const [quickDraw, setQuickDraws] = useState('');
+  const [protection, setProtection] = useState('');
   // add climbs
   const [grade, setGrade] = useState('');
   const [outcome, setOutcome] = useState('');
@@ -164,9 +176,11 @@ const LogWorkout = (props: LogWorkoutProps) => {
     { value: 'Sent', label: 'Sent' },
     { value: 'Attempted', label: 'Attempted' },
   ];
-  const activityDreopdownData = [
+  const activityDropdownData = [
     { value: '', label: 'Choose an activity'},
+    { value: 'Auto Belay', label: 'Auto Belay'},
     { value: 'Sport Climbing', label: 'Sport Climbing'},
+    { value: 'Trad Climbing', label: 'Trad Climbing'},
     { value: 'Bouldering', label: 'Bouldering'},
   ];
   const routeDreopdownData = [
@@ -175,6 +189,19 @@ const LogWorkout = (props: LogWorkoutProps) => {
     { value: 'Cave/Roof', label: 'Cave/Roof'},
     { value: 'Slab', label: 'Slab'},
     { value: 'Vertical', label: 'Vertical'},
+  ];
+  const eventDropdownData = [
+    { value: '', label: 'Choose an event'},
+    { value: 'Training', label: 'Training'},
+    { value: 'Fitness', label: 'Fitness'},
+    { value: 'Recreation/Fun', label: 'Recreation/Fun'},
+    { value: 'Projecting', label: 'Projecting'},
+    { value: 'Competition', label: 'Competition'},
+  ];
+  const gradingSystem = [
+    { value: 'V-Scale', label: 'V-Scale'},
+    { value: 'Font', label: 'Font'},
+    { value: 'YDS', label: 'YDS'},
   ];
 
   const routeTable = (<StyledTable>
@@ -196,7 +223,6 @@ const LogWorkout = (props: LogWorkoutProps) => {
       <StyledTableCell key={index}>{eachRoute.intensity}</StyledTableCell>
       <StyledTableCell key={index}>{eachRoute.routeType}</StyledTableCell>
       <StyledTableCell key={index}>{eachRoute.holdTypes}</StyledTableCell>
-      {/* <StyledTableCell key={index}><Button buttonName='Edit' buttonClickHandler={(e: any) => editRouteHandler(e, index)} /></StyledTableCell> */}
       <StyledTableCell key={index}><Button buttonName='Delete' buttonClickHandler={(e: any) => removeRouteHandler(e, index)} /></StyledTableCell>
     </tr>
     ))}
@@ -205,6 +231,14 @@ const LogWorkout = (props: LogWorkoutProps) => {
     <StyledLogWorkout>
       <h1>Log Workout</h1>
         <Form onSubmit={saveWorkoutHandler}>
+        <StyleWorkoutSection>
+          <h3>Activity</h3>
+          <StyledWorkoutRow>
+            <InputGroup htmlFor='activityName' labelName='Activity Name:' type='text' onChangeHandler={setActivityName}/>
+            <Dropdown htmlFor='activityType' labelName='Activity:' selectName='activity' selectId='activity-select' onChangeHandler={setActivity} options={activityDropdownData} />
+            <Dropdown htmlFor='event' labelName='Event:' selectName='evet' selectId='event-select' onChangeHandler={setEvent} options={eventDropdownData} />
+          </StyledWorkoutRow>
+        </StyleWorkoutSection>
           <StyleWorkoutSection>
           <h3>Climbing Time</h3>
           <StyledWorkoutRow>
@@ -216,21 +250,33 @@ const LogWorkout = (props: LogWorkoutProps) => {
           <StyleWorkoutSection>
           <h3>Location</h3>
           <StyledWorkoutRow>
-            <InputGroup htmlFor='gymName' labelName='Climbing Gym:' type='text' onChangeHandler={setClimbingGym}/>
-            <InputGroup htmlFor='gymLocation' labelName='Location:' type='text' onChangeHandler={setLocation}/>
+            <InputGroup htmlFor='gymCragName' labelName='Climbing Gym/Crag:' type='text' onChangeHandler={setClimbingGym}/>
+            <InputGroup htmlFor='address' labelName='Address:' type='text' onChangeHandler={setLocation}/>
           </StyledWorkoutRow>
           </StyleWorkoutSection>
           <StyleWorkoutSection>
           <h3>Session Data</h3>
             <StyledWorkoutRow>
               <InputGroup htmlFor='totalRoutes' labelName='Total Routes:' type='number' onChangeHandler={setTotalRoutes}/>
-              <InputGroup htmlFor='routesAttempted' labelName='Routes Attempted:' type='number' onChangeHandler={setRoutesAttempted}/>
-              <InputGroup htmlFor='routesCompleted' labelName='Routes Completed:' type='number' onChangeHandler={setRoutesCompleted}/>
+              <InputGroup htmlFor='calories' labelName='Calories:' type='number' onChangeHandler={setCalories}/>
             </StyledWorkoutRow>
             <StyledWorkoutRow>
-              <InputGroup htmlFor='maxDifficulty' labelName='Max Difficulty:' type='text' onChangeHandler={setMaxDifficulty}/>
-              <InputGroup htmlFor='avgDifficulty' labelName='Avg Difficulty:' type='text' onChangeHandler={setAvgDifficulty}/>
-              <InputGroup htmlFor='easiestDifficulty' labelName='Easiest Difficulty:' type='text' onChangeHandler={setEasiestDifficulty}/>
+              <InputGroup htmlFor='avgAscent' labelName='Avg Ascent (ft):' type='number' onChangeHandler={setAvgAscent}/>
+              <InputGroup htmlFor='maxAscent' labelName='Max Ascent (ft):' type='number' onChangeHandler={setMaxAscent}/>
+              <InputGroup htmlFor='totalAscent' labelName='Total Ascent (ft):' type='number' onChangeHandler={setTotalAscent}/>
+            </StyledWorkoutRow>
+            <StyledWorkoutRow>
+            <InputGroup htmlFor='maxDifficulty' labelName='Max Difficulty:' type='text' onChangeHandler={setMaxDifficulty}/>
+            <InputGroup htmlFor='overallExertion' labelName='Overall Exertion:' type='range' min='0' max='10' step='1' name='overallExertion' onChangeHandler={setOverallExertion}/>
+            {overallExertion}
+            </StyledWorkoutRow>
+            <StyledWorkoutRow>
+              <InputGroup htmlFor='avgHeartRate' labelName='Avg Heart Rate:' type='number' onChangeHandler={setAvgHeartRate}/>
+              <InputGroup htmlFor='maxHeartRate' labelName='Max Heart Rate:' type='number' onChangeHandler={setMaxHeartRate}/>
+            </StyledWorkoutRow>
+            <StyledWorkoutRow>
+              <InputGroup htmlFor='rockType' labelName='Rock Type:' type='text' onChangeHandler={setRockType}/>
+              <InputGroup htmlFor='weatherConditions' labelName='Weather Conditions:' type='text' onChangeHandler={setWeatherConditions}/>
             </StyledWorkoutRow>
             <StyledWorkoutRow>
               <Textarea htmlFor='notes' labelName='Notes:' onChangeHandler={setNotes}/>
@@ -246,6 +292,10 @@ const LogWorkout = (props: LogWorkoutProps) => {
           <StyledWorkoutRow>
             <InputGroup htmlFor='rope' labelName='Rope:' type='text' onChangeHandler={setRope}/>
             <InputGroup htmlFor='quickDraws' labelName='Quick Draws:' type='text' onChangeHandler={setQuickDraws}/>
+            <InputGroup htmlFor='protection' labelName='Protection:' type='text' onChangeHandler={setProtection}/>
+          </StyledWorkoutRow>
+          <StyledWorkoutRow>
+            <InputGroup htmlFor='helmet' labelName='Helmet:' type='text' onChangeHandler={setHelmet}/>
           </StyledWorkoutRow>
           </StyleWorkoutSection>
           <StyleWorkoutSection>
@@ -255,11 +305,12 @@ const LogWorkout = (props: LogWorkoutProps) => {
             <Dropdown htmlFor='outcome' labelName='Outcome:' selectName='outcome' selectId='outcome-select' onChangeHandler={setOutcome} options={outcomeDropdownData} />
           </StyledWorkoutRow>
           <StyledWorkoutRow>
+            <InputGroup htmlFor='chossRating' labelName='Choss Rating:' type='text' onChangeHandler={setGrade}/>
             <InputGroup htmlFor='intensity' labelName='Intensity:' type='range' min='0' max='10' step='1' name='intensity' onChangeHandler={setIntensity}/>
             {intensity}
           </StyledWorkoutRow>
           <StyledWorkoutRow>
-            <Dropdown htmlFor='route-select' labelName='Type of Route:' selectName='routes' selectId='route-select' onChangeHandler={setRouteType} options={routeDreopdownData} />
+            <Dropdown htmlFor='route-select' labelName='Wall Type:' selectName='routes' selectId='route-select' onChangeHandler={setRouteType} options={routeDreopdownData} />
             <Dropdown htmlFor='holds-select' labelName='Hold Type:' selectName='holds' selectId='holds-select' onChangeHandler={setHoldTypes} options={holdsDropdownData} />
           </StyledWorkoutRow>
           <StyledWorkoutRow>
