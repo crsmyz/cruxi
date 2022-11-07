@@ -210,27 +210,27 @@ const LogWorkout = (props: LogWorkoutProps) => {
           <StyledWorkoutRow>
             <InputGroup htmlFor='date' labelName='Date:' type='date' onChangeHandler={setDate}/>
             <InputGroup htmlFor='time' labelName='Start Time:' type='time' onChangeHandler={setStartTime}/>
-            <InputGroup htmlFor='time' labelName='End Time:' type='time' onChangeHandler={setDate}/>
+            <InputGroup htmlFor='time' labelName='End Time:' type='time' onChangeHandler={setEndTime}/>
           </StyledWorkoutRow>
           </StyleWorkoutSection>
           <StyleWorkoutSection>
           <h3>Location</h3>
           <StyledWorkoutRow>
-            <InputGroup htmlFor='gymName' labelName='Climbing Gym:' type='text' onChangeHandler={setDate}/>
-            <InputGroup htmlFor='gymLocation' labelName='Location:' type='text' onChangeHandler={setDate}/>
+            <InputGroup htmlFor='gymName' labelName='Climbing Gym:' type='text' onChangeHandler={setClimbingGym}/>
+            <InputGroup htmlFor='gymLocation' labelName='Location:' type='text' onChangeHandler={setLocation}/>
           </StyledWorkoutRow>
           </StyleWorkoutSection>
           <StyleWorkoutSection>
           <h3>Session Data</h3>
             <StyledWorkoutRow>
-              <InputGroup htmlFor='totalRoutes' labelName='Total Routes:' type='number' onChangeHandler={setDate}/>
-              <InputGroup htmlFor='routesAttempted' labelName='Routes Attempted:' type='number' onChangeHandler={setDate}/>
-              <InputGroup htmlFor='routesCompleted' labelName='Routes Completed:' type='number' onChangeHandler={setDate}/>
+              <InputGroup htmlFor='totalRoutes' labelName='Total Routes:' type='number' onChangeHandler={setTotalRoutes}/>
+              <InputGroup htmlFor='routesAttempted' labelName='Routes Attempted:' type='number' onChangeHandler={setRoutesAttempted}/>
+              <InputGroup htmlFor='routesCompleted' labelName='Routes Completed:' type='number' onChangeHandler={setRoutesCompleted}/>
             </StyledWorkoutRow>
             <StyledWorkoutRow>
-              <InputGroup htmlFor='maxDifficulty' labelName='Max Difficulty:' type='text' onChangeHandler={setDate}/>
-              <InputGroup htmlFor='avgDifficulty' labelName='Avg Difficulty:' type='text' onChangeHandler={setDate}/>
-              <InputGroup htmlFor='easiestDifficulty' labelName='Easiest Difficulty:' type='text' onChangeHandler={setDate}/>
+              <InputGroup htmlFor='maxDifficulty' labelName='Max Difficulty:' type='text' onChangeHandler={setMaxDifficulty}/>
+              <InputGroup htmlFor='avgDifficulty' labelName='Avg Difficulty:' type='text' onChangeHandler={setAvgDifficulty}/>
+              <InputGroup htmlFor='easiestDifficulty' labelName='Easiest Difficulty:' type='text' onChangeHandler={setEasiestDifficulty}/>
             </StyledWorkoutRow>
             <StyledWorkoutRow>
               <Textarea htmlFor='notes' labelName='Notes:' onChangeHandler={setNotes}/>
@@ -239,13 +239,13 @@ const LogWorkout = (props: LogWorkoutProps) => {
           <StyleWorkoutSection>
           <h3>Gear</h3>
           <StyledWorkoutRow>
-            <InputGroup htmlFor='shoes' labelName='Shoes:' type='text' onChangeHandler={setDate}/>
-            <InputGroup htmlFor='chalk' labelName='Chalk:' type='text' onChangeHandler={setDate}/>
-            <InputGroup htmlFor='harness' labelName='Harness:' type='text' onChangeHandler={setDate}/>
+            <InputGroup htmlFor='shoes' labelName='Shoes:' type='text' onChangeHandler={setShoes}/>
+            <InputGroup htmlFor='chalk' labelName='Chalk:' type='text' onChangeHandler={setChalk}/>
+            <InputGroup htmlFor='harness' labelName='Harness:' type='text' onChangeHandler={setHarness}/>
           </StyledWorkoutRow>
           <StyledWorkoutRow>
-            <InputGroup htmlFor='rope' labelName='Rope:' type='text' onChangeHandler={setDate}/>
-            <InputGroup htmlFor='quickDraws' labelName='Quick Draws:' type='text' onChangeHandler={setDate}/>
+            <InputGroup htmlFor='rope' labelName='Rope:' type='text' onChangeHandler={setRope}/>
+            <InputGroup htmlFor='quickDraws' labelName='Quick Draws:' type='text' onChangeHandler={setQuickDraws}/>
           </StyledWorkoutRow>
           </StyleWorkoutSection>
           <StyleWorkoutSection>
