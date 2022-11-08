@@ -77,6 +77,7 @@ const LogWorkout = (props: LogWorkoutProps) => {
   const [activityName, setActivityName] = useState('');
   const [activity, setActivity] = useState('');
   const [event, setEvent] = useState('');
+  const [gradingSystem, setGradingSystem] = useState('');
   const [calories, setCalories] = useState('');
   const [avgHeartRate, setAvgHeartRate] = useState('');
   const [maxHeartRate, setMaxHeartRate] = useState('');
@@ -198,7 +199,8 @@ const LogWorkout = (props: LogWorkoutProps) => {
     { value: 'Projecting', label: 'Projecting'},
     { value: 'Competition', label: 'Competition'},
   ];
-  const gradingSystem = [
+  const gradingSystemDropdownData = [
+    { value: '', label: 'Choose a grading system'},
     { value: 'V-Scale', label: 'V-Scale'},
     { value: 'Font', label: 'Font'},
     { value: 'YDS', label: 'YDS'},
@@ -236,7 +238,8 @@ const LogWorkout = (props: LogWorkoutProps) => {
           <StyledWorkoutRow>
             <InputGroup htmlFor='activityName' labelName='Activity Name:' type='text' onChangeHandler={setActivityName}/>
             <Dropdown htmlFor='activityType' labelName='Activity:' selectName='activity' selectId='activity-select' onChangeHandler={setActivity} options={activityDropdownData} />
-            <Dropdown htmlFor='event' labelName='Event:' selectName='evet' selectId='event-select' onChangeHandler={setEvent} options={eventDropdownData} />
+            <Dropdown htmlFor='event' labelName='Event:' selectName='event' selectId='event-select' onChangeHandler={setEvent} options={eventDropdownData} />
+            <Dropdown htmlFor='gradingSystem' labelName='Grading System:' selectName='gradingSystem' selectId='grading-system-select' onChangeHandler={setGradingSystem} options={gradingSystemDropdownData} />
           </StyledWorkoutRow>
         </StyleWorkoutSection>
           <StyleWorkoutSection>
