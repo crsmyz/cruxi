@@ -11,15 +11,23 @@ import NavItem from '../components/NavItem/NavItem';
 import { APP_NAME } from './../Constants/AppConstants';
 import Footer from '../components/Footer/Footer';
 
-const Layout = (props: LayoutProps) => {
+const Layout: React.FC<LayoutProps> = (props: LayoutProps) => {
   const { loginWithRedirect } = useAuth0();
   const { isAuthenticated } = useAuth0();
   const { logout } = useAuth0();
+  const LoginLogout: JSX.Element = '' ? <NavItem clickHandler={loginWithRedirect} hrefProp='' title='Login'/> :
+  <NavItem clickHandler={() => logout({returnTo: window.location.origin,})} hrefProp='' title='Logout'/>;
+  const NavMenu: JSX.Element[] = [
+    <NavItem clickHandler={() => loginWithRedirect({ screen_hint: 'signup'})} hrefProp='' title='Sign Up'/>,
+    LoginLogout,
+    <NavItem hrefProp='/dashboard' title='Dashboard'/>,
+    <NavItem hrefProp='/profile' title='Profile'/>
+  ];
 
-  const ShowSignUp = isAuthenticated ? '' : <NavItem clickHandler={() => loginWithRedirect({ screen_hint: 'signup'})} hrefProp='' title='Sign Up'/>;
-  const ShowLoginOrLogout = isAuthenticated ? <NavItem clickHandler={() => logout({returnTo: window.location.origin,})} hrefProp='' title='Logout'/> : <NavItem clickHandler={loginWithRedirect} hrefProp='' title='Login'/>;
-  const ShowDashboard = isAuthenticated ? <NavItem hrefProp='/dashboard' title='Dashboard'/> : '';
-  const ShowProfile = isAuthenticated ? <NavItem hrefProp='/profile' title='Profile'/> : '';
+  // const ShowSignUp = isAuthenticated ? '' : <NavItem clickHandler={() => loginWithRedirect({ screen_hint: 'signup'})} hrefProp='' title='Sign Up'/>;
+  // const ShowLoginOrLogout = isAuthenticated ? <NavItem clickHandler={() => logout({returnTo: window.location.origin,})} hrefProp='' title='Logout'/> : <NavItem clickHandler={loginWithRedirect} hrefProp='' title='Login'/>;
+  // const ShowDashboard = isAuthenticated ? <NavItem hrefProp='/dashboard' title='Dashboard'/> : '';
+  // const ShowProfile = isAuthenticated ? <NavItem hrefProp='/profile' title='Profile'/> : '';
 
   return (
     <StyledLayout>
@@ -29,10 +37,7 @@ const Layout = (props: LayoutProps) => {
           <HeaderAppName>{APP_NAME}</HeaderAppName>
         </StyledNavBrand>
         <StyledNavButtonLayout>
-          {ShowDashboard}
-          {ShowProfile}
-          {ShowSignUp}
-          {ShowLoginOrLogout}
+          {NavMenu.map((menuItem: unknown, index: number) => (<span key={index}>menuItem</span>))}
         </StyledNavButtonLayout>
       </Navbar>
       {props.children}

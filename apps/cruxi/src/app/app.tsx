@@ -1,7 +1,5 @@
 import React from 'react';
-
 import { Route, Routes } from 'react-router-dom';
-import { useAuth0 } from '@auth0/auth0-react';
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 // util
 import SplashScreenPage from './SplashScreenPage/SplashScreenPage';
@@ -23,13 +21,14 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 // environment
 import { environment } from './../environments/environment';
 
-const firebaseApp = firebase.initializeApp(environment);
+// firbase vars
+const firebaseApp: unknown = firebase.initializeApp(environment);
 const auth: any = firebase.auth();
-const firestore: any = firebase.firestore();
+const firestore: unknown = firebase.firestore();
 
-export const App = () => {
+const App: React.FC = () => {
   const [user] = useAuthState(auth);
-  if (isLoading) return <Loading />;
+  if (firestore) return <Loading />;
   return (
     <StyledApp>
       <Layout>
