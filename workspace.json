@@ -4,6 +4,8 @@
   "projects": {
     "cruxi": "apps/cruxi",
     "cruxi-e2e": "apps/cruxi-e2e",
+    "cruxi-src-app-context-auth-context": "apps/cruxi/src/app/context/auth-context",
+    "cruxi-src-app-context-auth-context-e2e": "apps/cruxi/src/app/context/auth-context-e2e",
     "server": "apps/server"
   }
 }
