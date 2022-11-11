@@ -21,8 +21,6 @@ import Signup from './signup/signup';
 import ForgotPassword from './forgot-password/forgot-password';
 
 const App: React.FC = () => {
-  
-  // if (firestore) return <Loading />;
   return (
     <StyledApp>
       <Layout>

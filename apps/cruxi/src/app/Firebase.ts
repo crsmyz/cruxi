@@ -5,7 +5,7 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
 // firbase vars
-const firebaseApp: unknown = firebase.initializeApp(environment);
+const firebaseApp: any = firebase.initializeApp(environment);
 
-export const auth: any = firebase.auth();
-export const firestore: unknown = firebase.firestore();
+export const auth: any = firebaseApp.auth();
+export const firestore: any = firebase.firestore();
