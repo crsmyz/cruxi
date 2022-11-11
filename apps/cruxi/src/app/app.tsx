@@ -12,28 +12,25 @@ import LogWorkout from './AppPages/LogWorkout/LogWorkout';
 import Profile from './AppPages/Profile/Profile';
 // styles
 import { StyledApp } from './StyledApp';
-// firebase
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
+// firebase hooks
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
-// environment
-import { environment } from './../environments/environment';
 
-// firbase vars
-const firebaseApp: unknown = firebase.initializeApp(environment);
-const auth: any = firebase.auth();
-const firestore: unknown = firebase.firestore();
+import Login from './login/login';
+import Signup from './signup/signup';
+import ForgotPassword from './forgot-password/forgot-password';
 
 const App: React.FC = () => {
-  const [user] = useAuthState(auth);
-  if (firestore) return <Loading />;
+  
+  // if (firestore) return <Loading />;
   return (
     <StyledApp>
       <Layout>
       <div className="wrapper">
           <Routes>
+            <Route path="/signup" element={<Signup/>} />
+            <Route path="/login" element={<Login/>} />
+            <Route path="/forgot-password" element={<ForgotPassword/>} />
             <Route path="/" element={<SplashScreenPage/>}/>
             <Route path="/logWorkout" element={<ProtectedRoute component={LogWorkout} />} />
             <Route path="/workoutHistory" element={<ProtectedRoute component={WorkoutHistory} />} />

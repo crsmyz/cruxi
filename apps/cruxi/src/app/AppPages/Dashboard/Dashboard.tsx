@@ -3,15 +3,33 @@ import React, { useState } from 'react';
 import { DashboardProps } from './Dashboard.interface';
 // styles
 import { StyledDashboard } from './StyledDashboard';
-import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
+// import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import LogWorkout from '../LogWorkout/LogWorkout';
+
+import { useAuth } from "./../../Context/AuthContext"
+import { Link, useNavigate } from "react-router-dom"
 
 const Dashboard = (props: DashboardProps) => {
   const [workout, setWorkout] = useState();
   const [workOutHistory, setWorkoutHistory] = useState([]);
 
+  const [error, setError] = useState("")
+  const { currentUser, logout } = useAuth()
+  const navigate = useNavigate()
 
-  const { user } = useAuth0();
+  async function handleLogout() {
+    setError("")
+
+    try {
+      await logout()
+      navigate("/login")
+    } catch {
+      setError("Failed to log out")
+    }
+  }
+
+
+  // const { user } = useAuth0();
   return (
     <StyledDashboard>
       <LogWorkout workOutData={workOutHistory} setWorkOutHandler={setWorkoutHistory}/>
