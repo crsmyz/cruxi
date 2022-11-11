@@ -12,9 +12,6 @@ import LogWorkout from './AppPages/LogWorkout/LogWorkout';
 import Profile from './AppPages/Profile/Profile';
 // styles
 import { StyledApp } from './StyledApp';
-// firebase hooks
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 import Login from './login/login';
 import Signup from './signup/signup';
