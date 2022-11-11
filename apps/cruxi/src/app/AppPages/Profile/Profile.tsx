@@ -4,7 +4,7 @@ import { ProfileProps } from './ProfileProps.interface';
 // styles
 import { StyledProfile } from './StyledProfile';
 
-import { useAuth } from "./../../Context/AuthContext"
+import { useAuth } from "../../Context2/AuthContext"
 import { Link, useNavigate } from "react-router-dom"
 
 const Profile = (props: ProfileProps) => {
