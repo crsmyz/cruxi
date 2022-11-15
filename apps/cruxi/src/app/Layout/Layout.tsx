@@ -1,6 +1,6 @@
 
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // interfaces
 import { LayoutProps } from './Layout.interface';
 // styles
@@ -9,7 +9,7 @@ import Navbar from '../components/Navbar/Navbar';
 import NavItem from '../components/NavItem/NavItem';
 import { APP_NAME } from './../Constants/AppConstants';
 import Footer from '../components/Footer/Footer';
-import { useNavigate } from "react-router-dom"
+import { useNavigate, redirect } from "react-router-dom"
 import { useAuth } from '../Context/AuthContext';
 
 
@@ -28,9 +28,13 @@ const Layout: React.FC<LayoutProps> = (props: LayoutProps) => {
     }
   }
 
+  useEffect(() => {
+    redirect('/signup');
+  }, []);
+
   const navToSignUp = () => {
     try {
-      navigate('/signup')
+      redirect('/signup')
     } catch {
       setError("signup error")
     }
