@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import Form from '../components/Form/Form';
+import Form from './../../components/Form/Form';
 import styled from 'styled-components';
-import Button from '../components/Button/Button';
-import InputGroup from '../components/Input/Input';
-import Dropdown from '../components/Dropdown/Dropdown';
-import Textarea from '../components/Textarea/Textarea';
+import Button from './../../components/Button/Button';
+import InputGroup from './../../components/Input/Input';
+import Dropdown from './../../components/Dropdown/Dropdown';
+import Textarea from './../../components/Textarea/Textarea';
 
 export interface LogWorkoutProps {
   workOutData: any;

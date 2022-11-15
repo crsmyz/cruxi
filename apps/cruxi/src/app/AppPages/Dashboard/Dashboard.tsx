@@ -3,10 +3,9 @@ import React, { useState } from 'react';
 import { DashboardProps } from './Dashboard.interface';
 // styles
 import { StyledDashboard } from './StyledDashboard';
-// import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import LogWorkout from '../LogWorkout/LogWorkout';
 
-import { useAuth } from "../../Context2/AuthContext"
+import { useAuth } from "../../Context/AuthContext"
 import { Link, useNavigate } from "react-router-dom"
 
 const Dashboard = (props: DashboardProps) => {
@@ -28,8 +27,6 @@ const Dashboard = (props: DashboardProps) => {
     }
   }
 
-
-  // const { user } = useAuth0();
   return (
     <StyledDashboard>
       <LogWorkout workOutData={workOutHistory} setWorkOutHandler={setWorkoutHistory}/>
@@ -127,8 +124,4 @@ const Dashboard = (props: DashboardProps) => {
   );
 }
 
-// export default Dashboard;
-
-export default withAuthenticationRequired(Dashboard, {
-  onRedirecting: () => <div>loading</div>,
-});
+export default Dashboard;

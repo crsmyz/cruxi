@@ -3,8 +3,7 @@ import * as ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
 import App from './app/app';
-// import Auth0ProviderWithHistory from './app/Auth0Provider/Auth0ProviderWithHistory';
-import { AuthProvider } from './app/Context2/AuthContext';
+import { AuthProvider } from './app/Context/AuthContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

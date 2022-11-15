@@ -2,12 +2,12 @@
 
 import React from 'react';
 // interfaces
-import { ProtectedRouteProps } from './ProtectedRoute.interface';
-import { withAuthenticationRequired } from '@auth0/auth0-react';
+import { Route, Navigate, Outlet } from "react-router-dom"
+import { useAuth } from "./../../Context/AuthContext"
 
-const ProtectedRoute = ({ component, ...args }: ProtectedRouteProps) => {
-  const Cp = withAuthenticationRequired(component);
-  return <Cp {...args} />
+const ProtectedRoute = ({ component: Component, path }: any) => {
+  const { currentUser } = useAuth()
+  return (currentUser ? <Outlet/> : <Navigate to="/login" />)
 }
 
 export default ProtectedRoute;

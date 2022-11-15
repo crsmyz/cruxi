@@ -27,10 +27,19 @@ const App: React.FC = () => {
             <Route path="/login" element={<Login/>} />
             <Route path="/forgot-password" element={<ForgotPassword/>} />
             <Route path="/" element={<SplashScreenPage/>}/>
-            <Route path="/logWorkout" element={<ProtectedRoute component={LogWorkout} />} />
-            <Route path="/workoutHistory" element={<ProtectedRoute component={WorkoutHistory} />} />
-            <Route path="/dashboard" element={<ProtectedRoute component={Dashboard} />} />
-            <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
+            <Route path='/' element={<ProtectedRoute/>}>
+              <Route path='/dashboard' element={<Dashboard/>}/>
+            </Route>
+            <Route path='/' element={<ProtectedRoute/>}>
+              <Route path="/profile" element={<Profile/>}/>
+            </Route>
+            {/* <Route exact path='/' element={<ProtectedRoute/>}>
+              <Route exact path='/' element={<LogWorkout/>}/>
+            </Route> */}
+            {/* <ProtectedRoute path="/logWorkout" component={LogWorkout}/> */}
+            {/* <ProtectedRoute path="/workoutHistory" component={WorkoutHistory}/> */}
+            {/* <ProtectedRoute path="/dashboard" component={Dashboard}/> */}
+            {/* <ProtectedRoute path="/profile" component={Profile}/> */}
           </Routes>
       </div>
       </Layout>
