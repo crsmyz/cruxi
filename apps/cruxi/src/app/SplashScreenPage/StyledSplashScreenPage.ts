@@ -6,7 +6,7 @@ export const StyledSplashScreenPage = styled.div`
 
 export const StyledSplashWrapper = styled.div`
   margin: 10rem 25rem 10rem 25rem;
-  padding: 5rem;
+  padding: 5rem 5rem 10rem 5rem;
   background-color: #d3c9c6d3;
   -webkit-clip-path: polygon(6% -17%,110% 30%,85% 75%,-2% 75%);
   clip-path: polygon(6% -17%,110% 30%,85% 75%,-2% 75%);

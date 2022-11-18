@@ -33,13 +33,12 @@ const App: React.FC = () => {
             <Route path='/' element={<ProtectedRoute/>}>
               <Route path="/profile" element={<Profile/>}/>
             </Route>
-            {/* <Route exact path='/' element={<ProtectedRoute/>}>
-              <Route exact path='/' element={<LogWorkout/>}/>
-            </Route> */}
-            {/* <ProtectedRoute path="/logWorkout" component={LogWorkout}/> */}
-            {/* <ProtectedRoute path="/workoutHistory" component={WorkoutHistory}/> */}
-            {/* <ProtectedRoute path="/dashboard" component={Dashboard}/> */}
-            {/* <ProtectedRoute path="/profile" component={Profile}/> */}
+            <Route path='/' element={<ProtectedRoute/>}>
+              <Route path='/logworkout' element={<LogWorkout/>}/>
+            </Route>
+            <Route path='/' element={<ProtectedRoute/>}>
+              <Route path='/' element={<WorkoutHistory/>}/>
+            </Route>
           </Routes>
       </div>
       </Layout>

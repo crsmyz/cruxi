@@ -29,7 +29,7 @@ const Dashboard = (props: DashboardProps) => {
 
   return (
     <StyledDashboard>
-      <LogWorkout workOutData={workOutHistory} setWorkOutHandler={setWorkoutHistory}/>
+      {/* <LogWorkout workOutData={workOutHistory} setWorkOutHandler={setWorkoutHistory}/> */}
       <h2>Workout History</h2>
       <div>
         {workOutHistory.map((workout: any) => (

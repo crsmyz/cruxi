@@ -6,10 +6,7 @@ import InputGroup from './../../components/Input/Input';
 import Dropdown from './../../components/Dropdown/Dropdown';
 import Textarea from './../../components/Textarea/Textarea';
 
-export interface LogWorkoutProps {
-  workOutData: any;
-  setWorkOutHandler: any;
-}
+export interface LogWorkoutProps {}
 
 export interface RouteRow {
   grade: string;
@@ -112,6 +109,8 @@ const LogWorkout = (props: LogWorkoutProps) => {
   const [routes, setRoutes] = useState(row);
   const [isEditing, setIsEditing] = useState(false);
 
+  const [sessionData, setSessionData] = useState({});
+
   const saveWorkoutHandler = (e: any) => {
     e.preventDefault();
     const workOut = {
@@ -145,7 +144,7 @@ const LogWorkout = (props: LogWorkoutProps) => {
 
       routes: routes,
     };
-    props.setWorkOutHandler([...props.workOutData, workOut]);
+    setSessionData(workOut);
   }
   const saveRouteHandler = (e: any) => {
     e.preventDefault();
@@ -326,6 +325,7 @@ const LogWorkout = (props: LogWorkoutProps) => {
           <br/>
           <Button buttonName='Submit Workout' />
         </Form>
+        <div>{JSON.stringify(sessionData)}</div>
     </StyledLogWorkout>
   );
 }

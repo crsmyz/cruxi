@@ -15,47 +15,34 @@ import { useAuth } from '../Context/AuthContext';
 
 const Layout: React.FC<LayoutProps> = (props: LayoutProps) => {
   const [error, setError] = useState("")
-  const { logout } = useAuth()
+  const { currentUser, logout } = useAuth()
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     setError("")
     try {
       await logout()
-      navigate("/login")
+      navigate("/login") 
     } catch {
       setError("Failed to log out")
     }
   }
 
-  useEffect(() => {
-    redirect('/signup');
-  }, []);
-
-  const navToSignUp = () => {
-    try {
-      redirect('/signup')
-    } catch {
-      setError("signup error")
-    }
-  }
-
   // const LoginLogout: JSX.Element = '' ? <NavItem clickHandler={navigate('/login')} hrefProp='' title='Login'/> :
   // <NavItem clickHandler={handleLogout} hrefProp='' title='Logout'/>;
-  const NavMenu: JSX.Element[] = [
-    <NavItem clickHandler={navigate('/login')} hrefProp='' title='Login'/>,
-    <NavItem clickHandler={handleLogout} hrefProp='' title='Logout'/>,
-    <NavItem clickHandler={navToSignUp} hrefProp='' title='Sign Up'/>,
-    <NavItem hrefProp='/dashboard' title='Dashboard'/>,
-    <NavItem hrefProp='/profile' title='Profile'/>
+  const NavMenuNoAuth: JSX.Element[] = [
+    <NavItem clickHandler='' hrefProp='/login' title='Login'/>,
+    <NavItem clickHandler='' hrefProp='/signup' title='Sign Up'/>,
   ];
 
+  const NavMenuAuth: JSX.Element[] = [
+    <NavItem hrefProp='/dashboard' title='Dashboard'/>,
+    <NavItem hrefProp='/logworkout' title='Log Workout'/>,
+    <NavItem hrefProp='/profile' title='Profile'/>,
+    <NavItem clickHandler={handleLogout} hrefProp='' title='Logout'/>,
+  ];
 
-
-  // const ShowSignUp = isAuthenticated ? '' : <NavItem clickHandler={() => loginWithRedirect({ screen_hint: 'signup'})} hrefProp='' title='Sign Up'/>;
-  // const ShowLoginOrLogout = isAuthenticated ? <NavItem clickHandler={() => logout({returnTo: window.location.origin,})} hrefProp='' title='Logout'/> : <NavItem clickHandler={loginWithRedirect} hrefProp='' title='Login'/>;
-  // const ShowDashboard = isAuthenticated ? <NavItem hrefProp='/dashboard' title='Dashboard'/> : '';
-  // const ShowProfile = isAuthenticated ? <NavItem hrefProp='/profile' title='Profile'/> : '';
+  
 
   return (
     <StyledLayout>
@@ -65,7 +52,8 @@ const Layout: React.FC<LayoutProps> = (props: LayoutProps) => {
           <HeaderAppName>{APP_NAME}</HeaderAppName>
         </StyledNavBrand>
         <StyledNavButtonLayout>
-          {NavMenu.map((menuItem: any, index: number) => <span key={index}>{menuItem}</span>)}
+          {currentUser && NavMenuAuth.map((menuItem: any, index: number) => <span key={index}>{menuItem}</span>)}
+          {!currentUser && NavMenuNoAuth.map((menuItem: any, index: number) => <span key={index}>{menuItem}</span>)}
         </StyledNavButtonLayout>
       </Navbar>
       {props.children}
