@@ -13,8 +13,8 @@ import Profile from './AppPages/Profile/Profile';
 // styles
 import { StyledApp } from './StyledApp';
 
-import Login from './login/login';
-import Signup from './signup/signup';
+import Login from './Login/Login';
+import Signup from './Signup/Signup';
 import ForgotPassword from './forgot-password/forgot-password';
 
 const App: React.FC = () => {
@@ -26,18 +26,20 @@ const App: React.FC = () => {
             <Route path="/signup" element={<Signup/>} />
             <Route path="/login" element={<Login/>} />
             <Route path="/forgot-password" element={<ForgotPassword/>} />
-            <Route path="/" element={<SplashScreenPage/>}/>
-            <Route path='/' element={<ProtectedRoute/>}>
-              <Route path='/dashboard' element={<Dashboard/>}/>
-            </Route>
-            <Route path='/' element={<ProtectedRoute/>}>
-              <Route path="/profile" element={<Profile/>}/>
-            </Route>
-            <Route path='/' element={<ProtectedRoute/>}>
-              <Route path='/logworkout' element={<LogWorkout/>}/>
-            </Route>
-            <Route path='/' element={<ProtectedRoute/>}>
-              <Route path='/' element={<WorkoutHistory/>}/>
+            <Route path='/' element={<Layout/>}>
+              <Route path="/" element={<SplashScreenPage/>}/>
+              <Route path='/' element={<ProtectedRoute/>}>
+                <Route path='/dashboard' element={<Dashboard/>}/>
+              </Route>
+              <Route path='/' element={<ProtectedRoute/>}>
+                <Route path="/profile" element={<Profile/>}/>
+              </Route>
+              <Route path='/' element={<ProtectedRoute/>}>
+                <Route path='/logworkout' element={<LogWorkout/>}/>
+              </Route>
+              <Route path='/' element={<ProtectedRoute/>}>
+                <Route path='/' element={<WorkoutHistory/>}/>
+              </Route>
             </Route>
           </Routes>
       </div>

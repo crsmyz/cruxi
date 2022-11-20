@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const StyledLayout = styled.div`
-  color: pink;
 `;
 
 export const StyledNavBrand = styled.div`
