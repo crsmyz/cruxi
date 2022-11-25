@@ -1,20 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // interfaces
 import { DashboardProps } from './Dashboard.interface';
 // styles
-import { StyledDashboard } from './StyledDashboard';
+import { StyledDashboard, StyledMetaData, StyledMetaName, StyledMetaDate, StyledMetaLocation, StyledCardBody, StyledCardStat, StyledCardStatGroup } from './StyledDashboard';
 import LogWorkout from '../LogWorkout/LogWorkout';
 
 import { useAuth } from "../../Context/AuthContext"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
+
+import { readWorkoutDataFromDB } from './../../Firebase';
+
+import Card from './../../components/Card/Card';
 
 const Dashboard = (props: DashboardProps) => {
   const [workout, setWorkout] = useState();
-  const [workOutHistory, setWorkoutHistory] = useState([]);
+  const [workOutHistory, setWorkoutHistory] = useState<any>([]);
 
   const [error, setError] = useState("")
   const { currentUser, logout } = useAuth()
   const navigate = useNavigate()
+
+  useEffect( () => {
+    const list: any[] = [];
+    readWorkoutDataFromDB(setWorkoutHistory);
+  }, [])
 
   async function handleLogout() {
     setError("")
@@ -30,94 +39,39 @@ const Dashboard = (props: DashboardProps) => {
   return (
     <StyledDashboard>
       {/* <LogWorkout workOutData={workOutHistory} setWorkOutHandler={setWorkoutHistory}/> */}
-      <h2>Workout History</h2>
+      <h1>Workout History</h1>
       <div>
         {workOutHistory.map((workout: any) => (
-          <div>
-            Date:
-            <br/>
-            {workout.date}
-            <br/>
-            Start Time:
-            <br/>
-            {workout.startTime}
-            <br/>
-            End Time
-            <br/>
-            {workout.endTime}
-            <br/>
-            Climbing Gym:
-            <br/>
-            {workout.climbingGym}
-            <br/>
-            Location
-            <br/>
-            {workout.location}
-            <br/>
-            Activity:
-            <br/>
-            {workout.activity}
-            <br/>
-            Total Routes:
-            <br/>
-            {workout.totalRoutes}
-            <br/>
-            Routes Attempted:
-            <br/>
-            {workout.routesAttempted}
-            <br/>
-            Routes Completed:
-            <br/>
-            {workout.routesCompleted}
-            <br/>
-            Max Difficulty:
-            <br/>
-            {workout.maxDifficulty}
-            <br/>
-            Avg Diff:
-            <br/>
-            {workout.avgDifficulty}
-            <br/>
-            East Diff:
-            <br/>
-            {workout.easiestDifficulty}
-            <br/>
-            Notes:
-            <br/>
-            {workout.notes}
-            <br/>
-            Shoes:
-            <br/>
-            {workout.shoes}
-            <br/>
-            Chalk:
-            <br/>
-            {workout.chalk}
-            <br/>
-            Harness:
-            <br/>
-            {workout.harness}
-            <br/>
-            Rope:
-            <br/>
-            {workout.rope}
-            <br/>
-            Quick Draw:
-            <br/>
-            {workout.quickDraw}
-            <br/>
-            <br/>
-            {workout.routes.map((route: any, index: number) => (
-              <div key={index}>
-                <span>{index + 1}</span>
-                <span>{workout.grade}</span>
-                <span>{workout.outcome}</span>
-                <span>{workout.intensity}</span>
-                <span>{workout.routeType}</span>
-                <span>{workout.holdTypes}</span>
-              </div>
-            ))}
-          </div>
+                <Card>
+                  <StyledMetaData>
+                    <StyledMetaName>{currentUser.displayName || 'Chris Medykiewicz'}</StyledMetaName>
+                    <StyledMetaDate>{workout.date}</StyledMetaDate>
+                    <StyledMetaLocation>{workout.location}</StyledMetaLocation>
+                  </StyledMetaData>
+                  <Link to="/activity">
+                    <h2>{workout.activityName}</h2>
+                  </Link>
+                  <h4>Event</h4>
+                  <StyledCardStat>{workout.event}</StyledCardStat>
+                  <StyledCardBody>
+                    <StyledCardStatGroup>
+                      <h4>Total Routes</h4>
+                      <StyledCardStat>{workout.totalRoutes}</StyledCardStat>
+                    </StyledCardStatGroup>
+                    <StyledCardStatGroup>
+                      <h4>Max Difficulty</h4>
+                      <StyledCardStat>{workout.maxDifficulty}</StyledCardStat>
+                    </StyledCardStatGroup>
+                    <StyledCardStatGroup>
+                      <h4>Total Ascent</h4>
+                      <StyledCardStat>{workout.TotalAscent}</StyledCardStat>
+                    </StyledCardStatGroup>
+                    <StyledCardStatGroup>
+                      <h4>Calories</h4>
+                      <StyledCardStat>{workout.calories}</StyledCardStat>
+                    </StyledCardStatGroup>
+                  </StyledCardBody>
+                </Card>
         ))}
       </div>
     </StyledDashboard>

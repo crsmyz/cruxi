@@ -13,6 +13,6 @@ export const StyledButton = styled.button`
   padding: 8px 24px;
   text-align: center;
   vertical-align: middle;
-  cursor: pointer;
+  cursor: pointer !important;
   font-family: "Rubik", sans-serif;
 `;

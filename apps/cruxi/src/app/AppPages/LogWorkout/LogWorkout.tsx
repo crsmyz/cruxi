@@ -6,6 +6,11 @@ import InputGroup from './../../components/Input/Input';
 import Dropdown from './../../components/Dropdown/Dropdown';
 import Textarea from './../../components/Textarea/Textarea';
 
+import { writeWorkoutDataToDB } from './../../Firebase';
+import { useAuth } from '../../Context/AuthContext';
+
+import { Link, useNavigate } from 'react-router-dom';
+
 export interface LogWorkoutProps {}
 
 export interface RouteRow {
@@ -17,6 +22,8 @@ export interface RouteRow {
 }
 
 const StyledLogWorkout = styled.div`
+  color: #3D3837;
+  margin: 2rem 4rem 2rem 4rem;
 `;
 
 const StyledCard = styled.div`
@@ -105,11 +112,16 @@ const LogWorkout = (props: LogWorkoutProps) => {
   const [intensity, setIntensity] = useState('');
   const [routeType, setRouteType] = useState('');
   const [holdTypes, setHoldTypes] = useState('');
+  const [chossRating, setChossRating] = useState('');
   // route table data
   const [routes, setRoutes] = useState(row);
   const [isEditing, setIsEditing] = useState(false);
 
   const [sessionData, setSessionData] = useState({});
+
+
+  const { currentUser } = useAuth()
+  const navigate = useNavigate();
 
   const saveWorkoutHandler = (e: any) => {
     e.preventDefault();
@@ -117,11 +129,22 @@ const LogWorkout = (props: LogWorkoutProps) => {
       date: date,
       startTime: startTime,
       endTime: endTime,
-
       climbingGym: climbingGym,
       location: location,
-
+      activityName: activityName,
       activity: activity,
+      event: event,
+      gradingSystem: gradingSystem,
+      calories: calories,
+      avgHeartRate: avgHeartRate,
+      maxHeartRate: maxHeartRate,
+      rockType: rockType,
+      avgAscent:avgAscent,
+      maxAscent: maxAscent,
+      TotalAscent: TotalAscent,
+      weatherConditions: weatherConditions,
+      helmet: helmet,
+      overallExertion: overallExertion,
       totalRoutes: totalRoutes,
       routesAttempted: routesAttempted,
       routesCompleted: routesCompleted,
@@ -129,22 +152,29 @@ const LogWorkout = (props: LogWorkoutProps) => {
       avgDifficulty: avgDifficulty,
       easiestDifficulty: easiestDifficulty,
       notes: notes,
-
       shoes: shoes,
       chalk: chalk,
       harness: harness,
       rope: rope,
       quickDraw: quickDraw,
-
+      protection: protection,
       grade: grade,
       outcome: outcome,
       intensity: intensity,
       routeType: routeType,
       holdTypes: holdTypes,
-
       routes: routes,
+      isEditing: isEditing,
+      sessionData: sessionData,
+      chossRating: chossRating,
     };
     setSessionData(workOut);
+    writeWorkoutDataToDB(currentUser.uid, { userId: currentUser.uid, ...workOut })
+    try {
+      navigate('/dashboard');
+    } catch(error) {
+      console.log(error);
+    }
   }
   const saveRouteHandler = (e: any) => {
     e.preventDefault();
@@ -153,7 +183,8 @@ const LogWorkout = (props: LogWorkoutProps) => {
       outcome: outcome,
       intensity: intensity,
       routeType: routeType,
-      holdTypes: holdTypes
+      holdTypes: holdTypes,
+      chossRating: chossRating
     };
     setRoutes([...routes, route]);
   }
@@ -307,7 +338,7 @@ const LogWorkout = (props: LogWorkoutProps) => {
             <Dropdown htmlFor='outcome' labelName='Outcome:' selectName='outcome' selectId='outcome-select' onChangeHandler={setOutcome} options={outcomeDropdownData} />
           </StyledWorkoutRow>
           <StyledWorkoutRow>
-            <InputGroup htmlFor='chossRating' labelName='Choss Rating:' type='text' onChangeHandler={setGrade}/>
+            <InputGroup htmlFor='chossRating' labelName='Choss Rating:' type='text' onChangeHandler={setChossRating}/>
             <InputGroup htmlFor='intensity' labelName='Intensity:' type='range' min='0' max='10' step='1' name='intensity' onChangeHandler={setIntensity}/>
             {intensity}
           </StyledWorkoutRow>
@@ -325,7 +356,6 @@ const LogWorkout = (props: LogWorkoutProps) => {
           <br/>
           <Button buttonName='Submit Workout' />
         </Form>
-        <div>{JSON.stringify(sessionData)}</div>
     </StyledLogWorkout>
   );
 }

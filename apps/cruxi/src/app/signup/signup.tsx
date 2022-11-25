@@ -1,57 +1,88 @@
-import React, { useRef, useState } from "react"
-import { useAuth } from "../Context/AuthContext"
-import { Link, useNavigate } from "react-router-dom"
+import React, { useState } from 'react';
+import { Link, useNavigate, NavigateFunction } from 'react-router-dom';
 
-export default function Signup() {
-  const emailRef: any = useRef()
-  const passwordRef: any = useRef()
-  const passwordConfirmRef: any = useRef()
-  const { signup } = useAuth()
-  const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
-  const navigate = useNavigate()
+import { useAuth } from '../Context/AuthContext';
 
-  async function handleSubmit(e: any) {
-    e.preventDefault()
+import InputGroup from './../components/Input/Input';
+import Form from './../components/Form/Form';
+import Button from './../components/Button/Button';
 
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Passwords do not match")
-    }
+import {
+  StyledAuthPages,
+  StyledSignup,
+  StyledCard,
+  StyledNavBrand,
+  HeaderAppName,
+  StyledSpacingDiv,
+  StyledUtilLink,
+} from './StyledSignup';
 
+import { APP_NAME } from './../Constants/AppConstants';
+
+const Signup: React.FC = () => {
+  const [error, setError] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [passwordConfirm, setPasswordConfirm] = useState<string>('');
+
+  const { signup } = useAuth();
+  const navigate: NavigateFunction = useNavigate();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (password !== passwordConfirm) return setError('Passwords do not match');
     try {
-      setError("")
-      setLoading(true)
-      await signup(emailRef.current.value, passwordRef.current.value)
-      navigate("/")
+      setError('');
+      setLoading(true);
+      await signup(email, password);
+      navigate('/');
     } catch {
-      setError("Failed to create an account")
+      setError('Failed to create an account');
     }
-
-    setLoading(false)
-  }
+    setLoading(false);
+  };
 
   return (
-    <>
-      <div>
-        <div>
+    <StyledAuthPages>
+      <StyledSignup>
+        <StyledCard>
+          <StyledNavBrand>
+            <HeaderAppName>{APP_NAME}</HeaderAppName>
+          </StyledNavBrand>
           <h2 className="text-center mb-4">Sign Up</h2>
           {error && <div>{error}</div>}
-          <form onSubmit={handleSubmit}>
-              <label>Email</label>
-              <input type="email" ref={emailRef} required />
-              <label>Password</label>
-              <input type="password" ref={passwordRef} required />
-              <label>Password Confirmation</label>
-              <input type="password" ref={passwordConfirmRef} required />
-            <button disabled={loading} className="w-100" type="submit">
-              Sign Up
-            </button>
-          </form>
-        </div>
-      </div>
-      <div className="w-100 text-center mt-2">
-        Already have an account? <Link to="/login">Log In</Link>
-      </div>
-    </>
-  )
-}
+          <Form onSubmit={handleSubmit}>
+            <InputGroup
+              htmlFor="email"
+              labelName="Email:"
+              type="text"
+              onChangeHandler={setEmail}
+            />
+            <InputGroup
+              htmlFor="password"
+              labelName="Password:"
+              type="text"
+              onChangeHandler={setPassword}
+            />
+            <InputGroup
+              htmlFor="confirmPassword"
+              labelName="Confirm Password:"
+              type="text"
+              onChangeHandler={setPasswordConfirm}
+            />
+            <StyledSpacingDiv>
+              <Button buttonName="Sign Up" />
+            </StyledSpacingDiv>
+          </Form>
+          <StyledUtilLink>
+            Already have an account?
+            <Link to="/login">Log In</Link>
+          </StyledUtilLink>
+        </StyledCard>
+      </StyledSignup>
+    </StyledAuthPages>
+  );
+};
+
+export default Signup;

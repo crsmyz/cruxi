@@ -52,8 +52,19 @@ const Profile = (props: ProfileProps) => {
           <>
       <div>
         <div>
-          <h2 className="text-center mb-4">Update Profile</h2>
+          <h1 className="text-center mb-4">Update Profile</h1>
           {error && <div>{error}</div>}
+          <h5>Username</h5>
+          <div>{currentUser.email}</div>
+          <h5>Phone Number</h5>
+          <div>{currentUser.phoneNumber}</div>
+          <h5>Name</h5>
+          <div>{currentUser.displayName}</div>
+          <h5>Last Login</h5>
+          <div>{currentUser.lastLoginAt}</div>
+          <h5>Proile Picture</h5>
+          <div>{currentUser.photoURL}</div>
+          <h5>Email</h5>
           <form onSubmit={handleSubmit}>
               <label>Email</label>
               <input

@@ -2,6 +2,7 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
+    "apps-cruxi-src-app-app-pages-activity": "libs/apps/cruxi/src/app/app-pages/activity",
     "cruxi": "apps/cruxi",
     "cruxi-e2e": "apps/cruxi-e2e",
     "cruxi-src-app-context-auth-context": "apps/cruxi/src/app/context/auth-context",
