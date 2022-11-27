@@ -106,16 +106,20 @@ const LogWorkout = (props: LogWorkoutProps) => {
   const [rope, setRope] = useState('');
   const [quickDraw, setQuickDraws] = useState('');
   const [protection, setProtection] = useState('');
+  const [brush, setBrush] = useState('');
   // add climbs
   const [grade, setGrade] = useState('');
   const [outcome, setOutcome] = useState('');
   const [intensity, setIntensity] = useState('');
   const [routeType, setRouteType] = useState('');
   const [holdTypes, setHoldTypes] = useState('');
-  const [chossRating, setChossRating] = useState('');
+  const [chossRating, setChossRating] = useState('')
+  const [climbColor, setClimbColor] = useState('');
+  const [wallName, setWallName] = useState('');
   // route table data
   const [routes, setRoutes] = useState(row);
   const [isEditing, setIsEditing] = useState(false);
+  const [webbingAndChord, setWebbingAndChord] = useState('');
 
   const [sessionData, setSessionData] = useState({});
 
@@ -158,6 +162,8 @@ const LogWorkout = (props: LogWorkoutProps) => {
       rope: rope,
       quickDraw: quickDraw,
       protection: protection,
+      brush: brush,
+      webbingAndChord: webbingAndChord,
       grade: grade,
       outcome: outcome,
       intensity: intensity,
@@ -184,7 +190,9 @@ const LogWorkout = (props: LogWorkoutProps) => {
       intensity: intensity,
       routeType: routeType,
       holdTypes: holdTypes,
-      chossRating: chossRating
+      chossRating: chossRating,
+      climbColor: climbColor,
+      wallName: wallName
     };
     setRoutes([...routes, route]);
   }
@@ -235,6 +243,72 @@ const LogWorkout = (props: LogWorkoutProps) => {
     { value: 'Font', label: 'Font'},
     { value: 'YDS', label: 'YDS'},
   ];
+  const vGradeDropdownData = [
+    { value: '', label: 'Choose a V-grade'},
+    { value: 'vb', label: 'VB'},
+    { value: 'v0', label: 'V0'},
+    { value: 'v1', label: 'V1'},
+    { value: 'v2', label: 'V2'},
+    { value: 'v3', label: 'V3'},
+    { value: 'v4', label: 'V4'},
+    { value: 'v5', label: 'V5'},
+    { value: 'v6', label: 'V6'},
+    { value: 'v7', label: 'V7'},
+    { value: 'v8', label: 'V8'},
+    { value: 'v9', label: 'V9'},
+    { value: 'v1', label: 'V10'},
+    { value: 'v11', label: 'V11'},
+    { value: 'v12', label: 'V12'},
+    { value: 'v13', label: 'V13'},
+    { value: 'v14', label: 'V14'},
+    { value: 'v15', label: 'V15'},
+    { value: 'v16', label: 'V16'},
+    { value: 'v17', label: 'V17'},
+  ];
+  const fontGradeDropdownData = [
+    { value: '', label: 'Choose a Font Grade'},
+    { value: '3', label: '3'},
+    { value: '4', label: '4'},
+    { value: '5', label: '5'},
+    { value: '5+', label: '5+'},
+    { value: '6A/+', label: '6A/+'},
+    { value: '6B/+', label: '6B/+'},
+    { value: '6C/+', label: '6C/+'},
+    { value: '7A', label: '7A'},
+    { value: '7A+', label: '7A+'},
+    { value: '7B/+', label: '7B/+'},
+    { value: '7C', label: '7C'},
+    { value: '7C+', label: '7C+'},
+    { value: '8A', label: '8A'},
+    { value: '8A+', label: '8A+'},
+    { value: '8B', label: '8B'},
+    { value: '8B+', label: '8B+'},
+    { value: '8C', label: '8C'},
+    { value: '8C+', label: '8C+'},
+    { value: '9A', label: '9A'},
+  ];
+  const ydsGradeDropdownData = [
+    { value: '', label: 'Choose a Font Grade'},
+    { value: '3', label: '3'},
+    { value: '4', label: '4'},
+    { value: '5', label: '5'},
+    { value: '5+', label: '5+'},
+    { value: '6A/+', label: '6A/+'},
+    { value: '6B/+', label: '6B/+'},
+    { value: '6C/+', label: '6C/+'},
+    { value: '7A', label: '7A'},
+    { value: '7A+', label: '7A+'},
+    { value: '7B/+', label: '7B/+'},
+    { value: '7C', label: '7C'},
+    { value: '7C+', label: '7C+'},
+    { value: '8A', label: '8A'},
+    { value: '8A+', label: '8A+'},
+    { value: '8B', label: '8B'},
+    { value: '8B+', label: '8B+'},
+    { value: '8C', label: '8C'},
+    { value: '8C+', label: '8C+'},
+    { value: '9A', label: '9A'},
+  ];
 
   const routeTable = (<StyledTable>
     <StyledTableHead>
@@ -268,8 +342,13 @@ const LogWorkout = (props: LogWorkoutProps) => {
           <StyledWorkoutRow>
             <InputGroup htmlFor='activityName' labelName='Activity Name:' type='text' onChangeHandler={setActivityName}/>
             <Dropdown htmlFor='activityType' labelName='Activity:' selectName='activity' selectId='activity-select' onChangeHandler={setActivity} options={activityDropdownData} />
+          </StyledWorkoutRow>
+          <StyledWorkoutRow>
             <Dropdown htmlFor='event' labelName='Event:' selectName='event' selectId='event-select' onChangeHandler={setEvent} options={eventDropdownData} />
             <Dropdown htmlFor='gradingSystem' labelName='Grading System:' selectName='gradingSystem' selectId='grading-system-select' onChangeHandler={setGradingSystem} options={gradingSystemDropdownData} />
+          </StyledWorkoutRow>
+          <StyledWorkoutRow>
+            <InputGroup htmlFor='date' labelName='Date:' type='date' onChangeHandler={setDate}/>
           </StyledWorkoutRow>
           <h3>Location</h3>
           <StyledWorkoutRow>
@@ -285,8 +364,11 @@ const LogWorkout = (props: LogWorkoutProps) => {
           </StyledWorkoutRow>
           <StyledWorkoutRow>
             <InputGroup htmlFor='chossRating' labelName='Choss Rating:' type='text' onChangeHandler={setChossRating}/>
-            <InputGroup htmlFor='intensity' labelName='Intensity:' type='range' min='0' max='10' step='1' name='intensity' onChangeHandler={setIntensity}/>
-            {intensity}
+            <InputGroup htmlFor='intensity' labelName='Intensity:' type='range' min='1' max='10' step='1' name='intensity' onChangeHandler={setIntensity} rangeNumber={intensity}/>
+          </StyledWorkoutRow>
+          <StyledWorkoutRow>
+            <InputGroup htmlFor='routeTapeColor' labelName='Tape/Climb Color:' type='text' onChangeHandler={setClimbColor}/>
+            <InputGroup htmlFor='wallName' labelName='Wall Name:' type='text' onChangeHandler={setWallName}/>
           </StyledWorkoutRow>
           <StyledWorkoutRow>
             <Dropdown htmlFor='route-select' labelName='Wall Type:' selectName='routes' selectId='route-select' onChangeHandler={setRouteType} options={routeDreopdownData} />
@@ -302,7 +384,6 @@ const LogWorkout = (props: LogWorkoutProps) => {
           <StyleWorkoutSection>
           <h3>Climbing Time</h3>
           <StyledWorkoutRow>
-            <InputGroup htmlFor='date' labelName='Date:' type='date' onChangeHandler={setDate}/>
             <InputGroup htmlFor='time' labelName='Start Time:' type='time' onChangeHandler={setStartTime}/>
             <InputGroup htmlFor='time' labelName='End Time:' type='time' onChangeHandler={setEndTime}/>
           </StyledWorkoutRow>
@@ -320,8 +401,7 @@ const LogWorkout = (props: LogWorkoutProps) => {
             </StyledWorkoutRow>
             <StyledWorkoutRow>
             <InputGroup htmlFor='maxDifficulty' labelName='Max Difficulty:' type='text' onChangeHandler={setMaxDifficulty}/>
-            <InputGroup htmlFor='overallExertion' labelName='Overall Exertion:' type='range' min='0' max='10' step='1' name='overallExertion' onChangeHandler={setOverallExertion}/>
-            {overallExertion}
+            <InputGroup htmlFor='overallExertion' labelName='Overall Exertion:' type='range' min='1' max='10' step='1' name='overallExertion' onChangeHandler={setOverallExertion} rangeNumber={overallExertion}/>
             </StyledWorkoutRow>
             <StyledWorkoutRow>
               <InputGroup htmlFor='avgHeartRate' labelName='Avg Heart Rate:' type='number' onChangeHandler={setAvgHeartRate}/>
@@ -336,19 +416,21 @@ const LogWorkout = (props: LogWorkoutProps) => {
             </StyledWorkoutRow>
           </StyleWorkoutSection>
           <StyleWorkoutSection>
-          <h3>Gear</h3>
+          <h3>Climbing Gear</h3>
           <StyledWorkoutRow>
             <InputGroup htmlFor='shoes' labelName='Shoes:' type='text' onChangeHandler={setShoes}/>
             <InputGroup htmlFor='chalk' labelName='Chalk:' type='text' onChangeHandler={setChalk}/>
-            <InputGroup htmlFor='harness' labelName='Harness:' type='text' onChangeHandler={setHarness}/>
+            <InputGroup htmlFor='brush' labelName='Brush:' type='text' onChangeHandler={setBrush}/>
           </StyledWorkoutRow>
           <StyledWorkoutRow>
+            <InputGroup htmlFor='harness' labelName='Harness:' type='text' onChangeHandler={setHarness}/>
             <InputGroup htmlFor='rope' labelName='Rope:' type='text' onChangeHandler={setRope}/>
             <InputGroup htmlFor='quickDraws' labelName='Quick Draws:' type='text' onChangeHandler={setQuickDraws}/>
-            <InputGroup htmlFor='protection' labelName='Protection:' type='text' onChangeHandler={setProtection}/>
           </StyledWorkoutRow>
           <StyledWorkoutRow>
+            <InputGroup htmlFor='protection' labelName='Trad Protection:' type='text' onChangeHandler={setProtection}/>
             <InputGroup htmlFor='helmet' labelName='Helmet:' type='text' onChangeHandler={setHelmet}/>
+            <InputGroup htmlFor='webbingAndChord' labelName='Webbing/Chord:' type='text' onChangeHandler={setWebbingAndChord}/>
           </StyledWorkoutRow>
           </StyleWorkoutSection>
           <br/>

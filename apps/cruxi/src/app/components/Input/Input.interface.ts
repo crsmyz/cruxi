@@ -9,4 +9,5 @@ export interface InputProps {
     max?: any;
     value?: any;
     step?: any;
+    rangeNumber?: any;
 }
