@@ -1,5 +1,5 @@
 
-import { Link, useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams, useLocation } from "react-router-dom"
 import styled from 'styled-components';
 
 /* eslint-disable-next-line */
@@ -12,122 +12,124 @@ const StyledActivity = styled.div`
 
 export function Activity(props: ActivityProps) {
   const { id } = useParams();
+  const { state } = useLocation();
+  const { workoutData } = state;
+
+  if (!state) return null;
 
   return (
     <StyledActivity>
       <h1>Activity: {id}</h1>
-      
+      <div>
+            Activity Name:
+            <br/>
+            {workoutData.activityName}
+            <br/>
+            Event:
+            <br/>
+            {workoutData.event}
+            {workoutData.gradingSystem}
+            {workoutData.calories}
+            {workoutData.avgHeartRate}
+            {workoutData.maxHeartRate}
+            {workoutData.rockType}
+            {workoutData.avgAscent}
+            {workoutData.maxAscent}
+            {workoutData.TotalAscent}
+            {workoutData.weatherConditions}
+            {workoutData.helmet}
+            {workoutData.overallExertion}
+            {workoutData.protection}
+            <br/>
+            Date:
+            <br/>
+            {workoutData.date}
+            <br/>
+            Start Time:
+            <br/>
+            {workoutData.startTime}
+            <br/>
+            End Time
+            <br/>
+            {workoutData.endTime}
+            <br/>
+            Climbing Gym:
+            <br/>
+            {workoutData.climbingGym}
+            <br/>
+            Location
+            <br/>
+            {workoutData.location}
+            <br/>
+            Activity:
+            <br/>
+            {workoutData.activity}
+            <br/>
+            Total Routes:
+            <br/>
+            {workoutData.totalRoutes}
+            <br/>
+            Routes Attempted:
+            <br/>
+            {workoutData.routesAttempted}
+            <br/>
+            Routes Completed:
+            <br/>
+            {workoutData.routesCompleted}
+            <br/>
+            Max Difficulty:
+            <br/>
+            {workoutData.maxDifficulty}
+            <br/>
+            Avg Diff:
+            <br/>
+            {workoutData.avgDifficulty}
+            <br/>
+            East Diff:
+            <br/>
+            {workoutData.easiestDifficulty}
+            <br/>
+            Notes:
+            <br/>
+            {workoutData.notes}
+            <br/>
+            Shoes:
+            <br/>
+            {workoutData.shoes}
+            <br/>
+            Chalk:
+            <br/>
+            {workoutData.chalk}
+            <br/>
+            Harness:
+            <br/>
+            {workoutData.harness}
+            <br/>
+            Rope:
+            <br/>
+            {workoutData.rope}
+            <br/>
+            Quick Draw:
+            <br/>
+            {workoutData.quickDraw}
+            <br/>
+            <br/>
+            {workoutData.routes.map((route: any, index: number) => (
+              <div key={index}>
+                <span>{index + 1}</span>
+                <span>{workoutData.grade}</span>
+                <span>{workoutData.outcome}</span>
+                <span>{workoutData.intensity}</span>
+                <span>{workoutData.routeType}</span>
+                <span>{workoutData.holdTypes}</span>
+                <span>{workoutData.chossRating}</span>
+              </div>
+            ))}
+            <br/>
+            <hr/>
+          </div>
     </StyledActivity>
   );
 }
-
-// <div>
-          //   Activity Name:
-          //   <br/>
-          //   {workout.activityName}
-          //   <br/>
-          //   Event:
-          //   <br/>
-          //   {workout.event}
-          //   {workout.gradingSystem}
-          //   {workout.calories}
-          //   {workout.avgHeartRate}
-          //   {workout.maxHeartRate}
-          //   {workout.rockType}
-          //   {workout.avgAscent}
-          //   {workout.maxAscent}
-          //   {workout.TotalAscent}
-          //   {workout.weatherConditions}
-          //   {workout.helmet}
-          //   {workout.overallExertion}
-          //   {workout.protection}
-          //   <br/>
-          //   Date:
-          //   <br/>
-          //   {workout.date}
-          //   <br/>
-          //   Start Time:
-          //   <br/>
-          //   {workout.startTime}
-          //   <br/>
-          //   End Time
-          //   <br/>
-          //   {workout.endTime}
-          //   <br/>
-          //   Climbing Gym:
-          //   <br/>
-          //   {workout.climbingGym}
-          //   <br/>
-          //   Location
-          //   <br/>
-          //   {workout.location}
-          //   <br/>
-          //   Activity:
-          //   <br/>
-          //   {workout.activity}
-          //   <br/>
-          //   Total Routes:
-          //   <br/>
-          //   {workout.totalRoutes}
-          //   <br/>
-          //   Routes Attempted:
-          //   <br/>
-          //   {workout.routesAttempted}
-          //   <br/>
-          //   Routes Completed:
-          //   <br/>
-          //   {workout.routesCompleted}
-          //   <br/>
-          //   Max Difficulty:
-          //   <br/>
-          //   {workout.maxDifficulty}
-          //   <br/>
-          //   Avg Diff:
-          //   <br/>
-          //   {workout.avgDifficulty}
-          //   <br/>
-          //   East Diff:
-          //   <br/>
-          //   {workout.easiestDifficulty}
-          //   <br/>
-          //   Notes:
-          //   <br/>
-          //   {workout.notes}
-          //   <br/>
-          //   Shoes:
-          //   <br/>
-          //   {workout.shoes}
-          //   <br/>
-          //   Chalk:
-          //   <br/>
-          //   {workout.chalk}
-          //   <br/>
-          //   Harness:
-          //   <br/>
-          //   {workout.harness}
-          //   <br/>
-          //   Rope:
-          //   <br/>
-          //   {workout.rope}
-          //   <br/>
-          //   Quick Draw:
-          //   <br/>
-          //   {workout.quickDraw}
-          //   <br/>
-          //   <br/>
-          //   {workout.routes.map((route: any, index: number) => (
-          //     <div key={index}>
-          //       <span>{index + 1}</span>
-          //       <span>{workout.grade}</span>
-          //       <span>{workout.outcome}</span>
-          //       <span>{workout.intensity}</span>
-          //       <span>{workout.routeType}</span>
-          //       <span>{workout.holdTypes}</span>
-          //       <span>{workout.chossRating}</span>
-          //     </div>
-          //   ))}
-          //   <br/>
-          //   <hr/>
-          // </div>
 
 export default Activity;

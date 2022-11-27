@@ -3,7 +3,8 @@ import styled from 'styled-components';
 export const StyledCard = styled.div`
   border: 1px solid #3D3837;
   border-radius: 0.35rem;
-  padding: 2rem 2rem 2rem 2rem;
+  padding: 1rem 1rem 1rem 1rem;
+  margin: 1rem 0rem 1rem 0rem;
 `;
 
 export const StyledLabel = styled.label`

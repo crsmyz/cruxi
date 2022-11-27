@@ -261,7 +261,7 @@ const LogWorkout = (props: LogWorkoutProps) => {
   </StyledTable>);
   return (
     <StyledLogWorkout>
-      <h1>Log Workout</h1>
+      <h1>Log Climbing Session</h1>
         <Form onSubmit={saveWorkoutHandler}>
         <StyleWorkoutSection>
           <h3>Activity</h3>
@@ -271,20 +271,40 @@ const LogWorkout = (props: LogWorkoutProps) => {
             <Dropdown htmlFor='event' labelName='Event:' selectName='event' selectId='event-select' onChangeHandler={setEvent} options={eventDropdownData} />
             <Dropdown htmlFor='gradingSystem' labelName='Grading System:' selectName='gradingSystem' selectId='grading-system-select' onChangeHandler={setGradingSystem} options={gradingSystemDropdownData} />
           </StyledWorkoutRow>
+          <h3>Location</h3>
+          <StyledWorkoutRow>
+            <InputGroup htmlFor='gymCragName' labelName='Climbing Gym/Crag:' type='text' onChangeHandler={setClimbingGym}/>
+            {/* <InputGroup htmlFor='address' labelName='Address:' type='text' onChangeHandler={setLocation}/> */}
+          </StyledWorkoutRow>
         </StyleWorkoutSection>
+        <StyleWorkoutSection>
+          <h3>Add Climbs</h3>
+          <StyledWorkoutRow>
+            <InputGroup htmlFor='grade' labelName='Grade:' type='text' onChangeHandler={setGrade}/>
+            <Dropdown htmlFor='outcome' labelName='Outcome:' selectName='outcome' selectId='outcome-select' onChangeHandler={setOutcome} options={outcomeDropdownData} />
+          </StyledWorkoutRow>
+          <StyledWorkoutRow>
+            <InputGroup htmlFor='chossRating' labelName='Choss Rating:' type='text' onChangeHandler={setChossRating}/>
+            <InputGroup htmlFor='intensity' labelName='Intensity:' type='range' min='0' max='10' step='1' name='intensity' onChangeHandler={setIntensity}/>
+            {intensity}
+          </StyledWorkoutRow>
+          <StyledWorkoutRow>
+            <Dropdown htmlFor='route-select' labelName='Wall Type:' selectName='routes' selectId='route-select' onChangeHandler={setRouteType} options={routeDreopdownData} />
+            <Dropdown htmlFor='holds-select' labelName='Hold Type:' selectName='holds' selectId='holds-select' onChangeHandler={setHoldTypes} options={holdsDropdownData} />
+          </StyledWorkoutRow>
+          <StyledWorkoutRow>
+            <Button buttonName='Add Route' buttonClickHandler={saveRouteHandler} />
+          </StyledWorkoutRow>
+          <StyledWorkoutRow>
+          {routes && routes.length > 0 && Object.keys(routes[0]).length > 0 ? routeTable : null}
+          </StyledWorkoutRow>
+          </StyleWorkoutSection>
           <StyleWorkoutSection>
           <h3>Climbing Time</h3>
           <StyledWorkoutRow>
             <InputGroup htmlFor='date' labelName='Date:' type='date' onChangeHandler={setDate}/>
             <InputGroup htmlFor='time' labelName='Start Time:' type='time' onChangeHandler={setStartTime}/>
             <InputGroup htmlFor='time' labelName='End Time:' type='time' onChangeHandler={setEndTime}/>
-          </StyledWorkoutRow>
-          </StyleWorkoutSection>
-          <StyleWorkoutSection>
-          <h3>Location</h3>
-          <StyledWorkoutRow>
-            <InputGroup htmlFor='gymCragName' labelName='Climbing Gym/Crag:' type='text' onChangeHandler={setClimbingGym}/>
-            <InputGroup htmlFor='address' labelName='Address:' type='text' onChangeHandler={setLocation}/>
           </StyledWorkoutRow>
           </StyleWorkoutSection>
           <StyleWorkoutSection>
@@ -329,28 +349,6 @@ const LogWorkout = (props: LogWorkoutProps) => {
           </StyledWorkoutRow>
           <StyledWorkoutRow>
             <InputGroup htmlFor='helmet' labelName='Helmet:' type='text' onChangeHandler={setHelmet}/>
-          </StyledWorkoutRow>
-          </StyleWorkoutSection>
-          <StyleWorkoutSection>
-          <h3>Add Climbs</h3>
-          <StyledWorkoutRow>
-            <InputGroup htmlFor='grade' labelName='Grade:' type='text' onChangeHandler={setGrade}/>
-            <Dropdown htmlFor='outcome' labelName='Outcome:' selectName='outcome' selectId='outcome-select' onChangeHandler={setOutcome} options={outcomeDropdownData} />
-          </StyledWorkoutRow>
-          <StyledWorkoutRow>
-            <InputGroup htmlFor='chossRating' labelName='Choss Rating:' type='text' onChangeHandler={setChossRating}/>
-            <InputGroup htmlFor='intensity' labelName='Intensity:' type='range' min='0' max='10' step='1' name='intensity' onChangeHandler={setIntensity}/>
-            {intensity}
-          </StyledWorkoutRow>
-          <StyledWorkoutRow>
-            <Dropdown htmlFor='route-select' labelName='Wall Type:' selectName='routes' selectId='route-select' onChangeHandler={setRouteType} options={routeDreopdownData} />
-            <Dropdown htmlFor='holds-select' labelName='Hold Type:' selectName='holds' selectId='holds-select' onChangeHandler={setHoldTypes} options={holdsDropdownData} />
-          </StyledWorkoutRow>
-          <StyledWorkoutRow>
-            <Button buttonName='Add Route' buttonClickHandler={saveRouteHandler} />
-          </StyledWorkoutRow>
-          <StyledWorkoutRow>
-          {routes && routes.length > 0 && Object.keys(routes[0]).length > 0 ? routeTable : null}
           </StyledWorkoutRow>
           </StyleWorkoutSection>
           <br/>

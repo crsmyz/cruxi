@@ -29,7 +29,7 @@ export const writeWorkoutDataToDB = (userId: string, workOutData: any) => {
 export const readWorkoutDataFromDB = async (initWorkoutState: any) => {
   const snapshot = await getDocs(collection(firestore, 'workouts'));
   const dataArray: any[] = snapshot.docs.map((doc: any) => {
-      return doc.data();
+      return {...doc.data(), docId: doc.id};
     });
     initWorkoutState(dataArray);
 }
