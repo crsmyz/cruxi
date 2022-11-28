@@ -12,11 +12,11 @@ import {
   StyledAuthPages,
 } from './StyledLogin';
 
-import Form from './../components/Form/Form';
-import Button from './../components/Button/Button';
-import InputGroup from './../components/Input/Input';
+import Form from '../components/Form/Form';
+import Button from '../components/Button/Button';
+import InputGroup from '../components/Input/Input';
 
-import { APP_NAME } from './../Constants/AppConstants';
+import { APP_NAME } from '../Constants/AppConstants';
 
 const Login: React.FC = () => {
   const [error, setError] = useState<string>('');

@@ -3,9 +3,9 @@ import { Link, useNavigate, NavigateFunction } from 'react-router-dom';
 
 import { useAuth } from '../Context/AuthContext';
 
-import InputGroup from './../components/Input/Input';
-import Form from './../components/Form/Form';
-import Button from './../components/Button/Button';
+import InputGroup from '../components/Input/Input';
+import Form from '../components/Form/Form';
+import Button from '../components/Button/Button';
 
 import {
   StyledAuthPages,
@@ -17,7 +17,7 @@ import {
   StyledUtilLink,
 } from './StyledSignup';
 
-import { APP_NAME } from './../Constants/AppConstants';
+import { APP_NAME } from '../Constants/AppConstants';
 
 const Signup: React.FC = () => {
   const [error, setError] = useState<string>('');
