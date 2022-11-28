@@ -49,6 +49,10 @@ const Dashboard = (props: DashboardProps) => {
           <StyledH2>Chris Medykiewicz</StyledH2>
           <StyledCardBody>
             <StyledCardStatGroup>
+              <StyledH4>Hardest Redpoint</StyledH4>
+              <StyledCardStat>???</StyledCardStat>
+              <StyledH4>Consistent Redpoint</StyledH4>
+              <StyledCardStat>???</StyledCardStat>
               <StyledH4>Hardest Onsight</StyledH4>
               <StyledCardStat>V6</StyledCardStat>
               <StyledH4>Consistent Onsight</StyledH4>

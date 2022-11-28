@@ -122,6 +122,8 @@ const LogWorkout = (props: LogWorkoutProps) => {
   const [webbingAndChord, setWebbingAndChord] = useState('');
 
   const [sessionData, setSessionData] = useState({});
+  const [gradingSystemDropdown, setGradingSystemDropdown] = useState<any>([]);
+
 
 
   const { currentUser } = useAuth()
@@ -363,14 +365,14 @@ const LogWorkout = (props: LogWorkoutProps) => {
     { value: '9b+', label: '9A'},
   ];
 
-  let activeGradingSystem: any[];
-
-  activeGradingSystem = gradingSystem === 'V-Scale' ? vGradeDropdownData : [{value: 'Choose a grade...', label: 'Choose a grade...'}];
-  activeGradingSystem = gradingSystem === 'Font' ? fontGradeDropdownData : [{value: 'Choose a grade...', label: 'Choose a grade...'}];
-  activeGradingSystem = gradingSystem === 'YDS' ? ydsGradeDropdownData : [{value: 'Choose a grade...', label: 'Choose a grade...'}];
-  activeGradingSystem = gradingSystem === 'French' ? frenchSportGradeDropdownData : [{value: 'Choose a grade...', label: 'Choose a grade...'}];
-
-
+  
+  const setClimbingSessionGradeHandler = (val: any) => {
+    setGradingSystem(val);
+    if (val === 'V-Scale') setGradingSystemDropdown(vGradeDropdownData);
+    if (val === 'Font') setGradingSystemDropdown(fontGradeDropdownData);
+    if (val === 'YDS') setGradingSystemDropdown(ydsGradeDropdownData);
+    if (val === 'French') setGradingSystemDropdown(frenchSportGradeDropdownData);
+  }
 
 
 
@@ -409,10 +411,12 @@ const LogWorkout = (props: LogWorkoutProps) => {
           </StyledWorkoutRow>
           <StyledWorkoutRow>
             <Dropdown htmlFor='event' labelName='Event:' selectName='event' selectId='event-select' onChangeHandler={setEvent} options={eventDropdownData} />
-            <Dropdown htmlFor='gradingSystem' labelName='Grading System:' selectName='gradingSystem' selectId='grading-system-select' onChangeHandler={setGradingSystem} options={gradingSystemDropdownData} />
+            <Dropdown htmlFor='gradingSystem' labelName='Grading System:' selectName='gradingSystem' selectId='grading-system-select' onChangeHandler={setClimbingSessionGradeHandler} options={gradingSystemDropdownData} />
           </StyledWorkoutRow>
           <StyledWorkoutRow>
             <InputGroup htmlFor='date' labelName='Date:' type='date' onChangeHandler={setDate}/>
+            <InputGroup htmlFor='time' labelName='Start Time:' type='time' onChangeHandler={setStartTime}/>
+            <InputGroup htmlFor='time' labelName='End Time:' type='time' onChangeHandler={setEndTime}/>
           </StyledWorkoutRow>
           <h3>Location</h3>
           <StyledWorkoutRow>
@@ -423,7 +427,7 @@ const LogWorkout = (props: LogWorkoutProps) => {
         <StyleWorkoutSection>
           <h3>Add Climbs</h3>
           <StyledWorkoutRow>
-            <Dropdown htmlFor='grade' labelName='Grade:' selectName='gradeSelect' selectId='grade-select' onChangeHandler={setGrade} options={activeGradingSystem} />
+            <Dropdown htmlFor='grade' labelName='Grade:' selectName='gradeSelect' selectId='grade-select' onChangeHandler={setGrade} options={gradingSystemDropdown} />
             <Dropdown htmlFor='outcome' labelName='Outcome:' selectName='outcome' selectId='outcome-select' onChangeHandler={setOutcome} options={outcomeDropdownData} />
           </StyledWorkoutRow>
           <StyledWorkoutRow>
@@ -445,13 +449,13 @@ const LogWorkout = (props: LogWorkoutProps) => {
           {routes && routes.length > 0 && Object.keys(routes[0]).length > 0 ? routeTable : null}
           </StyledWorkoutRow>
           </StyleWorkoutSection>
-          <StyleWorkoutSection>
+          {/* <StyleWorkoutSection>
           <h3>Climbing Time</h3>
           <StyledWorkoutRow>
             <InputGroup htmlFor='time' labelName='Start Time:' type='time' onChangeHandler={setStartTime}/>
             <InputGroup htmlFor='time' labelName='End Time:' type='time' onChangeHandler={setEndTime}/>
           </StyledWorkoutRow>
-          </StyleWorkoutSection>
+          </StyleWorkoutSection> */}
           <StyleWorkoutSection>
           <h3>Session Data</h3>
             <StyledWorkoutRow>
@@ -460,7 +464,7 @@ const LogWorkout = (props: LogWorkoutProps) => {
             </StyledWorkoutRow>
             <StyledWorkoutRow>
               <InputGroup htmlFor='avgAscent' labelName='Avg Ascent (ft):' type='number' onChangeHandler={setAvgAscent}/>
-              <InputGroup htmlFor='maxAscent' labelName='Max Ascent (ft):' type='number' onChangeHandler={setMaxAscent}/>
+              {/* <InputGroup htmlFor='maxAscent' labelName='Max Ascent (ft):' type='number' onChangeHandler={setMaxAscent}/> */}
               <InputGroup htmlFor='totalAscent' labelName='Total Ascent (ft):' type='number' onChangeHandler={setTotalAscent}/>
             </StyledWorkoutRow>
             <StyledWorkoutRow>
