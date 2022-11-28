@@ -242,6 +242,7 @@ const LogWorkout = (props: LogWorkoutProps) => {
     { value: 'V-Scale', label: 'V-Scale'},
     { value: 'Font', label: 'Font'},
     { value: 'YDS', label: 'YDS'},
+    { value: 'French', label: 'French'},
   ];
   const vGradeDropdownData = [
     { value: '', label: 'Choose a V-grade'},
@@ -288,27 +289,90 @@ const LogWorkout = (props: LogWorkoutProps) => {
     { value: '9A', label: '9A'},
   ];
   const ydsGradeDropdownData = [
-    { value: '', label: 'Choose a Font Grade'},
-    { value: '3', label: '3'},
-    { value: '4', label: '4'},
-    { value: '5', label: '5'},
-    { value: '5+', label: '5+'},
-    { value: '6A/+', label: '6A/+'},
-    { value: '6B/+', label: '6B/+'},
-    { value: '6C/+', label: '6C/+'},
-    { value: '7A', label: '7A'},
-    { value: '7A+', label: '7A+'},
-    { value: '7B/+', label: '7B/+'},
-    { value: '7C', label: '7C'},
-    { value: '7C+', label: '7C+'},
-    { value: '8A', label: '8A'},
-    { value: '8A+', label: '8A+'},
-    { value: '8B', label: '8B'},
-    { value: '8B+', label: '8B+'},
-    { value: '8C', label: '8C'},
-    { value: '8C+', label: '8C+'},
-    { value: '9A', label: '9A'},
+    { value: '', label: 'Choose a YDS Grade'},
+    { value: '5.0', label: '5.0'},
+    { value: '5.1', label: '5.1'},
+    { value: '5.2', label: '5.2'},
+    { value: '5.3', label: '5.3'},
+    { value: '5.4', label: '5.4'},
+    { value: '5.5', label: '5.5'},
+    { value: '5.6', label: '5.6'},
+    { value: '5.7', label: '5.7'},
+    { value: '5.8', label: '5.8'},
+    { value: '5.9', label: '5.9'},
+    { value: '5.10a', label: '5.10a'},
+    { value: '5.10b', label: '5.10b'},
+    { value: '5.10c', label: '5.10c'},
+    { value: '5.10d', label: '5.10d'},
+    { value: '5.11a', label: '5.11a'},
+    { value: '5.11b', label: '5.11b'},
+    { value: '5.11c', label: '5.11c'},
+    { value: '5.11d', label: '5.11d'},
+    { value: '5.12a', label: '5.12a'},
+    { value: '5.12b', label: '5.12b'},
+    { value: '5.12c', label: '5.12c'},
+    { value: '5.12d', label: '5.12d'},
+    { value: '5.13a', label: '5.13a'},
+    { value: '5.13d', label: '5.13b'},
+    { value: '5.13c', label: '5.13c'},
+    { value: '5.13d', label: '5.13d'},
+    { value: '5.14a', label: '5.14a'},
+    { value: '5.14b', label: '5.14b'},
+    { value: '5.14c', label: '5.14c'},
+    { value: '5.14d', label: '5.14d'},
+    { value: '5.15a', label: '5.15a'},
+    { value: '5.15b', label: '5.15b'},
+    { value: '5.15c', label: '5.15c'},
+    { value: '5.15d', label: '5.15d'},
   ];
+  const frenchSportGradeDropdownData = [
+    { value: '', label: 'Choose a French Sport Grade'},
+    { value: '2-', label: '3'},
+    { value: '2', label: '4'},
+    { value: '3', label: '5'},
+    { value: '3+', label: '5+'},
+    { value: '4a', label: '6A/+'},
+    { value: '4b', label: '6B/+'},
+    { value: '4c', label: '6C/+'},
+    { value: '5a', label: '7A'},
+    { value: '5b', label: '7A+'},
+    { value: '5c', label: '7B/+'},
+    { value: '6a', label: '7C'},
+    { value: '6a+', label: '7C+'},
+    { value: '6b', label: '8A'},
+    { value: '6b+', label: '8A+'},
+    { value: '6c', label: '8B'},
+    { value: '6c+', label: '8B+'},
+    { value: '7a', label: '8C'},
+    { value: '7a+', label: '8C+'},
+    { value: '7b', label: '9A'},
+    { value: '7b+', label: '9A'},
+    { value: '7c', label: '9A'},
+    { value: '7c+', label: '9A'},
+    { value: '8a', label: '9A'},
+    { value: '8a+', label: '9A'},
+    { value: '8b', label: '9A'},
+    { value: '8b+', label: '9A'},
+    { value: '8c', label: '9A'},
+    { value: '8c+', label: '9A'},
+    { value: '9a', label: '9A'},
+    { value: '9a+', label: '9A'},
+    { value: '9b', label: '9A'},
+    { value: '9b+', label: '9A'},
+    { value: '9c', label: '9A'},
+    { value: '9b+', label: '9A'},
+  ];
+
+  let activeGradingSystem: any[];
+
+  activeGradingSystem = gradingSystem === 'V-Scale' ? vGradeDropdownData : [{value: 'Choose a grade...', label: 'Choose a grade...'}];
+  activeGradingSystem = gradingSystem === 'Font' ? fontGradeDropdownData : [{value: 'Choose a grade...', label: 'Choose a grade...'}];
+  activeGradingSystem = gradingSystem === 'YDS' ? ydsGradeDropdownData : [{value: 'Choose a grade...', label: 'Choose a grade...'}];
+  activeGradingSystem = gradingSystem === 'French' ? frenchSportGradeDropdownData : [{value: 'Choose a grade...', label: 'Choose a grade...'}];
+
+
+
+
 
   const routeTable = (<StyledTable>
     <StyledTableHead>
@@ -359,7 +423,7 @@ const LogWorkout = (props: LogWorkoutProps) => {
         <StyleWorkoutSection>
           <h3>Add Climbs</h3>
           <StyledWorkoutRow>
-            <InputGroup htmlFor='grade' labelName='Grade:' type='text' onChangeHandler={setGrade}/>
+            <Dropdown htmlFor='grade' labelName='Grade:' selectName='gradeSelect' selectId='grade-select' onChangeHandler={setGrade} options={activeGradingSystem} />
             <Dropdown htmlFor='outcome' labelName='Outcome:' selectName='outcome' selectId='outcome-select' onChangeHandler={setOutcome} options={outcomeDropdownData} />
           </StyledWorkoutRow>
           <StyledWorkoutRow>
@@ -367,11 +431,11 @@ const LogWorkout = (props: LogWorkoutProps) => {
             <InputGroup htmlFor='intensity' labelName='Intensity:' type='range' min='1' max='10' step='1' name='intensity' onChangeHandler={setIntensity} rangeNumber={intensity}/>
           </StyledWorkoutRow>
           <StyledWorkoutRow>
-            <InputGroup htmlFor='routeTapeColor' labelName='Tape/Climb Color:' type='text' onChangeHandler={setClimbColor}/>
             <InputGroup htmlFor='wallName' labelName='Wall Name:' type='text' onChangeHandler={setWallName}/>
+            <Dropdown htmlFor='route-select' labelName='Wall Type:' selectName='routes' selectId='route-select' onChangeHandler={setRouteType} options={routeDreopdownData} />
           </StyledWorkoutRow>
           <StyledWorkoutRow>
-            <Dropdown htmlFor='route-select' labelName='Wall Type:' selectName='routes' selectId='route-select' onChangeHandler={setRouteType} options={routeDreopdownData} />
+          <InputGroup htmlFor='routeTapeColor' labelName='Tape/Hold Color:' type='text' onChangeHandler={setClimbColor}/>
             <Dropdown htmlFor='holds-select' labelName='Hold Type:' selectName='holds' selectId='holds-select' onChangeHandler={setHoldTypes} options={holdsDropdownData} />
           </StyledWorkoutRow>
           <StyledWorkoutRow>
