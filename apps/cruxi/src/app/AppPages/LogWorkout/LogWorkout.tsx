@@ -443,7 +443,7 @@ const LogWorkout = (props: LogWorkoutProps) => {
             <Dropdown htmlFor='holds-select' labelName='Hold Type:' selectName='holds' selectId='holds-select' onChangeHandler={setHoldTypes} options={holdsDropdownData} />
           </StyledWorkoutRow>
           <StyledWorkoutRow>
-            <Button buttonName='Add Route' buttonClickHandler={saveRouteHandler} />
+            <Button buttonName='Add Climb' buttonClickHandler={saveRouteHandler} />
           </StyledWorkoutRow>
           <StyledWorkoutRow>
           {routes && routes.length > 0 && Object.keys(routes[0]).length > 0 ? routeTable : null}
