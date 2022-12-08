@@ -365,7 +365,6 @@ const LogWorkout = (props: LogWorkoutProps) => {
     { value: '9b+', label: '9A'},
   ];
 
-  
   const setClimbingSessionGradeHandler = (val: any) => {
     setGradingSystem(val);
     if (val === 'V-Scale') setGradingSystemDropdown(vGradeDropdownData);
@@ -373,8 +372,6 @@ const LogWorkout = (props: LogWorkoutProps) => {
     if (val === 'YDS') setGradingSystemDropdown(ydsGradeDropdownData);
     if (val === 'French') setGradingSystemDropdown(frenchSportGradeDropdownData);
   }
-
-
 
   const routeTable = (<StyledTable>
     <StyledTableHead>

@@ -4,7 +4,9 @@ export interface DropdownProps {
     labelName: string;
     selectName: any;
     selectId: any;
-    options: Array<option>
+    options: Array<option>;
+    value?: any;
+    disable?: boolean;
 }
 
 interface option {

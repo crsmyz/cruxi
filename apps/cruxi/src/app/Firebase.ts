@@ -33,3 +33,26 @@ export const readWorkoutDataFromDB = async (initWorkoutState: any) => {
     });
     initWorkoutState(dataArray);
 }
+export const writeBoulderingProfile = (userId: string, boulderingProfileData: any) => {
+  addDoc(collection(firestore, 'boulderingProfile'), boulderingProfileData);
+}
+export const readBoulderingProfileDataFromDB = async (initWorkoutState: any, dropdownState?: any, setDefaultGrade?: any) => {
+  const snapshot = await getDocs(collection(firestore, 'boulderingProfile'));
+  const data: any[] = snapshot.docs.map((doc: any) => {
+      return {...doc.data(), docId: doc.id};
+    });
+    initWorkoutState(data[1]);
+    dropdownState && dropdownState(data[1].defaultGradingSys);
+    setDefaultGrade && setDefaultGrade(data[1].defaultGradingSys);
+}
+export const writeRopeProfile = (userId: string, ropeProfileData: any) => {
+  addDoc(collection(firestore, 'ropeProfile'), ropeProfileData);
+}
+export const readRopeProfileDataFromDB = async (initWorkoutState: any, dropdownState?: any) => {
+  const snapshot = await getDocs(collection(firestore, 'ropeProfile'));
+  const data: any[] = snapshot.docs.map((doc: any) => {
+      return {...doc.data(), docId: doc.id};
+    });
+    initWorkoutState(data[1]);
+    dropdownState && dropdownState(data[1].ropeDefaultGradingSys);
+}

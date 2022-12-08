@@ -35,7 +35,21 @@ export const AuthProvider = ({ children }: any) => {
     return currentUser.updatePassword(password);
   }
 
+  const updatePhoneNumber = (phoneNumber: any) => {
+  //   // const cred = firebase.auth.PhoneAuthProvider.credential(id, code);
+  //   return currentUser.updatePhoneNumber(phoneNumber);
+  }
+
+  const updateDisplayName = () => {
+    return currentUser.updatePassword();
+  }
+
+  const updateProfile = (displayName?: string, profilePicture?: string) => {
+    return currentUser.updateProfile({ displayName: displayName, photoURL: profilePicture });
+  }
+
   useEffect(() => {
+    // auth.
     const unsubscribe = auth.onAuthStateChanged((user: any) => {
       setCurrentUser(user);
       setLoading(false);
@@ -52,6 +66,8 @@ export const AuthProvider = ({ children }: any) => {
     resetPassword,
     updateEmail,
     updatePassword,
+    // updatePhoneNumber,
+    updateProfile
   };
 
   return (
