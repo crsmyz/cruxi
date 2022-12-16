@@ -1,12 +1,12 @@
 import React from 'react';
 import { Route, Routes, Outlet } from 'react-router-dom';
 
-import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 
 // util
 import SplashScreenPage from './AppPages/SplashScreenPage/SplashScreenPage';
 import Layout from './Layout/Layout';
-import Loading from './components/Loading/Loading';
+import Loading from './Components/Loading/Loading';
 
 // children
 import Dashboard from './AppPages/Dashboard/Dashboard';
@@ -20,7 +20,7 @@ import { StyledApp } from './StyledApp';
 import Login from './Login/Login';
 import Signup from './Signup/Signup';
 import ForgotPassword from './ForgotPassword/ForgotPassword';
-import Footer from './components/Footer/Footer';
+import Footer from './Components/Footer/Footer';
 import Activity from './AppPages/Activity/Activity';
 
 const UnAuthenticatedLayout: React.FC = () => { 

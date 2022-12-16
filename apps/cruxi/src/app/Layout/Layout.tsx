@@ -8,9 +8,9 @@ import {
   StyledNavButtonLayout,
   HeaderAppName,
 } from './StyledLayout';
-import Navbar from '../components/Navbar/Navbar';
-import NavItem from '../components/NavItem/NavItem';
-import Footer from '../components/Footer/Footer';
+import Navbar from '../Components/Navbar/Navbar';
+import NavItem from '../Components/NavItem/NavItem';
+import Footer from '../Components/Footer/Footer';
 
 import { APP_NAME } from './../Constants/AppConstants';
 

@@ -1,9 +1,9 @@
 
 import { Link, useNavigate, useParams, useLocation } from "react-router-dom"
 import styled from 'styled-components';
-import Button from "../../components/Button/Button";
+import Button from "../../Components/Button/Button";
 
-import Card from "../../components/Card/Card";
+import Card from "../../Components/Card/Card";
 
 /* eslint-disable-next-line */
 export interface ActivityProps {}

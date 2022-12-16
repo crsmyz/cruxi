@@ -9,8 +9,8 @@ import {
   SplashBody,
 } from './StyledSplashScreenPage';
 
-import SplashScreen from '../../components/SplashScreen/SplashScreen';
-import Button from '../../components/Button/Button';
+import SplashScreen from '../../Components/SplashScreen/SplashScreen';
+import Button from '../../Components/Button/Button';
 
 const SplashScreenPage: React.FC = () => {
   const header = 'Welcome to Cruxi';
