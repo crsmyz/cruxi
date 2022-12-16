@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import Form from './../../components/Form/Form';
+import Form from './../../Components/Form/Form';
 import styled from 'styled-components';
-import Button from './../../components/Button/Button';
-import InputGroup from './../../components/Input/Input';
-import Dropdown from './../../components/Dropdown/Dropdown';
-import Textarea from './../../components/Textarea/Textarea';
+import Button from './../../Components/Button/Button';
+import InputGroup from './../../Components/Input/Input';
+import Dropdown from './../../Components/Dropdown/Dropdown';
+import Textarea from './../../Components/Textarea/Textarea';
 
 import { writeWorkoutDataToDB } from '../../Firebase';
 import { useAuth } from '../../Context/AuthContext';

@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 import { useAuth } from '../Context/AuthContext';
 
-import Form from '../components/Form/Form';
-import Button from '../components/Button/Button';
-import InputGroup from '../components/Input/Input';
+import Form from '../Components/Form/Form';
+import Button from '../Components/Button/Button';
+import InputGroup from '../Components/Input/Input';
 
 import {
   StyledForgotPassword,
