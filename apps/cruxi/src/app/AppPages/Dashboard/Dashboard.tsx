@@ -30,7 +30,7 @@ import {
   readWorkoutDataFromDB,
   readBoulderingProfileDataFromDB,
   readRopeProfileDataFromDB,
-} from './../../Firebase';
+} from '../../Firebase';
 
 const Dashboard = (props: DashboardProps) => {
   const [error, setError] = useState('');
@@ -43,9 +43,9 @@ const Dashboard = (props: DashboardProps) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    readWorkoutDataFromDB(setWorkoutHistory);
-    readBoulderingProfileDataFromDB(setBoulderingProfile);
-    readRopeProfileDataFromDB(setRopeProfile);
+    readWorkoutDataFromDB(setWorkoutHistory, currentUser);
+    readBoulderingProfileDataFromDB(setBoulderingProfile, currentUser, null, null);
+    readRopeProfileDataFromDB(setRopeProfile, currentUser, null);
   }, []);
 
   async function handleLogout() {
@@ -58,6 +58,82 @@ const Dashboard = (props: DashboardProps) => {
     }
   }
 
+  const boulderingProfileSection = (
+  <StyledCardStatGroup>
+    <h3>Bouldering Profile</h3>
+    <StyledH4>Boulder Grading System</StyledH4>
+    <StyledCardStat>
+    {boulderProfile?.defaultGradingSys}
+    </StyledCardStat>
+    <StyledH4>Hardest Redpoint</StyledH4>
+    <StyledCardStat>
+    {boulderProfile?.hardestRedpoint}
+    </StyledCardStat>
+    <StyledH4>Consistent Redpoint</StyledH4>
+    <StyledCardStat>
+    {boulderProfile?.consistentRedpoint}
+    </StyledCardStat>
+    <StyledH4>Easy Redpoint</StyledH4>
+    <StyledCardStat>{boulderProfile?.easyRedpoint}</StyledCardStat>
+    <StyledH4>Hardest Onsight</StyledH4>
+    <StyledCardStat>{boulderProfile?.hardestOnsight}</StyledCardStat>
+    <StyledH4>Consistent Onsight</StyledH4>
+    <StyledCardStat>
+    {boulderProfile?.consistentOnsight}
+    </StyledCardStat>
+    <StyledH4>Easy Onsight</StyledH4>
+    <StyledCardStat>{boulderProfile?.easyOnsight}</StyledCardStat>
+    <StyledH4>Short-Term Project Grade</StyledH4>
+    <StyledCardStat>
+    {boulderProfile?.shortTermProject}
+    </StyledCardStat>
+    <StyledH4>Long-Term Project Grade</StyledH4>
+    <StyledCardStat>
+    {boulderProfile?.longTermProject}
+    </StyledCardStat>
+    <Link to='/profile'>
+      <Button buttonName="Edit Profile" />
+    </Link>
+    </StyledCardStatGroup>
+  );
+
+  const ropeProfileSection = (
+    <StyledCardStatGroup>
+    <h3>Ropes Profile</h3>
+    <StyledH4>Rope Grading System</StyledH4>
+    <StyledCardStat>
+      {ropeProfile?.ropeDefaultGradingSys}
+    </StyledCardStat>
+    <StyledH4>Consistent Redpoint</StyledH4>
+    <StyledCardStat>
+      {ropeProfile?.ropeConsistentRedpoint}
+    </StyledCardStat>
+    <StyledH4>Easy Redpoint</StyledH4>
+    <StyledCardStat>{ropeProfile?.ropeEasyRedpoint}</StyledCardStat>
+    <StyledH4>Hardest Onsight</StyledH4>
+    <StyledCardStat>
+      {ropeProfile?.ropeHardestOnsight}
+    </StyledCardStat>
+    <StyledH4>Consistent Onsight</StyledH4>
+    <StyledCardStat>
+      {ropeProfile?.ropeConsistentOnsight}
+    </StyledCardStat>
+    <StyledH4>Easy Onsight</StyledH4>
+    <StyledCardStat>{ropeProfile?.ropeEasyOnsight}</StyledCardStat>
+    <StyledH4>Short-Term Project Grade</StyledH4>
+    <StyledCardStat>
+      {ropeProfile?.ropeShortTermProject}
+    </StyledCardStat>
+    <StyledH4>Long-Term Project Grade</StyledH4>
+    <StyledCardStat>
+      {ropeProfile?.ropeLongTermProject}
+    </StyledCardStat>
+    <Link to='/profile'>
+      <Button buttonName="Edit Profile" />
+    </Link>
+  </StyledCardStatGroup>
+  );
+
   return (
     <StyledDashboard>
       <h1>Climbing Dashboard</h1>
@@ -66,71 +142,11 @@ const Dashboard = (props: DashboardProps) => {
           <Card>
             <StyledH2>Chris Medykiewicz</StyledH2>
             <StyledCardBody>
-              <StyledCardStatGroup>
-                <h3>Bouldering Profile</h3>
-                <StyledH4>Boulder Grading System</StyledH4>
-                <StyledCardStat>
-                  {boulderProfile.defaultGradingSys}
-                </StyledCardStat>
-                <StyledH4>Hardest Redpoint</StyledH4>
-                <StyledCardStat>
-                  {boulderProfile.hardestRedpoint}
-                </StyledCardStat>
-                <StyledH4>Consistent Redpoint</StyledH4>
-                <StyledCardStat>
-                  {boulderProfile.consistentRedpoint}
-                </StyledCardStat>
-                <StyledH4>Easy Redpoint</StyledH4>
-                <StyledCardStat>{boulderProfile.easyRedpoint}</StyledCardStat>
-                <StyledH4>Hardest Onsight</StyledH4>
-                <StyledCardStat>{boulderProfile.hardestOnsight}</StyledCardStat>
-                <StyledH4>Consistent Onsight</StyledH4>
-                <StyledCardStat>
-                  {boulderProfile.consistentOnsight}
-                </StyledCardStat>
-                <StyledH4>Easy Onsight</StyledH4>
-                <StyledCardStat>{boulderProfile.easyOnsight}</StyledCardStat>
-                <StyledH4>Short-Term Project Grade</StyledH4>
-                <StyledCardStat>
-                  {boulderProfile.shortTermProject}
-                </StyledCardStat>
-                <StyledH4>Long-Term Project Grade</StyledH4>
-                <StyledCardStat>
-                  {boulderProfile.longTermProject}
-                </StyledCardStat>
-                <h3>Ropes Profile</h3>
-                <StyledH4>Rope Grading System</StyledH4>
-                <StyledCardStat>
-                  {ropeProfile.ropeDefaultGradingSys}
-                </StyledCardStat>
-                <StyledH4>Consistent Redpoint</StyledH4>
-                <StyledCardStat>
-                  {ropeProfile.ropeConsistentRedpoint}
-                </StyledCardStat>
-                <StyledH4>Easy Redpoint</StyledH4>
-                <StyledCardStat>{ropeProfile.ropeEasyRedpoint}</StyledCardStat>
-                <StyledH4>Hardest Onsight</StyledH4>
-                <StyledCardStat>
-                  {ropeProfile.ropeHardestOnsight}
-                </StyledCardStat>
-                <StyledH4>Consistent Onsight</StyledH4>
-                <StyledCardStat>
-                  {ropeProfile.ropeConsistentOnsight}
-                </StyledCardStat>
-                <StyledH4>Easy Onsight</StyledH4>
-                <StyledCardStat>{ropeProfile.ropeEasyOnsight}</StyledCardStat>
-                <StyledH4>Short-Term Project Grade</StyledH4>
-                <StyledCardStat>
-                  {ropeProfile.ropeShortTermProject}
-                </StyledCardStat>
-                <StyledH4>Long-Term Project Grade</StyledH4>
-                <StyledCardStat>
-                  {ropeProfile.ropeLongTermProject}
-                </StyledCardStat>
-              </StyledCardStatGroup>
+              {boulderProfile ? boulderingProfileSection : null}
+              {ropeProfile ? ropeProfileSection : null}
             </StyledCardBody>
           </Card>
-          <Card>
+          {/* <Card>
             <StyledH2>Goals</StyledH2>
             <StyledCardBody>
               <StyledCardStatGroup>
@@ -155,7 +171,7 @@ const Dashboard = (props: DashboardProps) => {
                 <Button buttonName="Manage Goals" />
               </StyledCardStatGroup>
             </StyledCardBody>
-          </Card>
+          </Card> */}
         </StyledGridItem1>
         <StyledGridItem2>
           <h2>Climbing Sessions</h2>
@@ -201,7 +217,7 @@ const Dashboard = (props: DashboardProps) => {
             </Card>
           ))}
         </StyledGridItem2>
-        <StyledGridItem3>
+        {/* <StyledGridItem3>
           <Card>
             <StyledH2>Training Plan</StyledH2>
             <StyledCardBody>
@@ -218,7 +234,7 @@ const Dashboard = (props: DashboardProps) => {
               </StyledCardStatGroup>
             </StyledCardBody>
           </Card>
-        </StyledGridItem3>
+        </StyledGridItem3> */}
       </StyledGridContainer>
     </StyledDashboard>
   );

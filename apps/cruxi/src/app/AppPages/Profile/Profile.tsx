@@ -72,11 +72,6 @@ const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
   // grade dropdowns for boulder and rope
   const [boulderGradeDropdown, setBoulderGradeDropdown] = useState<any>([]);
   const [ropeGradeDropdown, setRopeGradeDropdown] = useState<any>([]);
-  // default grade value
-  const [defaultGrade, setDefaultGrade] = useState<any>('');
-
-  const [gradingSystemDropdown, setGradingSystemDropdown] = useState<any>([]);
-  
 
   const { currentUser, updatePassword, updateEmail, updateDisplayName, updatePhoneNumber } = useAuth();
   const navigate = useNavigate();
@@ -84,14 +79,37 @@ const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
   useEffect(() => {
     readBoulderingProfileDataFromDB(
       setBoulderingProfile,
+      currentUser,
       setBoulderGradeHandler,
-      setDefaultGrade
+      setBoulderGradesFromServerHandler
     );
     readRopeProfileDataFromDB(
       setRopeProfile,
+      currentUser,
       setRopeGradeHandler,
+      setRopeGradesFromServerHandler
     );
   }, []);
+  const setBoulderGradesFromServerHandler = (boulderingDataFromServer: any) => {
+    setBoulderHardestRedpoint(boulderingDataFromServer.hardestRedpoint);
+    setBoulderConsistentRedpoint(boulderingDataFromServer.consistentRedpoint);
+    setBoulderEasyRedpoint(boulderingDataFromServer.easyRedpoint);
+    setBoulderHardestOnsight(boulderingDataFromServer.hardestOnsight);
+    setBoulderConsistentOnsight(boulderingDataFromServer.consistentOnsight);
+    setBoulderEasyOnsight(boulderingDataFromServer.easyOnsight);
+    setBoulderShortTermProject(boulderingDataFromServer.shortTermProject);
+    setBoulderLongTermProject(boulderingDataFromServer.longTermProject);
+  };
+  const setRopeGradesFromServerHandler = (ropeDataFromServer: any) => {
+    setRopeHardestRedpoint(ropeDataFromServer.ropeHardestRedpoint);
+    setRopeConsistentRedpoint(ropeDataFromServer.ropeConsistentRedpoint);
+    setRopeEasyRedpoint(ropeDataFromServer.ropeEasyRedpoint);
+    setRopeHardestOnsight(ropeDataFromServer.ropeHardestOnsight);
+    setRopeConsistentOnsight(ropeDataFromServer.ropeConsistentOnsight);
+    setRopeEasyOnsight(ropeDataFromServer.ropeEasyOnsight);
+    setRopeShortTermProject(ropeDataFromServer.ropeShortTermProject);
+    setRopeLongTermProject(ropeDataFromServer.ropeLongTermProject);
+  };
   // handlers for local state
   const setBoulderGradeHandler = (boulderGradeSystem: string) => {
     setBoulderGradeSystem(boulderGradeSystem);
@@ -147,6 +165,7 @@ const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
   const saveBoulderingProfileHandler = (e: any) => {
     e.preventDefault();
     const boulderProfile = {
+      timestamp: new Date(),
       defaultGradingSys: boulderGradeSystem,
       hardestRedpoint: boulderHardestRedpoint,
       consistentRedpoint: boulderConsistentRedpoint,
@@ -158,12 +177,12 @@ const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
       longTermProject: boulderLongTermProject,
     };
     setBoulderingProfile(boulderProfile);
-    writeBoulderingProfile(currentUser.uid, {
+    writeBoulderingProfile({
       userId: currentUser.uid,
       ...boulderProfile,
     });
     try {
-      navigate('/dashboard');
+      navigate('/');
     } catch (error) {
       console.log(error);
     }
@@ -171,6 +190,7 @@ const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
   const saveRopesProfileHandler = (e: any) => {
     e.preventDefault();
     const ropeProfile = {
+      timestamp: new Date(),
       ropeDefaultGradingSys: ropeGradeSystem,
       ropeHardestRedpoint: ropeHardestRedpoint,
       ropeConsistentRedpoint: ropeConsistentRedpoint,
@@ -195,8 +215,6 @@ const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
 
   return (
     <StyledProfile>
-      <div>{JSON.stringify(boulderProfile)}</div>
-      <div>{JSON.stringify(ropeProfile)}</div>
       <h1>Profile</h1>
       <h3>Bouldering Profile</h3>
       <StyleWorkoutSection>
@@ -204,13 +222,13 @@ const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
           <>
             <StyledWorkoutRow>
               <Dropdown
-                value={'defaultGrade' || 'Choose a grading system...'}
                 htmlFor="defaultGradingSys"
                 labelName="Default Grading System:"
                 selectName="gradingSystem"
                 selectId="grading-system-select"
                 onChangeHandler={setBoulderGradeHandler}
                 options={gradingSystemDropdownData}
+                value={boulderGradeSystem}
               />
             </StyledWorkoutRow>
             <StyledWorkoutRow>
@@ -222,6 +240,7 @@ const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
                 selectId="hardRedpointGrade-select"
                 onChangeHandler={setBoulderHardestRedpoint}
                 options={boulderGradeDropdown}
+                value={boulderHardestRedpoint}
               />
               <Dropdown
                 disable={(boulderGradeSystem?.length < 1)}
@@ -231,6 +250,7 @@ const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
                 selectId="consistentRedpointGrade-select"
                 onChangeHandler={setBoulderConsistentRedpoint}
                 options={boulderGradeDropdown}
+                value={boulderConsistentRedpoint}
               />
               <Dropdown
                 disable={(boulderGradeSystem?.length < 1)}
@@ -240,6 +260,7 @@ const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
                 selectId="easyRedpointGrade-select"
                 onChangeHandler={setBoulderEasyRedpoint}
                 options={boulderGradeDropdown}
+                value={boulderEasyRedpoint}
               />
             </StyledWorkoutRow>
             <StyledWorkoutRow>
@@ -251,6 +272,7 @@ const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
                 selectId="hardOnsightGrade-select"
                 onChangeHandler={setBoulderHardestOnsight}
                 options={boulderGradeDropdown}
+                value={boulderHardestOnsight}
               />
               <Dropdown
                 disable={(boulderGradeSystem?.length < 1)}
@@ -260,6 +282,7 @@ const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
                 selectId="hardRedpointGrade-select"
                 onChangeHandler={setBoulderConsistentOnsight}
                 options={boulderGradeDropdown}
+                value={boulderConsistentOnsight}
               />
               <Dropdown
                 disable={(boulderGradeSystem?.length < 1)}
@@ -269,6 +292,7 @@ const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
                 selectId="easyOnsightGrade-select"
                 onChangeHandler={setBoulderEasyOnsight}
                 options={boulderGradeDropdown}
+                value={boulderEasyOnsight}
               />
             </StyledWorkoutRow>
             <StyledWorkoutRow>
@@ -280,6 +304,7 @@ const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
                 selectId="shortTermProjGrade-select"
                 onChangeHandler={setBoulderShortTermProject}
                 options={boulderGradeDropdown}
+                value={boulderShortTermProject}
               />
               <Dropdown
                 disable={(boulderGradeSystem?.length < 1)}
@@ -289,6 +314,7 @@ const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
                 selectId="longTermProjGrade-select"
                 onChangeHandler={setBoulderLongTermProject}
                 options={boulderGradeDropdown}
+                value={boulderLongTermProject}
               />
             </StyledWorkoutRow>
             <Button buttonName="Save Changes" />
@@ -307,84 +333,93 @@ const Profile: React.FC<ProfileProps> = (props: ProfileProps) => {
                 selectId="grading-system-select"
                 onChangeHandler={setRopeGradeHandler}
                 options={ropeGradingSystemDropdownData}
+                value={ropeGradeSystem}
               />
             </StyledWorkoutRow>
             <StyledWorkoutRow>
               <Dropdown
-                disable={(boulderGradeSystem?.length < 1)}
+                disable={(ropeGradeSystem?.length < 1)}
                 htmlFor="hardRepoint"
                 labelName="Hardest Redpoint:"
                 selectName="hardRedpointGradeSelect"
                 selectId="hardRedpointGrade-select"
                 onChangeHandler={setRopeHardestRedpoint}
                 options={ropeGradeDropdown}
+                value={ropeHardestRedpoint}
               />
               <Dropdown
-                disable={(boulderGradeSystem?.length < 1)}
+              disable={(ropeGradeSystem?.length < 1)}
                 htmlFor="consistentRedpoint"
                 labelName="Consistent Redpoint:"
                 selectName="consistentRedpointGradeSelect"
                 selectId="consistentRedpointGrade-select"
                 onChangeHandler={setRopeConsistentRedpoint}
                 options={ropeGradeDropdown}
+                value={ropeConsistentRedpoint}
               />
               <Dropdown
-                disable={(boulderGradeSystem?.length < 1)}
+                disable={(ropeGradeSystem?.length < 1)}
                 htmlFor="easyRedpoint"
                 labelName="Easy Redpoint:"
                 selectName="easyRedpointGradeSelect"
                 selectId="easyRedpointGrade-select"
                 onChangeHandler={setRopeEasyRedpoint}
                 options={ropeGradeDropdown}
+                value={ropeEasyRedpoint}
               />
             </StyledWorkoutRow>
             <StyledWorkoutRow>
               <Dropdown
-                disable={(boulderGradeSystem?.length < 1)}
+                disable={(ropeGradeSystem?.length < 1)}
                 htmlFor="hardOnsight"
                 labelName="Hardest Onsight:"
                 selectName="hardOnsightGradeSelect"
                 selectId="hardOnsightGrade-select"
                 onChangeHandler={setRopeHardestOnsight}
                 options={ropeGradeDropdown}
+                value={ropeHardestOnsight}
               />
               <Dropdown
-                disable={(boulderGradeSystem?.length < 1)}
+                disable={(ropeGradeSystem?.length < 1)}
                 htmlFor="consistentOnsight"
                 labelName="Consistent Onsight:"
                 selectName="consistentOnsightGradeSelect"
                 selectId="hardRedpointGrade-select"
                 onChangeHandler={setRopeConsistentOnsight}
                 options={ropeGradeDropdown}
+                value={ropeConsistentOnsight}
               />
               <Dropdown
-                disable={(boulderGradeSystem?.length < 1)}
+                disable={(ropeGradeSystem?.length < 1)}
                 htmlFor="easyOnsight"
                 labelName="Easy Onsight:"
                 selectName="easyOnsightGradeSelect"
                 selectId="easyOnsightGrade-select"
                 onChangeHandler={setRopeEasyOnsight}
                 options={ropeGradeDropdown}
+                value={ropeEasyOnsight}
               />
             </StyledWorkoutRow>
             <StyledWorkoutRow>
               <Dropdown
-                disable={(boulderGradeSystem?.length < 1)}
+                disable={(ropeGradeSystem?.length < 1)}
                 htmlFor="shortTermProj"
                 labelName="Short-Term Project Grade:"
                 selectName="shortTermProjGradeSelect"
                 selectId="shortTermProjGrade-select"
                 onChangeHandler={setRopeShortTermProject}
                 options={ropeGradeDropdown}
+                value={ropeShortTermProject}
               />
               <Dropdown
-                disable={(boulderGradeSystem?.length < 1)}
+                disable={(ropeGradeSystem?.length < 1)}
                 htmlFor="longTermProj"
                 labelName="Long-Term Project Grade:"
                 selectName="longTermProjGradeSelect"
                 selectId="longTermProjGrade-select"
                 onChangeHandler={setRopeLongTermProject}
                 options={ropeGradeDropdown}
+                value={ropeLongTermProject}
               />
             </StyledWorkoutRow>
             <Button buttonName="Save Changes" />

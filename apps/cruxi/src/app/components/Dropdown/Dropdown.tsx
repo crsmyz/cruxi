@@ -9,7 +9,7 @@ export function Dropdown(props: DropdownProps) {
       <br/>
       <StyledSelect disabled={props.disable} value={props.value} name={props.selectName} id={props.selectId} onChange={(e) => props.onChangeHandler(e.target.value)}>
               {props.options.map((eachOption: any, index: number) => (
-                <StyledOption key={index} value={eachOption.value}>{eachOption.label}</StyledOption>
+                <StyledOption key={index} selected={eachOption?.selected} value={eachOption.value}>{eachOption.label}</StyledOption>
               ))}
       </StyledSelect>
     </StyledDropdown>

@@ -6,7 +6,7 @@ import InputGroup from './../../components/Input/Input';
 import Dropdown from './../../components/Dropdown/Dropdown';
 import Textarea from './../../components/Textarea/Textarea';
 
-import { writeWorkoutDataToDB } from './../../Firebase';
+import { writeWorkoutDataToDB } from '../../Firebase';
 import { useAuth } from '../../Context/AuthContext';
 
 import { Link, useNavigate } from 'react-router-dom';

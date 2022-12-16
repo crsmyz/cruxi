@@ -1,6 +1,7 @@
 
 import { Link, useNavigate, useParams, useLocation } from "react-router-dom"
 import styled from 'styled-components';
+import Button from "../../components/Button/Button";
 
 import Card from "../../components/Card/Card";
 
@@ -42,6 +43,7 @@ export function Activity(props: ActivityProps) {
     <StyledActivity>
       <h1>Activity</h1>
       <Card>
+        <Button buttonName="Edit Climb" />
         <StyledCardStatGroup>
           <StyledH4>Activity Name:</StyledH4>
           <StyledCardStat>{workoutData.activityName}</StyledCardStat>
