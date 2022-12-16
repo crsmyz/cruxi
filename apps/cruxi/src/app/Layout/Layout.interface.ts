@@ -1,3 +1,1 @@
-export interface LayoutProps {
-    children: any;
-  }
+export interface LayoutProps {}

@@ -1,3 +1,5 @@
 export interface SplashScreenProps {
-    children?: any;
+    header: string;
+    body: string;
+    button: JSX.Element;
 }

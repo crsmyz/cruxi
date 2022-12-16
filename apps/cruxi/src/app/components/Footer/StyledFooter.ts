@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
 export const StyledFooter = styled.footer`
+  position: sticky;
+  bottom:0;
+  left:0;
+  right: 0;
   background-color: #3D3837;
   color: #FFFFFF;
   font-weight: 600;
