@@ -1,11 +1,11 @@
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { useAuth } from '../Context/AuthContext';
+import { useAuth } from '../../Context/AuthContext';
 
-import Form from '../Components/Form/Form';
-import Button from '../Components/Button/Button';
-import InputGroup from '../Components/Input/Input';
+import Form from '../../Components/Form/Form';
+import Button from '../../Components/Button/Button';
+import InputGroup from '../../Components/Input/Input';
 
 import {
   StyledForgotPassword,
@@ -16,7 +16,7 @@ import {
   StyledAuthPages,
 } from './StyledForgotPassword';
 
-import { APP_NAME } from '../Constants/AppConstants';
+import { APP_NAME } from '../../Constants/AppConstants';
 
 const ForgotPassword: React.FC = () => {
   const [error, setError] = useState<string>('');

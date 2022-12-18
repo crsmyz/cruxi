@@ -17,9 +17,9 @@ import Profile from './AppPages/Profile/Profile';
 // styles
 import { StyledApp } from './StyledApp';
 
-import Login from './Login/Login';
-import Signup from './Signup/Signup';
-import ForgotPassword from './ForgotPassword/ForgotPassword';
+import Login from './AppPages/Login/Login';
+import Signup from './AppPages/Signup/Signup';
+import ForgotPassword from './AppPages/ForgotPassword/ForgotPassword';
 import Footer from './Components/Footer/Footer';
 import Activity from './AppPages/Activity/Activity';
 

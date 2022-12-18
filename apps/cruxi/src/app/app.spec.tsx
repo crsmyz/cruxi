@@ -7,5 +7,4 @@ describe('App', () => {
 
     expect(baseElement).toBeTruthy();
   });
-  
 });
