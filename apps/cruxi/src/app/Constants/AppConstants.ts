@@ -4,3 +4,6 @@ export const APP_SPLASH_PAGE_CONTENT = `Cruxi is a climbing app that helps make 
   You can assess your current status as a climber. Track exercises,
   see your progress, and progress to your goals. Sign up now to see
   how Cruxi can make you a better climber!`;
+export const FOOTER_CONTENT = `Climbing is an inherently dangerous sport and should be performed only with 
+the proper instruction and supervision of an experienced climber. We assume no responsibility for any 
+injuries incurred by the user!`;

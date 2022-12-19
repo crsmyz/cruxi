@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { useAuth } from '../../Context/AuthContext';
 
-import Form from '../../Components/Form/Form';
-import Button from '../../Components/Button/Button';
-import InputGroup from '../../Components/Input/Input';
+import { Form, Button, InputGroup } from '@cruxi/cruxi-ui';
 
 import {
   StyledForgotPassword,

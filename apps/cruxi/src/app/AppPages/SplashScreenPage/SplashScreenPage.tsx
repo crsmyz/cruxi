@@ -2,8 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 // components
-import SplashScreen from '../../Components/SplashScreen/SplashScreen';
-import Button from '../../Components/Button/Button';
+import { SplashScreen, Button } from '@cruxi/cruxi-ui'
 // constants
 import { APP_SPLASH_PAGE_TITLE } from './../../Constants/AppConstants';
 import { APP_SPLASH_PAGE_CONTENT } from './../../Constants/AppConstants';

@@ -2,10 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate, NavigateFunction } from 'react-router-dom';
 
 import { useAuth } from '../../Context/AuthContext';
-
-import InputGroup from '../../Components/Input/Input';
-import Form from '../../Components/Form/Form';
-import Button from '../../Components/Button/Button';
+import {InputGroup, Form, Button} from '@cruxi/cruxi-ui'
 
 import {
   StyledAuthPages,

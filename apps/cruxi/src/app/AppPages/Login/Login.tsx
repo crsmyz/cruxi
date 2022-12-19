@@ -12,9 +12,7 @@ import {
   StyledAuthPages,
 } from './StyledLogin';
 
-import Form from '../../Components/Form/Form';
-import Button from '../../Components/Button/Button';
-import InputGroup from '../../Components/Input/Input';
+import { Form, Button, InputGroup } from '@cruxi/cruxi-ui';
 
 import { APP_NAME } from '../../Constants/AppConstants';
 
