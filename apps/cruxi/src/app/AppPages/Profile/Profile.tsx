@@ -30,7 +30,7 @@ import {
   ydsGradeDropdownData,
   gradingSystemDropdownData,
   ropeGradingSystemDropdownData,
-} from './ClimbingGrades';
+} from '../../Interfaces/ClimbingGrades';
 
 
 

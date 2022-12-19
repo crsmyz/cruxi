@@ -1,30 +1,22 @@
+// react
 import React from 'react';
 import { Link } from 'react-router-dom';
-
-// styles
-import {
-  StyledSplashScreenPage,
-  StyledSplashWrapper,
-  SplashHeader,
-  SplashBody,
-} from './StyledSplashScreenPage';
-
+// components
 import SplashScreen from '../../Components/SplashScreen/SplashScreen';
 import Button from '../../Components/Button/Button';
+// constants
+import { APP_SPLASH_PAGE_TITLE } from './../../Constants/AppConstants';
+import { APP_SPLASH_PAGE_CONTENT } from './../../Constants/AppConstants';
 
-const SplashScreenPage: React.FC = () => {
-  const header = 'Welcome to Cruxi';
-  const body = `Cruxi is a climbing app that helps make you you a better climber.
-  You can assess your current status as a climber. Track exercises,
-  see your progress, and progress to your goals. Sign up now to see
-  how Cruxi can make you a better climber!`;
+const CruxiSplashScreenPage: React.FC = () => {
+  const header: string = APP_SPLASH_PAGE_TITLE;
+  const body: string = APP_SPLASH_PAGE_CONTENT;
   const button = (
     <Link to="/signup">
       <Button buttonName="Sign Up" />
     </Link>
   );
-
   return <SplashScreen header={header} body={body} button={button} />;
 };
 
-export default SplashScreenPage;
+export default CruxiSplashScreenPage;

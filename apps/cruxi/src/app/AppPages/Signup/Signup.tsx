@@ -26,7 +26,7 @@ const Signup: React.FC = () => {
   const [password, setPassword] = useState<string>('');
   const [passwordConfirm, setPasswordConfirm] = useState<string>('');
 
-  const { signup } = useAuth();
+  const { signup }: any = useAuth();
   const navigate: NavigateFunction = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {

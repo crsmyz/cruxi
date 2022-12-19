@@ -7,7 +7,7 @@ export const StyledNavItem = styled.div`
 
 export const StyleAnchor = styled.a`
   color: #3D3837;
-  text-decoration: none;
+  text-decoration: nones;
   font-family: "Rubik", sans-serif;
   font-size: 1.1rem;
   font-weight: 600;

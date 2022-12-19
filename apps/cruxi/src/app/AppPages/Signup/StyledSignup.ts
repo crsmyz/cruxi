@@ -39,7 +39,6 @@ export const StyledSignup = styled.div`
   width: 100%;
   max-width: 300px;
   background-color: #d3c9c6d3;
-  /* border-radius: 0.35rem; */
 
   -webkit-clip-path: polygon(
     7% 13%,

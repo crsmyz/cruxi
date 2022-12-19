@@ -4,7 +4,7 @@ import SplashScreenPage from './SplashScreenPage';
 
 describe('SplashScreenPage', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<SplashScreenPage />);
+    const { baseElement } = render(<SplashScreenPage/>);
     expect(baseElement).toBeTruthy();
   });
 });

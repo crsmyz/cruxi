@@ -4,13 +4,12 @@ import { Route, Routes, Outlet } from 'react-router-dom';
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 
 // util
-import SplashScreenPage from './AppPages/SplashScreenPage/SplashScreenPage';
+import CruxiSplashScreenPage from './AppPages/SplashScreenPage/SplashScreenPage';
 import Layout from './Layout/Layout';
 import Loading from './Components/Loading/Loading';
 
 // children
 import Dashboard from './AppPages/Dashboard/Dashboard';
-import WorkoutHistory from './AppPages/WorkoutHistory/WorkoutHistory';
 import LogWorkout from './AppPages/LogWorkout/LogWorkout';
 import Profile from './AppPages/Profile/Profile';
 
@@ -23,7 +22,7 @@ import ForgotPassword from './AppPages/ForgotPassword/ForgotPassword';
 import Footer from './Components/Footer/Footer';
 import Activity from './AppPages/Activity/Activity';
 
-const UnAuthenticatedLayout: React.FC = () => { 
+const UnAuthenticatedLayout: React.FC = () => {
   return <>
     <Outlet/>
     <Footer/>
@@ -41,7 +40,7 @@ const App: React.FC = () => {
             <Route path="/forgot-password" element={<ForgotPassword/>} />
           </Route>
           <Route element={<Layout/>} >
-            <Route path='/' element={<SplashScreenPage/>}/>
+            <Route path='/' element={<CruxiSplashScreenPage/>}/>
             <Route path='/' element={<ProtectedRoute/>}>
               <Route path='/dashboard' element={<Dashboard/>}/>
             </Route>
@@ -53,9 +52,6 @@ const App: React.FC = () => {
             </Route>
             <Route path='/' element={<ProtectedRoute/>}>
               <Route path='/logworkout' element={<LogWorkout/>}/>
-            </Route>
-            <Route path='/' element={<ProtectedRoute/>}>
-              <Route path='/' element={<WorkoutHistory/>}/>
             </Route>
           </Route>
         </Routes>
