@@ -10,3 +10,4 @@ export * from './lib/Components/Navbar/Navbar';
 export * from './lib/Components/ProtectedRoute/ProtectedRoute';
 export * from './lib/Components/SplashScreen/SplashScreen';
 export * from './lib/Components/Textarea/Textarea';
+export * from './lib/Components/AuthSplashScreen/AuthSplashScreen';
