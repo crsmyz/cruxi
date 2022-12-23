@@ -1,6 +1,8 @@
+// react
 import React, { useState } from 'react';
 import { useNavigate, Outlet, NavigateFunction } from 'react-router-dom';
-
+// interfaces
+// ...
 // styles
 import {
   StyledLayout,
@@ -8,13 +10,12 @@ import {
   StyledNavButtonLayout,
   HeaderAppName,
 } from './StyledLayout';
-import Navbar from '../Components/Navbar/Navbar';
-import NavItem from '../Components/NavItem/NavItem';
-import Footer from '../Components/Footer/Footer';
-
-import { APP_NAME } from './../Constants/AppConstants';
-
+// cruxi ui lib components
+import { Navbar, NavItem, Footer } from '@cruxi/cruxi-ui';
+// context
 import { useAuth } from '../Context/AuthContext';
+// constants
+import { APP_NAME, FOOTER_CONTENT } from './../Constants/AppConstants';
 
 const Layout: React.FC = () => {
   const [error, setError] = useState<string>('');
@@ -67,7 +68,7 @@ const Layout: React.FC = () => {
         </StyledNavButtonLayout>
       </Navbar>
       <Outlet />
-      <Footer />
+      <Footer content={FOOTER_CONTENT} />
     </StyledLayout>
   );
 };

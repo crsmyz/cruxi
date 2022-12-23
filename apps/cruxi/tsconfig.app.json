@@ -19,5 +19,5 @@
     "**/*.spec.jsx",
     "**/*.test.jsx"
   ],
-  "include": ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"]
+  "include": ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx", "../../libs/cruxi-ui/src/lib/Components/auth-splash-screen.tsx", "../../libs/cruxi-ui/src/lib/Components/AuthSplashScreen/auth-splash-screen.spec.tsx"]
 }

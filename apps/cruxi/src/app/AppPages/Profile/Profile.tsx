@@ -10,10 +10,8 @@ import {
   StyleWorkoutSection,
 } from './StyledProfile';
 // components
-import InputGroup from '../../Components/Input/Input';
-import Form from '../../Components/Form/Form';
-import Button from '../../Components/Button/Button';
-import Dropdown from '../../Components/Dropdown/Dropdown';
+import {InputGroup, Form, Button, Dropdown} from '@cruxi/cruxi-ui'
+
 import { useAuth } from '../../Context/AuthContext';
 // firebase
 import {
@@ -30,7 +28,7 @@ import {
   ydsGradeDropdownData,
   gradingSystemDropdownData,
   ropeGradingSystemDropdownData,
-} from './ClimbingGrades';
+} from '../../Constants/DropdownData/index';
 
 
 

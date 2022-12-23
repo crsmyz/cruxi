@@ -1,21 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, NavigateFunction } from 'react-router-dom';
-
 import { useAuth } from '../../Context/AuthContext';
-
-import {
-  StyledLogin,
-  StyledCard,
-  StyledUtilLink,
-  HeaderAppName,
-  StyledNavBrand,
-  StyledAuthPages,
-} from './StyledLogin';
-
-import Form from '../../Components/Form/Form';
-import Button from '../../Components/Button/Button';
-import InputGroup from '../../Components/Input/Input';
-
+import { StyledUtilLink } from './StyledLogin';
+import { AuthSplashScreen, Form, Button, InputGroup } from '@cruxi/cruxi-ui';
 import { APP_NAME } from '../../Constants/AppConstants';
 
 const Login: React.FC = () => {
@@ -40,40 +27,45 @@ const Login: React.FC = () => {
     setLoading(false);
   };
 
-  return (
-    <StyledAuthPages>
-      <StyledLogin>
-        <StyledCard>
-          <StyledNavBrand>
-            <HeaderAppName>{APP_NAME}</HeaderAppName>
-          </StyledNavBrand>
-          <h2 className="text-center mb-4">Log In</h2>
-          {error && <div>{error}</div>}
-          <Form onSubmit={handleSubmit}>
-            <InputGroup
-              htmlFor="email"
-              labelName="Email:"
-              type="text"
-              onChangeHandler={setEmail}
-            />
-            <InputGroup
-              htmlFor="password"
-              labelName="Password:"
-              type="text"
-              onChangeHandler={setPassword}
-            />
-            <StyledUtilLink>
-              <Link to="/forgot-password">Forgot Password?</Link>
-            </StyledUtilLink>
-            <Button buttonName="Log In" />
-          </Form>
-          <StyledUtilLink>
-            Need an account? <Link to="/signup">Sign Up</Link>
-          </StyledUtilLink>
-        </StyledCard>
-      </StyledLogin>
-    </StyledAuthPages>
+  const backgroundImageURL = './../../../assets/images/flatirons.jpg';
+  const cardHeader = 'Log In';
+  const cardClipPath = '18% 6%, 96% -2%, 86% 28%, 106% 82%, 85% 95%, -3% 108%, 4% 64%, -13% -2%';
+  const bodyContent = (
+    <>
+      {error && <div>{error}</div>}
+      <Form onSubmit={handleSubmit}>
+        <InputGroup
+          htmlFor="email"
+          labelName="Email:"
+          type="text"
+          onChangeHandler={setEmail}
+        />
+        <InputGroup
+          htmlFor="password"
+          labelName="Password:"
+          type="text"
+          onChangeHandler={setPassword}
+        />
+        <StyledUtilLink>
+          <Link to="/forgot-password">Forgot Password?</Link>
+        </StyledUtilLink>
+        <Button buttonName="Log In" />
+      </Form>
+      <StyledUtilLink>
+        Need an account? <Link to="/signup">Sign Up</Link>
+      </StyledUtilLink>
+    </>
   );
-}
+
+  return (
+    <AuthSplashScreen
+      backgroundImage={backgroundImageURL}
+      clipPath={cardClipPath}
+      appNameHeader={APP_NAME}
+      cardHeader={cardHeader}
+      bodyContent={bodyContent}
+    />
+  );
+};
 
 export default Login;

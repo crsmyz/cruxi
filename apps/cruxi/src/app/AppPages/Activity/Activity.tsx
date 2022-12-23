@@ -1,9 +1,8 @@
 
 import { Link, useNavigate, useParams, useLocation } from "react-router-dom"
 import styled from 'styled-components';
-import Button from "../../Components/Button/Button";
 
-import Card from "../../Components/Card/Card";
+import { Card, Button } from '@cruxi/cruxi-ui';
 
 /* eslint-disable-next-line */
 export interface ActivityProps {}

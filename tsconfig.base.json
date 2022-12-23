@@ -15,9 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@cruxi/apps/cruxi/src/app/app-pages/activity": [
-        "libs/apps/cruxi/src/app/app-pages/activity/src/index.ts"
-      ]
+      "@cruxi/cruxi-ui": ["libs/cruxi-ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

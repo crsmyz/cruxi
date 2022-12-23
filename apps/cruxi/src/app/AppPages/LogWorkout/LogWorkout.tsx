@@ -1,73 +1,26 @@
+// react
 import React, {useState} from 'react';
-import Form from './../../Components/Form/Form';
-import styled from 'styled-components';
-import Button from './../../Components/Button/Button';
-import InputGroup from './../../Components/Input/Input';
-import Dropdown from './../../Components/Dropdown/Dropdown';
-import Textarea from './../../Components/Textarea/Textarea';
-
-import { writeWorkoutDataToDB } from '../../Firebase';
-import { useAuth } from '../../Context/AuthContext';
-
 import { Link, useNavigate } from 'react-router-dom';
+// interfaces
+import { RouteRow } from './LogWorkoutProps.interface';
+// components
+import { Form, Button, InputGroup, Dropdown, Textarea } from '@cruxi/cruxi-ui';
+// firebase
+import { writeWorkoutDataToDB } from '../../Firebase';
+// context
+import { useAuth } from '../../Context/AuthContext';
+import { StyledLogWorkout, StyledTable, StyledTableCell, StyledTableHead, StyledTableHeader, StyledTableHeaderRow, StyledWorkoutRow, StyleWorkoutSection } from './StyledLogWorkout';
+import { activityDropdownData } from '../../Constants/DropdownData/ClimbingActivityType';
+import { vGradeDropdownData, fontGradeDropdownData, ydsGradeDropdownData, frenchSportGradeDropdownData } from '../../Constants/DropdownData/ClimbingGrades';
+import { gradingSystemDropdownData } from '../../Constants/DropdownData/ClimbingGradeSystems';
+import { outcomeDropdownData } from '../../Constants/DropdownData/ClimbingResult';
+import { holdsDropdownData } from '../../Constants/DropdownData/RouteHolds';
+import { routeDreopdownData } from '../../Constants/DropdownData/RouteWallType';
+import { eventDropdownData } from '../../Constants/DropdownData/SessionObjective';
 
-export interface LogWorkoutProps {}
 
-export interface RouteRow {
-  grade: string;
-  outcome: string;
-  intensity: string;
-  routeType: string;
-  holdTypes: string;
-}
 
-const StyledLogWorkout = styled.div`
-  color: #3D3837;
-  margin: 2rem 4rem 2rem 4rem;
-`;
-
-const StyledCard = styled.div`
-  padding: 1rem 1rem 1rem 2rem;
-  background-color: #FFFFFF;
-  border: 1px solid #D3C9C67A;
-  border-radius: 0.35rem;
-`;
-const StyledRouteDataRow = styled.div`
-  display: flex;
-`;
-const StyledRouteDataItem = styled.div`
-  margin: 1rem;
-`;
-const StyledTable = styled.table`
-  border-collapse: collapse;
-`;
-const StyledTableHead = styled.thead`
-  border-bottom: 1px solid #D3C9C67A;
-`;
-const StyledTableHeaderRow = styled.tr`
-`;
-const StyledTableHeader = styled.td`
-  padding: 0rem 4rem 1rem 0rem;
-  color: #3D3837;
-  font-weight: 500;
-  font-size: 1.25rem;
-`;
-const StyledTableCell = styled.td`
-  padding: 1rem 3rem 1rem 0rem;
-  color: #3D3837;
-  font-weight: 400;
-  font-size: 1.125rem;
-`;
-const StyledWorkoutRow = styled.div`
-  margin: 1rem 0rem 0rem 0rem;
-  display: flex;
-`;
-const StyleWorkoutSection = styled.section`
-  padding-bottom: 2rem;
-  border-bottom: 1px solid #D3C9C67A;
-`;
-
-const LogWorkout = (props: LogWorkoutProps) => {
+const LogWorkout: React.FC = () => {
   const row : RouteRow[] = [];
 
   // climbing time
@@ -123,8 +76,6 @@ const LogWorkout = (props: LogWorkoutProps) => {
 
   const [sessionData, setSessionData] = useState({});
   const [gradingSystemDropdown, setGradingSystemDropdown] = useState<any>([]);
-
-
 
   const { currentUser } = useAuth()
   const navigate = useNavigate();
@@ -204,166 +155,6 @@ const LogWorkout = (props: LogWorkoutProps) => {
     newRoutes.splice(i, 1);
     setRoutes([...newRoutes]);
   }
-
-  const holdsDropdownData = [
-    { value: '', label: 'Choose Holds...' },
-    { value: 'Crimps', label: 'Crimps' },
-    { value: 'Slopers', label: 'Slopers' },
-    { value: 'Jugs', label: 'Jugs' },
-    { value: 'Mixed', label: 'Mixed' },
-  ];
-  const outcomeDropdownData = [
-    { value: '', label: 'Climbing Outcome...' },
-    { value: 'Sent', label: 'Sent' },
-    { value: 'Attempted', label: 'Attempted' },
-  ];
-  const activityDropdownData = [
-    { value: '', label: 'Choose an activity'},
-    { value: 'Auto Belay', label: 'Auto Belay'},
-    { value: 'Sport Climbing', label: 'Sport Climbing'},
-    { value: 'Trad Climbing', label: 'Trad Climbing'},
-    { value: 'Bouldering', label: 'Bouldering'},
-  ];
-  const routeDreopdownData = [
-    { value: '', label: 'Choose a route'},
-    { value: 'Overhanging', label: 'Overhanging'},
-    { value: 'Cave/Roof', label: 'Cave/Roof'},
-    { value: 'Slab', label: 'Slab'},
-    { value: 'Vertical', label: 'Vertical'},
-  ];
-  const eventDropdownData = [
-    { value: '', label: 'Choose an event'},
-    { value: 'Training', label: 'Training'},
-    { value: 'Fitness', label: 'Fitness'},
-    { value: 'Recreation/Fun', label: 'Recreation/Fun'},
-    { value: 'Projecting', label: 'Projecting'},
-    { value: 'Competition', label: 'Competition'},
-  ];
-  const gradingSystemDropdownData = [
-    { value: '', label: 'Choose a grading system'},
-    { value: 'V-Scale', label: 'V-Scale'},
-    { value: 'Font', label: 'Font'},
-    { value: 'YDS', label: 'YDS'},
-    { value: 'French', label: 'French'},
-  ];
-  const vGradeDropdownData = [
-    { value: '', label: 'Choose a V-grade'},
-    { value: 'vb', label: 'VB'},
-    { value: 'v0', label: 'V0'},
-    { value: 'v1', label: 'V1'},
-    { value: 'v2', label: 'V2'},
-    { value: 'v3', label: 'V3'},
-    { value: 'v4', label: 'V4'},
-    { value: 'v5', label: 'V5'},
-    { value: 'v6', label: 'V6'},
-    { value: 'v7', label: 'V7'},
-    { value: 'v8', label: 'V8'},
-    { value: 'v9', label: 'V9'},
-    { value: 'v1', label: 'V10'},
-    { value: 'v11', label: 'V11'},
-    { value: 'v12', label: 'V12'},
-    { value: 'v13', label: 'V13'},
-    { value: 'v14', label: 'V14'},
-    { value: 'v15', label: 'V15'},
-    { value: 'v16', label: 'V16'},
-    { value: 'v17', label: 'V17'},
-  ];
-  const fontGradeDropdownData = [
-    { value: '', label: 'Choose a Font Grade'},
-    { value: '3', label: '3'},
-    { value: '4', label: '4'},
-    { value: '5', label: '5'},
-    { value: '5+', label: '5+'},
-    { value: '6A/+', label: '6A/+'},
-    { value: '6B/+', label: '6B/+'},
-    { value: '6C/+', label: '6C/+'},
-    { value: '7A', label: '7A'},
-    { value: '7A+', label: '7A+'},
-    { value: '7B/+', label: '7B/+'},
-    { value: '7C', label: '7C'},
-    { value: '7C+', label: '7C+'},
-    { value: '8A', label: '8A'},
-    { value: '8A+', label: '8A+'},
-    { value: '8B', label: '8B'},
-    { value: '8B+', label: '8B+'},
-    { value: '8C', label: '8C'},
-    { value: '8C+', label: '8C+'},
-    { value: '9A', label: '9A'},
-  ];
-  const ydsGradeDropdownData = [
-    { value: '', label: 'Choose a YDS Grade'},
-    { value: '5.0', label: '5.0'},
-    { value: '5.1', label: '5.1'},
-    { value: '5.2', label: '5.2'},
-    { value: '5.3', label: '5.3'},
-    { value: '5.4', label: '5.4'},
-    { value: '5.5', label: '5.5'},
-    { value: '5.6', label: '5.6'},
-    { value: '5.7', label: '5.7'},
-    { value: '5.8', label: '5.8'},
-    { value: '5.9', label: '5.9'},
-    { value: '5.10a', label: '5.10a'},
-    { value: '5.10b', label: '5.10b'},
-    { value: '5.10c', label: '5.10c'},
-    { value: '5.10d', label: '5.10d'},
-    { value: '5.11a', label: '5.11a'},
-    { value: '5.11b', label: '5.11b'},
-    { value: '5.11c', label: '5.11c'},
-    { value: '5.11d', label: '5.11d'},
-    { value: '5.12a', label: '5.12a'},
-    { value: '5.12b', label: '5.12b'},
-    { value: '5.12c', label: '5.12c'},
-    { value: '5.12d', label: '5.12d'},
-    { value: '5.13a', label: '5.13a'},
-    { value: '5.13d', label: '5.13b'},
-    { value: '5.13c', label: '5.13c'},
-    { value: '5.13d', label: '5.13d'},
-    { value: '5.14a', label: '5.14a'},
-    { value: '5.14b', label: '5.14b'},
-    { value: '5.14c', label: '5.14c'},
-    { value: '5.14d', label: '5.14d'},
-    { value: '5.15a', label: '5.15a'},
-    { value: '5.15b', label: '5.15b'},
-    { value: '5.15c', label: '5.15c'},
-    { value: '5.15d', label: '5.15d'},
-  ];
-  const frenchSportGradeDropdownData = [
-    { value: '', label: 'Choose a French Sport Grade'},
-    { value: '2-', label: '3'},
-    { value: '2', label: '4'},
-    { value: '3', label: '5'},
-    { value: '3+', label: '5+'},
-    { value: '4a', label: '6A/+'},
-    { value: '4b', label: '6B/+'},
-    { value: '4c', label: '6C/+'},
-    { value: '5a', label: '7A'},
-    { value: '5b', label: '7A+'},
-    { value: '5c', label: '7B/+'},
-    { value: '6a', label: '7C'},
-    { value: '6a+', label: '7C+'},
-    { value: '6b', label: '8A'},
-    { value: '6b+', label: '8A+'},
-    { value: '6c', label: '8B'},
-    { value: '6c+', label: '8B+'},
-    { value: '7a', label: '8C'},
-    { value: '7a+', label: '8C+'},
-    { value: '7b', label: '9A'},
-    { value: '7b+', label: '9A'},
-    { value: '7c', label: '9A'},
-    { value: '7c+', label: '9A'},
-    { value: '8a', label: '9A'},
-    { value: '8a+', label: '9A'},
-    { value: '8b', label: '9A'},
-    { value: '8b+', label: '9A'},
-    { value: '8c', label: '9A'},
-    { value: '8c+', label: '9A'},
-    { value: '9a', label: '9A'},
-    { value: '9a+', label: '9A'},
-    { value: '9b', label: '9A'},
-    { value: '9b+', label: '9A'},
-    { value: '9c', label: '9A'},
-    { value: '9b+', label: '9A'},
-  ];
 
   const setClimbingSessionGradeHandler = (val: any) => {
     setGradingSystem(val);

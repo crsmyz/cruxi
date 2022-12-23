@@ -1,21 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-
 import { useAuth } from '../../Context/AuthContext';
-
-import Form from '../../Components/Form/Form';
-import Button from '../../Components/Button/Button';
-import InputGroup from '../../Components/Input/Input';
-
-import {
-  StyledForgotPassword,
-  StyledCard,
-  StyledUtilLink,
-  HeaderAppName,
-  StyledNavBrand,
-  StyledAuthPages,
-} from './StyledForgotPassword';
-
+import { Form, Button, InputGroup, AuthSplashScreen } from '@cruxi/cruxi-ui';
+import { StyledUtilLink } from './StyledForgotPassword';
 import { APP_NAME } from '../../Constants/AppConstants';
 
 const ForgotPassword: React.FC = () => {
@@ -41,33 +28,38 @@ const ForgotPassword: React.FC = () => {
     setLoading(false);
   }
 
+  const backgroundImageURL = './../../assets/images/cape.jpg';
+  const cardHeader = 'Reset Password';
+  const cardClipPath = '100% -8%,78% 16%,95% 42%,100% 82%,81% 107%,60% 112%,-6% 92%,4% 74%,0% 40%,12% 24%, 5% 9%';
+  const bodyContent = (
+    <>
+      {error && <div>{error}</div>}
+      <Form onSubmit={handleSubmit}>
+        <InputGroup
+          htmlFor="email"
+          labelName="Email:"
+          type="text"
+          onChangeHandler={setEmail}
+        />
+        <Button buttonName="Reset Password" />
+      </Form>
+      <StyledUtilLink>
+        <Link to="/login">Login</Link>
+      </StyledUtilLink>
+      <StyledUtilLink>
+        Need an account? <Link to="/signup">Sign Up</Link>
+      </StyledUtilLink>
+    </>
+  );
+
   return (
-    <StyledAuthPages>
-      <StyledForgotPassword>
-        <StyledCard>
-          <StyledNavBrand>
-            <HeaderAppName>{APP_NAME}</HeaderAppName>
-          </StyledNavBrand>
-          <h2 className="text-center mb-4">Reset Password</h2>
-          {error && <div>{error}</div>}
-          <Form onSubmit={handleSubmit}>
-            <InputGroup
-              htmlFor="email"
-              labelName="Email:"
-              type="text"
-              onChangeHandler={setEmail}
-            />
-            <Button buttonName="Reset Password" />
-          </Form>
-          <StyledUtilLink>
-            <Link to="/login">Login</Link>
-          </StyledUtilLink>
-          <StyledUtilLink>
-            Need an account? <Link to="/signup">Sign Up</Link>
-          </StyledUtilLink>
-        </StyledCard>
-      </StyledForgotPassword>
-    </StyledAuthPages>
+    <AuthSplashScreen
+      backgroundImage={backgroundImageURL}
+      clipPath={cardClipPath}
+      appNameHeader={APP_NAME}
+      cardHeader={cardHeader}
+      bodyContent={bodyContent}
+    />
   );
 };
 
